@@ -61,8 +61,7 @@ Nghe có vẻ như những lợi ích này chỉ giúp nhóm phát triển EasyE
 
 Minh chứng rõ nhất là tôi – như đã đề cập ở trên – có được hệ thống nhanh và ổn định nhất từ trước đến nay. Việc duy nhất tôi cần làm là tìm hiểu thêm về Docker.
 
-Tham khảo:  
-[Plan to use Docker in EasyEngine v4](https://easyengine.io/blog/how-we-plan-to-use-docker-in-easyengine-v4/)
+Tham khảo: [Plan to use Docker in EasyEngine v4](https://easyengine.io/blog/how-we-plan-to-use-docker-in-easyengine-v4/)
 
 ## Tư duy đội ngũ và sự đánh giá thấp một nền tảng có tầm vóc  
 
@@ -82,10 +81,8 @@ Nhân tiện, tôi thực sự ngưỡng mộ tư duy và cách giải quyết v
 
 Trong số các hệ thống quản lý server mà tôi đã đề cập, EasyEngine thực sự ở một đẳng cấp khác về tư duy doanh nghiệp. Nếu xét về đối thủ tương xứng, có lẽ chỉ có **Trellis** của Roots. Tuy nhiên, nếu bạn chỉ quản lý một vài website và không phải là lập trình viên chuyên nghiệp, tốt nhất là đừng đụng vào Trellis.  
 
-### Tham khảo:  
-[**EasyEngine v4 and updates**](https://easyengine.io/blog/easyengine-v4-updates/)  
+Tham khảo: [**EasyEngine v4 and updates**](https://easyengine.io/blog/easyengine-v4-updates/)  
 
----
 
 ## Những điều tôi có được khi sử dụng EasyEngine 4  
 

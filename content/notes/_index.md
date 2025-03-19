@@ -32,21 +32,21 @@ When the development team decided to adopt Docker, they acknowledged a slight pe
 
 I don’t have rigorous benchmark tests, but I have used various server management solutions, including OpenLiteSpeed, Centminmod, WordOps (a fork of EasyEngine 3), SlickStack, and a few others I didn't spend much time on. Here’s my assessment:  
 
-### **1. [OpenLiteSpeed](https://openlitespeed.org/)**  
+### 1. [OpenLiteSpeed](https://openlitespeed.org/)
 It has very fast response times, and that’s undeniable. It has been praised extensively, to the point where I prioritized trying it. However, when I switched to Nginx, I realized those praises didn’t necessarily translate into better overall performance. You can achieve a faster Nginx setup than OLS with proper tuning.  
 
-### **2. [Centminmod](https://centminmod.com/)**  
+### 2. [Centminmod](https://centminmod.com/) 
 Often cited as the fastest LEMP management system—and that’s true. It consistently ranks at the top in performance benchmarks. Developed by a single passionate individual, Daniel Lu, Centminmod focuses intensely on performance and security.  
 
 However, this extreme optimization makes it complex. It auto-configures the server, builds customized software, and fine-tunes everything to the limit. This results in a system that is difficult to configure, troubleshoot, and maintain. Although Lu provides free support, it’s not enough to offset the challenges. I eventually gave up on Centminmod because my website had errors, wasn't as fast as expected, and I had no clear path to fixing it.  
 
-### **3. [WordOps](https://wordops.net/)**  
+### 3. [WordOps](https://wordops.net/)  
 I tried WordOps because I was comfortable with a traditional LEMP setup and hesitant about Docker’s complexity. WordOps is easy to use and efficient—very similar to EasyEngine v3. However, I encountered caching issues, which I expected to "just work" but didn't.  
 
 Even after multiple attempts, I couldn’t fix it. I also found syntax errors in the pre-configured Nginx settings, which reduced my confidence in the system. This made me understand why EasyEngine abandoned the v3 model and rebuilt everything from scratch with Docker.  
 [EasyEngine's thoughts on WordOps](https://easyengine.io/blog/wordops-easyengine-v3-fork/)  
 
-### **4. [SlickStack](https://slickstack.io/)**  
+### 4. [SlickStack](https://slickstack.io/) 
 I didn’t spend much time on this one. It’s designed for a narrow use case—requiring Cloudflare, supporting only one website per server, and pre-installing many optimization plugins.  
 
 These limitations, along with concerns about plugin maintenance and deep system optimizations, made me uncertain about its approach. Plus, when I compared performance scores with EasyEngine, SlickStack didn’t hold up. Although they have a unique philosophy, I quickly moved on.  
@@ -79,8 +79,7 @@ At first glance, these seem like developer-centric benefits rather than user adv
 
 And the proof? As I mentioned earlier, I now have a fast, error-free system. The only extra thing I need to do is learn more about Docker! 😊  
 
-### References:  
-[Plan to use Docker in EasyEngine v4](https://easyengine.io/blog/how-we-plan-to-use-docker-in-easyengine-v4/)
+References: [Plan to use Docker in EasyEngine v4](https://easyengine.io/blog/how-we-plan-to-use-docker-in-easyengine-v4/)
 ## Team Mindset and Underrated Potential  
 
 EasyEngine made a big impact when it first launched and was warmly welcomed—up until version 3. But when they transitioned to v4 with Docker, they gradually lost fans and attention. Not only that, but they also faced significant backlash from the community.  
@@ -97,8 +96,7 @@ By the way, I truly admire the mindset and problem-solving approach of rtCamp—
 
 Among all the server management solutions I’ve mentioned, EasyEngine stands out in its business mindset. At this level, its closest competitor is probably *Trellis* by Roots. However, if you only manage a few websites and aren’t a professional developer, stay away from Trellis.  
 
-### Reference:  
-[**EasyEngine v4 and updates**](https://easyengine.io/blog/easyengine-v4-updates/)  
+Reference: [**EasyEngine v4 and updates**](https://easyengine.io/blog/easyengine-v4-updates/)  
 
 
 ## What I Gained from Using EasyEngine 4  

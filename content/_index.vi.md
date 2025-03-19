@@ -5,7 +5,7 @@ layout: hextra-home
 
 {{< hextra/hero-badge >}}
   <div class="hx-w-2 hx-h-2 hx-rounded-full hx-bg-primary-400"></div>
-  <span>My Notes, Your times</span>
+  <span>Chia sẻ kinh nghiệm</span>
   {{< icon name="arrow-circle-right" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
 
@@ -17,12 +17,12 @@ layout: hextra-home
 
 <div class="hx-mb-12">
 {{< hextra/hero-subtitle >}}
-  Fast, easy and stated&nbsp;<br class="sm:hx-block hx-hidden" />for creating server websites
+  Kinh nghiệm cá nhân của tôi&nbsp;<br class="sm:hx-block hx-hidden" />về một giải pháp server hiệu xuất, tin cậy, hiện đại.
 {{< /hextra/hero-subtitle >}}
 </div>
 
 <div class="hx-mb-6">
-{{< hextra/hero-button text="Review EasyEngine" link="notes" >}}
+{{< hextra/hero-button text="Đánh giá về EasyEngine" link="notes" >}}
 </div>
 
 <div class="hx-mt-6"></div>
