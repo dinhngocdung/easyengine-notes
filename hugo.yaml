@@ -1,5 +1,5 @@
 # Hugo configuration file
-title: My Site
+title: Dũng'Notes for EasyEngine
 
 # import hextra as module
 module:
@@ -18,29 +18,28 @@ markup:
 
 menu:
   main:
-    - name: Docs
-      pageRef: /docs
+    - name: Notes
+      pageRef: /notes
       weight: 1
     - name: About
       pageRef: /about
       weight: 2
-    - name: Contact ↗
-      url: "https://github.com/imfing"
+    - name: Discussion ↗
+      url: "https://github.com/EasyEngine/easyengine/discussions"
       weight: 3
     - name: Search
       weight: 4
       params:
         type: search
-    - name: GitHub
+    - name: GitHub EeayEngine
       weight: 5
-      url: "https://github.com/imfing/hextra-starter-template"
+      url: "https://github.com/EasyEngine/easyengine"
       params:
         icon: github
-    - name: Twitter
+    - name: EasyEngine ↗
       weight: 6
-      url: "https://twitter.com/"
-      params:
-        icon: x-twitter
+      url: "https://easyengine.io/"
+
 
 params:
   navbar:
@@ -48,9 +47,18 @@ params:
     displayLogo: false
 
   footer:
-    displayCopyright: false
+    displayCopyright: true
     displayPoweredBy: true
 
   editURL:
     enable: true
     base: "https://github.com/imfing/hextra-starter-template/edit/main/content"
+
+defaultContentLanguage: en
+languages:
+  en:
+    languageName: English
+    weight: 1
+  vi:
+    languageName: Tiếng Việt
+    weight: 2
