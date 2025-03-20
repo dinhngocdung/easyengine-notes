@@ -55,7 +55,7 @@ Với máy chủ chạy qua Cloudflare:
 
 ```mermaid
 graph LR
-  B1([1.1.1.1]) -->|Requests| CF1(("Cloudflare 4.4.4.4"))
+  B1([1.1.1.1]) -->|Requests| CF1(("Cloudflare\n4.4.4.4"))
   B2([2.2.2.2]) -->|Requests| CF1
   CF1 -->|Requests| S2{Server}
   S2 -->|Logs| L2@{ shape: doc, label: "Logs\n4.4.4.4\n4.4.4.4" }

@@ -44,16 +44,27 @@ graph LR
   A1([1.1.1.1]) -->|Requests| S1{Server}
   A2([2.2.2.2]) -->|Requests| S1
   S1 -->|Logs| L1@{ shape: doc, label: "Logs\n1.1.1.1\n2.2.2.2" }
+
+  style A1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+  style A2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+  style S1 fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
+  style L1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
 ```
 
 ### Server Logs with Cloudflare  
 
 ```mermaid
 graph LR
-  B1([1.1.1.1]) -->|Requests| CF1(("Cloudflare 4.4.4.4"))
+  B1([1.1.1.1]) -->|Requests| CF1(("Cloudflare\n4.4.4.4"))
   B2([2.2.2.2]) -->|Requests| CF1
   CF1 -->|Requests| S2{Server}
   S2 -->|Logs| L2@{ shape: doc, label: "Logs\n4.4.4.4\n4.4.4.4" }
+
+  style B1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+  style B2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+  style CF1 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000  
+  style S2 fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
+  style L2 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000    
 ```
 
 Without restoring the original IP, server logs will only display Cloudflare’s IPs, making tracking and security difficult. Anti-DDoS systems or IP-based restrictions may not function properly.  
