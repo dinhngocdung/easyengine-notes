@@ -3,9 +3,15 @@ title: Dũng's Notes for EasyEngine
 layout: hextra-home
 ---
 
-{{< hextra/hero-badge >}}
+{{< hextra/hero-container
+  image="https://easyengine.io/wp-content/uploads/sites/20/2019/06/EasyEngine-New-Logo-Animated.svg"
+  imageTitle="Regolith Desktop Environment"
+  imageWidth="853"
+>}}
+
+{{< hextra/hero-badge link="https://github.com/EasyEngine/easyengine/discussions">>}}
   <div class="hx-w-2 hx-h-2 hx-rounded-full hx-bg-primary-400"></div>
-  <span>Chia sẻ kinh nghiệm</span>
+  <span>Thảo luận về EasyEngine</span>
   {{< icon name="arrow-circle-right" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
 
