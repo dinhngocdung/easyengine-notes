@@ -15,7 +15,7 @@ Borg/**Borgmatic** is an effective backup solution for web servers. It compresse
 
 Once again, we will deploy Borgmatic on Docker following the **EasyEngine** approach.  
 
-## **Creating a Borgmatic Container**  
+## Creating a Borgmatic Container  
 
 I use the official Docker image from Borgmatic.  
 
@@ -35,7 +35,7 @@ nano docker-compose.yml
 
 Copy the following content into the file. Modify the `volumes` section based on your backup needs. For example, if you don’t use Fail2Ban, you can remove that line.  
 
-```yaml
+```yaml {filename="~/borgmatic/docker-compose.yml"}
 services:
   borgmatic:
     image: ghcr.io/borgmatic-collective/borgmatic
@@ -85,11 +85,11 @@ Initialize the Borgmatic Docker container:
 docker-compose up -d
 ```
 
-## **Connecting Borgmatic to BorgBase**  
+## Connecting Borgmatic to BorgBase  
 
 Before setting up backups, we need a storage location. If your website data is around 200GB, **BorgBase** is an excellent choice at only **$2/month**. For smaller websites, they offer **10GB free storage**.  
 
-### **Steps to Set Up BorgBase**  
+### Steps to Set Up BorgBase  
 
 1. Register and create an account if you don’t have one:  
    👉 [BorgBase Registration](https://www.borgbase.com/register)  
@@ -118,7 +118,7 @@ Before setting up backups, we need a storage location. If your website data is a
    - Under **Access**, select the newly added key  
    - Save and complete the setup  
 
-## **Configuring Borgmatic Operations**  
+## Configuring Borgmatic Operations  
 
 Borgmatic's operations are configured via the `config.yaml` file.  
 
@@ -130,7 +130,7 @@ nano data/borgmatic.d/config.yaml
 
 Copy and modify the following configuration, replacing `repositories` and `encryption_passphrase` with your details:  
 
-```yaml
+```yaml {filename="~/borgmatic/data/borgmatic.d/config.yam"}
 source_directories:
     - /mnt/source/easyengine 
     - /mnt/source/volumes 
@@ -181,7 +181,7 @@ Validate the configuration file:
 docker-compose exec borgmatic borgmatic config validate
 ```
 
-## **Initializing BorgBase Repository**  
+## Initializing BorgBase Repository  
 
 Inside the Borgmatic container, replace `BORG_REPO=` with your BorgBase repository URL:  
 
@@ -191,7 +191,7 @@ borgmatic --init --encryption repokey-blake2
 export BORG_REPO=ssh://123abc@def45678.repo.borgbase.com/./repo
 ```
 
-## **Managing Borgmatic Backups**  
+## Managing Borgmatic Backups  
 
 List backup archives:  
 
@@ -211,9 +211,9 @@ Extract `path/1` from the latest backup and restore it to `/restore`:
 docker-compose exec borgmatic borgmatic extract --archive latest --path path/1 --destination /restore
 ```
 
-## **Scheduling Automatic Backups**  
+## Scheduling Automatic Backups  
 
-### **Using Cron Inside the Docker Container**  
+### Using Cron Inside the Docker Container  
 
 Add a cron schedule inside the container’s `crontab.txt` file:  
 
@@ -227,7 +227,7 @@ Add the following line:
 0 3 * * * PATH=$PATH:/usr/local/bin /usr/local/bin/borgmatic --stats -v 0 2>&1
 ```
 
-### **Running Borgmatic Only When Needed**  
+### Running Borgmatic Only When Needed  
 
 To optimize resources, I set up a cron job that starts Borgmatic **only when backup is needed** and removes the container afterward.  
 
@@ -251,7 +251,7 @@ Add this schedule:
 
 At **3 AM daily**, Docker will launch, perform a backup, and then remove the container upon completion.  
 
-### **References**  
+### References  
 
 - [Borgmatic Documentation](https://torsion.org/borgmatic/)  
 - [BorgBase](https://www.borgbase.com/)  
