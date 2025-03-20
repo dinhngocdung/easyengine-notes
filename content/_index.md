@@ -38,7 +38,7 @@ layout: hextra-home
 
 
 <div class="hx-mb-6">
-{{< hextra/hero-button text="Review of EasyEngine in 2025" link="notes/review" >}}
+{{< hextra/hero-button text="Let's start" link="notes" >}}
 </div>
 
 <div class="hx-mt-6"></div>

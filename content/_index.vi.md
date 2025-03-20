@@ -22,7 +22,7 @@ layout: hextra-home
 </div>
 
 <div class="hx-mb-6">
-{{< hextra/hero-button text="Đánh giá về EasyEngine năm 2025" link="notes/review" >}}
+{{< hextra/hero-button text="Theo tôi nào" link="notes" >}}
 </div>
 
 <div class="hx-mt-6"></div>
