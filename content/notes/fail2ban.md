@@ -102,7 +102,7 @@ nano docker-compose.yml
 
 Copy and paste the following content into the file:  
 
-```yaml
+```yaml {filename="~/fail2ban/docker-compose.yml"}
 services:
   fail2ban:
     image: crazymax/fail2ban:latest
@@ -133,7 +133,7 @@ nano ~/fail2ban/data/jail.d/jail.local
 
 Copy and paste the following content into the `jail.local` file. Pay special attention to the `chain = DOCKER-USER` setting, as Fail2Ban will insert ban rules into this chain to be effective in a Dockerized system.  
 
-```bash
+```bash {filename="~/fail2ban/data/jail.d/jail.local"}
 [DEFAULT]
 
 ignoreip = 116.110.40.117 127.0.0.1/8 ::1 10.0.0.0/20 
