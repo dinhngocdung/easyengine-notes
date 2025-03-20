@@ -1,5 +1,5 @@
 ---
-title: Redis & Proxy-Cache: Giải Pháp Cache Toàn Diện Cho WordPress
+title: "Redis & Proxy-Cache: Giải Pháp Cache Toàn Diện Cho WordPress"
 type: docs
 prev: ssl-redirect
 next: fail2ban

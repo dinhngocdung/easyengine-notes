@@ -1,5 +1,5 @@
 ---
-title: EasyEngine Caching: Full-Page, Object, and Proxy Cache Explained
+title: "EasyEngine Caching: Full-Page, Object, and Proxy Cache Explained"
 type: docs
 prev: ssl-redirect
 next: fail2ban

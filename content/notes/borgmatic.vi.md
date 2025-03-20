@@ -1,5 +1,5 @@
 ---
-title: Borgmatic: Sao lưu server nhanh, rẻ, an toàn
+title: "Borgmatic: Sao lưu server nhanh, rẻ, an toàn"
 type: docs
 prev: seo-security
 ---

@@ -1,5 +1,5 @@
 ---
-title: Cloudflare
+title: Cloudflare with Fail2ban Docker
 type: docs
 prev: fail2ban
 next: seo-security

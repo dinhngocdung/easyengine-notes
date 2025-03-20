@@ -1,5 +1,5 @@
 ---
-title: Fail2ban Docker: Enhancing Security
+title: "Fail2ban Docker: Enhancing Security"
 type: docs
 prev: cache
 next: cloudflare
