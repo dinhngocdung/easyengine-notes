@@ -41,19 +41,19 @@ Below is a comparison table for easier understanding:
 - Example: Attaching a volume for MySQL: `-v mysql-data:/var/lib/mysql`, ensuring data is not lost if the container is removed.
 - This is crucial for databases and web files, different from storing them directly on the host.
 
-Networks**
+**Networks**
 - In a traditional LEMP stack, services communicate via localhost (127.0.0.1). In Docker, you must create a network, e.g., `docker network create lemp-net`, and attach containers to it for communication.
 - Example: NGINX must connect to PHP-FPM via the network, using TCP (port mapping or network alias) instead of Unix sockets.
 
-Port Mapping**
+**Port Mapping**
 - To access services externally, you map host ports to container ports, e.g., `-p 80:80` for NGINX.
 - Unlike traditional LEMP, where ports are directly bound on the host, this is a necessary step for container access.
 
-Environment Variables**
+**Environment Variables**
 - Instead of editing configuration files on the host, you configure services via environment variables, e.g., `MYSQL_ROOT_PASSWORD` for MySQL.
 - This enhances flexibility, especially when deploying across different environments (development, production).
 
-Container Lifecycle Management**
+**Container Lifecycle Management**
 - Instead of using `systemctl`, you manage containers with commands like `docker start`, `docker stop`, `docker restart`.
 - Docker Compose also supports lifecycle management, e.g., `docker-compose up -d` to run in the background, `docker-compose down` to stop.
 
@@ -230,6 +230,37 @@ Reference: [EasyEngine HTTP Request Cycle](https://easyengine.io/handbook/intern
 ## Where Your Data is Stored
 
 Now, let's review where your data is stored. This will help you know where to upload website content and how to modify configurations.
+
+{{< filetree/container >}}
+  {{< filetree/folder name="sample-site.com" >}}
+    {{< filetree/folder name="app" >}}
+      {{< filetree/folder name="htdocs" >}}
+      {{< /filetree/folder >}}
+      {{< filetree/file name="wp-config.php" >}}
+    {{< /filetree/folder >}}
+    {{< filetree/folder name="config" >}}
+      {{< filetree/folder name="nginx" >}}
+      {{< /filetree/folder >}}
+      {{< filetree/folder name="php" >}}
+      {{< /filetree/folder >}}
+      {{< filetree/folder name="postfix" >}}
+      {{< /filetree/folder >}}
+    {{< /filetree/folder >}}
+    {{< filetree/folder name="logs" >}}
+      {{< filetree/folder name="nginx" >}}
+      {{< /filetree/folder >}}
+      {{< filetree/folder name="php" >}}
+      {{< /filetree/folder >}}
+    {{< /filetree/folder >}}
+    {{< filetree/folder name="services" >}}
+      {{< filetree/folder name="postfix" >}}
+      {{< /filetree/folder >}}
+    {{< /filetree/folder >}}
+    {{< filetree/file name="docker-compose.yml" >}}
+    {{< filetree/file name="docker-compose-admin.yml" >}}
+  {{< /filetree/folder >}}
+{{< /filetree/container >}}
+
 
 ```bash
 sample-site.com
