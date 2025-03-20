@@ -10,3 +10,13 @@ Tôi kinh ngạc trước sự thuận tiện và hiệu suất của EasyEngine
 Nếu bạn đang tìm hiểu cách xây dựng webserver đầu tiên của mình, tìm kiếm một phương pháp tốt hơn để quản lý webserver hiện tại, hoặc đã nghe nói về EasyEngine 4 nhưng vẫn còn băn khoăn, thì bạn chính là người sẽ hưởng lợi nhiều nhất từ ghi chú này.
 
 Đừng lo lắng về những cảnh báo liên quan đến Docker hay sự phức tạp của nó. Tôi cũng không biết gì về Docker trước khi sử dụng EasyEngine 4. Nhưng đội ngũ phát triển đã làm được điều phi thường: bạn không cần biết về Docker vẫn có thể vận hành webserver Docker hóa với EasyEngine.
+
+{{< cards >}}
+  {{< card link="review" title="Đánh giá EasyEngine 4" icon="warning" >}}
+  {{< card link="differences" title="Chuyển qua EasyEngine" icon="card" >}}
+  {{< card link="deploying" title="Cài đặt với WordPress" icon="chevron-right" >}}
+  {{< card link="cache" title="Redis Cache" icon="folder-tree" >}}
+  {{< card link="fail2ban" title="Fail2ban Docker" icon="badge-check" >}}
+  {{< card link="cloudflare" title="Cloudflare với Fail2Ban" icon="one" >}}
+  {{< card link="borgmatic" title="Sao lưu Borgmatic" icon="collection" >}}
+{{< /cards >}}

@@ -3,7 +3,7 @@ title: Đinh Ngọc Dũng
 type: about
 ---
 
-#I'm not a developer, 
-#a tea master 
-#or an architect.
-#:)
+# I'm not a developer, 
+# not a tea master 
+# or not an architect.
+# :)
