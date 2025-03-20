@@ -2,12 +2,18 @@
 title: Dũng's Notes for EasyEngine
 layout: hextra-home
 ---
-
 {{< hextra/hero-badge link="https://github.com/EasyEngine/easyengine/discussions">}}
   <div class="hx-w-2 hx-h-2 hx-rounded-full hx-bg-primary-400"></div>
   <span>Discussion about EasyEngine</span>
   {{< icon name="arrow-circle-right" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
+
+{{< hextra/hero-container
+  image="https://easyengine.io/wp-content/uploads/sites/20/2019/06/EasyEngine-New-Logo-Avatar-Transparent-Background-1.png"
+  imageClass="hx-block hx-overflow-hidden hx-rounded-3xl"
+  imageWidth="300" imageHeight="300"
+  imageTitle="AXIVO"
+>}}
 
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-headline >}}
@@ -15,11 +21,21 @@ layout: hextra-home
 {{< /hextra/hero-headline >}}
 </div>
 
-<div class="hx-mb-12">
+<div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-subtitle >}}
-  My experience in building a web server&nbsp;<br class="sm:hx-block hx-hidden" />that is fast, performance, reliable, and modern.
+  👋 Welcome to my notes.
 {{< /hextra/hero-subtitle >}}
 </div>
+
+<div class="hx-mt-6 hx-mb-6">
+{{< hextra/hero-subtitle >}}
+  My experience in building a web server
+  that is fast, performance, reliable, and modern.
+{{< /hextra/hero-subtitle >}}
+</div>
+
+{{< /hextra/hero-container >}}
+
 
 <div class="hx-mb-6">
 {{< hextra/hero-button text="Review of EasyEngine in 2025" link="notes/review" >}}
@@ -44,7 +60,7 @@ layout: hextra-home
     image="/images/defferences.png"
     imageClass="hx-top-[40%] hx-left-[36px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.15),hsla(0,0%,100%,0));"
-    link="notes/defferences"
+    link="notes/differences"
   >}}
   {{< hextra/feature-card
     title="Deploying WordPress on EasyEngine"
