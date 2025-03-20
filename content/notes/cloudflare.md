@@ -113,7 +113,7 @@ Cloudflare WAF is the first line of defense in your firewall setup, protecting y
 #### **Cloudflare WAF (Web Application Firewall)**  
 Cloudflare WAF protects websites from attacks such as SQL injection, XSS, DDoS, and malicious bots. It acts as an intermediary proxy between users and the server, analyzing traffic to block malicious requests before they reach the origin server.  
 
-#### **Advantages of Cloudflare WAF:**  
+#### Advantages of Cloudflare WAF  
 - **Automatic Protection:** Regular updates with the latest security rules.  
 - **High Performance:** Runs on Cloudflare's global network, reducing server load.  
 - **Easy Integration:** No hardware required, activation with just a few clicks.  
@@ -137,7 +137,7 @@ style C fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000
 style N fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
 ```  
 
-### **How Fail2Ban Works with Cloudflare**  
+### How Fail2Ban Works with Cloudflare  
 
 Fail2Ban monitors server logs for suspicious activity and takes appropriate action to block threats. However, when using Cloudflare, Fail2Ban cannot directly block IPs at the server firewall level, since all traffic passes through Cloudflare.  
 
@@ -164,11 +164,11 @@ style N fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000
 style F fill:#f9f,stroke:#333,stroke-width:2px,color:#000  
 ```  
 
-## **Adding Fail2Ban Actions for Cloudflare WAF**  
+## Adding Fail2Ban Actions for Cloudflare WAF  
 
 To integrate Fail2Ban with Cloudflare WAF, you need to modify Fail2Ban’s default actions to interact with Cloudflare’s API.  
 
-### **1. Modify Fail2Ban Jail Configuration**  
+### 1. Modify Fail2Ban Jail Configuration  
 Edit the **jail.local** configuration file:  
 
 ```bash
@@ -185,7 +185,7 @@ action   = iptables-multiport[port="%(port)s", protocol="%(protocol)s", chain="%
            cloudflare-token
 ```  
 
-### **2. Create a Cloudflare Action File**  
+### 2. Create a Cloudflare Action File  
 Create a new action file **cloudflare-token.conf**:  
 
 ```bash
@@ -194,7 +194,7 @@ nano ~/fail2ban/data/action.d/cloudflare-token.conf
 
 Copy and paste the following configuration (replace `cfzone` and `cftoken` with your Cloudflare details):  
 
-```ini
+```ini  {filename="~/fail2ban/data/action.d/cloudflare-token.conf"}
 [Definition]
 
 actionban = curl -s -X POST "<_cf_api_url>" \
@@ -224,7 +224,7 @@ cfmode = block
 notes = Fail2Ban <name>
 ```  
 
-### **3. Restart Fail2Ban**  
+### 3. Restart Fail2Ban  
 Reload Fail2Ban to apply the new configuration:  
 
 ```bash

@@ -283,7 +283,7 @@ mkdir -p ~/fail2ban/data/filter.d
 nano ~/fail2ban/data/filter.d/wp-login-fail.conf
 ```
 Content:
-```
+``` {filename="wp-login-fail.conf"}
 [Definition]
 failregex = ^<HOST>.* "POST .*/wp-login.php([/?#\\].*)? HTTP/.*" 200
 ignoreregex =
@@ -294,7 +294,7 @@ ignoreregex =
 nano ~/fail2ban/data/filter.d/nginx-req-limit.conf
 ```
 Content:
-```
+```{filename="nginx-req-limit.conf"}
 [Definition]
 failregex = limiting requests, excess:.* by zone.*client: <HOST>
 ignoreregex =
@@ -305,7 +305,7 @@ ignoreregex =
 nano ~/fail2ban/data/filter.d/nginx-badbots.conf
 ```
 Content:
-```
+```{filename="nginx-badbots.conf"}
 [Definition]
 failregex = ^<HOST> -.*"(GET|POST|HEAD).*HTTP.*"(?:badbots|badbotscustom)"$
 ignoreregex = .*Googlebot.*|.*Bingbot.*
@@ -316,7 +316,7 @@ ignoreregex = .*Googlebot.*|.*Bingbot.*
 nano ~/fail2ban/data/filter.d/nginx-http-auth.conf
 ```
 Content:
-```
+```{filename="nginx-http-auth.conf"}
 [Definition]
 failregex = ^ \[error\] \d+#\d+: \*\d+ user "(?:[^"]+|.*?)":? (?:password mismatch|was not found in "[^"]*"), client: <HOST>
 ignoreregex =
@@ -327,7 +327,7 @@ ignoreregex =
 nano ~/fail2ban/data/filter.d/nginx-nohome.conf
 ```
 Content:
-```
+```{filename="nginx-nohome.conf"}
 [Definition]
 failregex = ^<HOST> -.*GET .*/~.*
 ignoreregex =
@@ -338,7 +338,7 @@ ignoreregex =
 nano ~/fail2ban/data/filter.d/nginx-noproxy.conf
 ```
 Content:
-```
+```{filename="nginx-noproxy.conf"}
 [Definition]
 failregex = ^<HOST> -.*GET http.*
 ignoreregex =
@@ -349,7 +349,7 @@ ignoreregex =
 nano ~/fail2ban/data/filter.d/nginx-noscript.conf
 ```
 Content:
-```
+```{filename="ginx-noscript.conf"}
 [Definition]
 failregex = ^<HOST>.* "(GET|POST) .*/.*\.(php|asp|exe|pl|cgi|scgi)(\?.*)? HTTP/.*"
 ignoreregex = ^<HOST>.* "(GET|POST) .*/wp-login\.php.*$"
@@ -362,7 +362,7 @@ ignoreregex = ^<HOST>.* "(GET|POST) .*/wp-login\.php.*$"
 nano ~/fail2ban/data/filter.d/nginx-forbidden.conf
 ```
 Content:
-```
+```{filename="ginx-forbidden.conf"}
 [Definition]
 failregex = ^.*\[error\] \d+#\d+: .* is forbidden, client: <HOST>.*$
 ignoreregex =
@@ -373,7 +373,7 @@ ignoreregex =
 nano ~/fail2ban/data/filter.d/nginx-no-file-directory.conf
 ```
 Content:
-```
+```{filename="nginx-no-file-directory.conf"}
 [Definition]
 failregex = ^.*\[error\] \d+#\d+: .*No such file or directory.*client: <HOST>.*$
 ignoreregex = ^.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|woff|woff2|svg|map)(\?.*)? HTTP/.*"
@@ -384,7 +384,7 @@ ignoreregex = ^.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|woff|wo
 nano ~/fail2ban/data/filter.d/nginx-errors.conf
 ```
 Content:
-```
+```{filename="nginx-errors.conf"}
 [Definition]
 failregex = ^<HOST> -.* "(GET|POST|HEAD) .+ HTTP/.*" (40[0-7]|41[0-8]) .*$
 ignoreregex = ^<HOST>.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|woff|woff2|svg|map)(\?.*)? HTTP/.*"

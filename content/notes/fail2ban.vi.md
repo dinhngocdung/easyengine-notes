@@ -102,7 +102,7 @@ nano docker-compose.yml
 
 Chép nội dung này vào:
 
-```yaml
+```yaml {filename="~/fail2ban/docker-compose.yml"}
 services:
   fail2ban:
     image: crazymax/fail2ban:latest
@@ -133,7 +133,7 @@ nano ~/fail2ban/data/jail.d/jail.local
 
 Chép nội dung sau đây vào file `jail.local` đang mở. Đặc biệt chú ý cài đặt `chain = DOCKER-USER`, Fail2Ban sẽ chèn lệnh cấm vào chain này để có tác dụng trong hệ thống Docker hóa.  
 
-```bash
+```bash {filename="~/fail2ban/data/jail.d/jail.local"}
 [DEFAULT]
 
 ignoreip = 116.110.40.117 127.0.0.1/8 ::1 10.0.0.0/20 
@@ -282,7 +282,7 @@ mkdir -p ~/fail2ban/data/filter.d
 nano ~/fail2ban/data/filter.d/wp-login-fail.conf
 ```
 Nội dung:
-```
+``` {filename="wp-login-fail.conf"}
 [Definition]
 failregex = ^<HOST>.* "POST .*/wp-login.php([/?#\\].*)? HTTP/.*" 200
 ignoreregex =
@@ -293,7 +293,7 @@ ignoreregex =
 nano ~/fail2ban/data/filter.d/nginx-req-limit.conf
 ```
 Nội dung:
-```
+```{filename="nginx-req-limit.conf"}
 [Definition]
 failregex = limiting requests, excess:.* by zone.*client: <HOST>
 ignoreregex =
@@ -304,7 +304,7 @@ ignoreregex =
 nano ~/fail2ban/data/filter.d/nginx-badbots.conf
 ```
 Nội dung:
-```
+```{filename="nginx-badbots.conf"}
 [Definition]
 failregex = ^<HOST> -.*"(GET|POST|HEAD).*HTTP.*"(?:badbots|badbotscustom)"$
 ignoreregex = .*Googlebot.*|.*Bingbot.*
@@ -315,7 +315,7 @@ ignoreregex = .*Googlebot.*|.*Bingbot.*
 nano ~/fail2ban/data/filter.d/nginx-http-auth.conf
 ```
 Nội dung:
-```
+```{filename="nginx-http-auth.conf"}
 [Definition]
 failregex = ^ \[error\] \d+#\d+: \*\d+ user "(?:[^"]+|.*?)":? (?:password mismatch|was not found in "[^"]*"), client: <HOST>
 ignoreregex =
@@ -326,7 +326,7 @@ ignoreregex =
 nano ~/fail2ban/data/filter.d/nginx-nohome.conf
 ```
 Nội dung:
-```
+```{filename="nginx-nohome.conf"}
 [Definition]
 failregex = ^<HOST> -.*GET .*/~.*
 ignoreregex =
@@ -337,7 +337,7 @@ ignoreregex =
 nano ~/fail2ban/data/filter.d/nginx-noproxy.conf
 ```
 Nội dung:
-```
+```{filename="nginx-noproxy.conf"}
 [Definition]
 failregex = ^<HOST> -.*GET http.*
 ignoreregex =
@@ -348,7 +348,7 @@ ignoreregex =
 nano ~/fail2ban/data/filter.d/nginx-noscript.conf
 ```
 Nội dung:
-```
+```{filename="ginx-noscript.conf"}
 [Definition]
 failregex = ^<HOST>.* "(GET|POST) .*/.*\.(php|asp|exe|pl|cgi|scgi)(\?.*)? HTTP/.*"
 ignoreregex = ^<HOST>.* "(GET|POST) .*/wp-login\.php.*$"
@@ -361,7 +361,7 @@ ignoreregex = ^<HOST>.* "(GET|POST) .*/wp-login\.php.*$"
 nano ~/fail2ban/data/filter.d/nginx-forbidden.conf
 ```
 Nội dung:
-```
+```{filename="ginx-forbidden.conf"}
 [Definition]
 failregex = ^.*\[error\] \d+#\d+: .* is forbidden, client: <HOST>.*$
 ignoreregex =
@@ -372,7 +372,7 @@ ignoreregex =
 nano ~/fail2ban/data/filter.d/nginx-no-file-directory.conf
 ```
 Nội dung:
-```
+```{filename="nginx-no-file-directory.conf"}
 [Definition]
 failregex = ^.*\[error\] \d+#\d+: .*No such file or directory.*client: <HOST>.*$
 ignoreregex = ^.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|woff|woff2|svg|map)(\?.*)? HTTP/.*"
@@ -383,7 +383,7 @@ ignoreregex = ^.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|woff|wo
 nano ~/fail2ban/data/filter.d/nginx-errors.conf
 ```
 Nội dung:
-```
+```{filename="nginx-errors.conf"}
 [Definition]
 failregex = ^<HOST> -.* "(GET|POST|HEAD) .+ HTTP/.*" (40[0-7]|41[0-8]) .*$
 ignoreregex = ^<HOST>.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|woff|woff2|svg|map)(\?.*)? HTTP/.*"

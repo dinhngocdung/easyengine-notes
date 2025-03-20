@@ -190,7 +190,7 @@ nano ~/fail2ban/data/action.d/cloudflare-token.conf
 
 Chép nội dung này vào, nhớ thay thế `cfzone` và `cftoken` của bạn vào file:  
 
-```bash
+```bash {filename="~/fail2ban/data/action.d/cloudflare-token.conf"}
 #
 # Author: Logic-32
 #
