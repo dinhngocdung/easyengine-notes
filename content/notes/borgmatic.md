@@ -1,12 +1,9 @@
 ---
 title: Borgmatic – An Efficient Backup Solution for Web Servers
-linkTitle: Borgmatic Sao Lưu
+linkTitle: Borgmatic Backup
 weight: 10
 type: docs
 prev: seo-security
----
-Here is the corrected and translated version of your text into English:  
-
 ---
 
 Borg/**Borgmatic** is an effective backup solution for web servers. It compresses and deduplicates data to save storage space, encrypts backups for security, and only backs up changed data to increase speed. Borgmatic automates backups, verifies integrity, and simplifies restoration.  

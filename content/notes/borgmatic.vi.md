@@ -1,6 +1,6 @@
 ---
 title: "Borgmatic: Sao lưu server nhanh, rẻ, an toàn"
-linkTitle: Borgmatic Backup
+linkTitle: Sao lưu với Borgmatic
 weight: 10
 type: docs
 prev: seo-security
