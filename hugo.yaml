@@ -1,6 +1,8 @@
 # Hugo configuration file
 title: Dũng'Notes for EasyEngine
 
+enableRobotsTXT: true
+
 # import hextra as module
 module:
   imports:
