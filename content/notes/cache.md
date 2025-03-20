@@ -1,5 +1,7 @@
 ---
 title: "EasyEngine Caching: Full-Page, Object, and Proxy Cache Explained"
+linkTitle: Cache
+weight: 6
 type: docs
 prev: ssl-redirect
 next: fail2ban

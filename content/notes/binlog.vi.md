@@ -1,5 +1,7 @@
 ---
 title: Lỗi Database Connection do Binlog MariaDB trong EasyEngine
+linkTitle: Lỗi Binlog
+weight: 4
 type: docs
 prev: deploying
 next: ssl-redirect

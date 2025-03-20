@@ -1,5 +1,7 @@
 ---
 title: Thiết Lập SSL, Domain và Redirect
+linkTitle: SSL, Redirects
+weight: 5
 type: docs
 prev: binlog
 next: cache

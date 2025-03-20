@@ -1,5 +1,7 @@
 ---
 title: Review of EasyEngine 4
+linkTitle: Review
+weight: 1
 type: docs
 prev: /
 next: differences

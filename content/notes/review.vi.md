@@ -1,5 +1,7 @@
 ---
 title: Đánh giá EasyEngine
+linkTitle: Đánh giá
+weight: 1
 type: docs
 prev: /
 next: differences

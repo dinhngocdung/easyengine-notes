@@ -1,5 +1,7 @@
 ---
 title: Deploying WordPress with EasyEngine 4
+linkTitle: Deploying
+weight: 3
 type: docs
 prev: differences
 next: binlog

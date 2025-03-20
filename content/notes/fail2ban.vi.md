@@ -1,5 +1,7 @@
 ---
 title: "Fail2ban Docker: bảo mật tăng cường"
+linkTitle: Fail2ban
+weight: 7
 type: docs
 prev: cache
 next: cloudflare

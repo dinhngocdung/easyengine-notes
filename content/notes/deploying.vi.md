@@ -1,5 +1,7 @@
 ---
 title: Triển khai WordPress với EasyEngine 4
+linkTitle: Triển khai
+weight: 3
 type: docs
 prev: differences
 next: binlog

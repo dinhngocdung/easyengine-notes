@@ -1,5 +1,7 @@
 ---
 title: Cloudflare với Fail2ban Docker
+linkTitle: Cloudflare
+weight: 8
 type: docs
 prev: fail2ban
 next: seo-security

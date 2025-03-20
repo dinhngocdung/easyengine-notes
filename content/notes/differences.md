@@ -1,5 +1,7 @@
 ---
 title: Differences When Switching to EasyEngine 4
+linkTitle: Differences
+weight: 2
 type: docs
 prev: review
 next: deploying

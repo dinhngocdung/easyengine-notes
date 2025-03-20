@@ -1,5 +1,7 @@
 ---
 title: Managing SSL, Domains, and Redirects with EasyEngine
+linkTitle: SSL, Redirects
+weight: 5
 type: docs
 prev: binlog
 next: cache

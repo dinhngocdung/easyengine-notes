@@ -1,5 +1,7 @@
 ---
 title: MariaDB Binlog Overflow Causing Database Connection Errors in EasyEngine
+linkTitle: Binlog Errors
+weight: 4
 type: docs
 prev: deploying
 next: ssl-redirect

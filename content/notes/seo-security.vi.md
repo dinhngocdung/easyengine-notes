@@ -1,5 +1,7 @@
 ---
 title: Mẹo nhỏ Bảo mật và SEO
+linkTitle: Security & SEO
+weight: 9
 type: docs
 prev: seo-security
 next: borgmatic
