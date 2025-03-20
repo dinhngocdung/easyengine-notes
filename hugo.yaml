@@ -11,6 +11,8 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+  highlight:
+    noClasses: false
 
   # enable hextra syntax highlight
   highlight:
