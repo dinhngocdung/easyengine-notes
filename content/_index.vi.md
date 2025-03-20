@@ -4,7 +4,7 @@ layout: hextra-home
 ---
 
 {{< hextra/hero-container
-  image="https://easyengine.io/wp-content/uploads/sites/20/2019/06/EasyEngine-New-Logo-Animated.svg"
+  image="https://easyengine.io/wp-content/uploads/sites/20/2019/06/EasyEngine-New-Logo-Avatar-Transparent-Background-1.png"
   imageTitle="Regolith Desktop Environment"
   imageWidth="853"
 >}}
