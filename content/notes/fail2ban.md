@@ -29,7 +29,7 @@ Fail2Ban operates in three main steps:
 flowchart LR
     %% Define components
     subgraph Docker Host
-        subgraph iptables
+        subgraph nftables
         direction TB
             INPUT[[INPUT]]
             DOCKER-USER[[DOCKER-USER]]
@@ -80,13 +80,21 @@ Fail2Ban operates using three key components: **Jail, Filter, and Action**.
 
 The principle of Dockerization is to minimize intervention on the host server—everything runs within a container. Here, we follow the same approach by installing Fail2Ban inside a container using the `crazymax/fail2ban` image.  
 
-### Steps to implement:  
+**Steps to implement:**
 
 1. Prepare the `docker-compose.yml` and `.env` files, which dictate how Docker operates.  
 2. Configure jails, actions, and filters.  
 3. Run Fail2Ban with Docker.  
 
-## `docker-compose.yml`  
+
+
+## docker-compose.yml
+
+Prepare the `docker-compose.yml`
+
+{{% steps %}}
+
+### Create a directory
 
 Create a directory for the Fail2Ban Docker setup:  
 
@@ -99,6 +107,8 @@ Create the `docker-compose.yml` file, which instructs Docker on how to set up th
 ```bash
 nano docker-compose.yml
 ```  
+
+### Content
 
 Copy and paste the following content into the file:  
 
@@ -121,7 +131,7 @@ services:
       - F2B_DB_PURGE_AGE=1d
     restart: unless-stopped
 ```  
-
+{{% /steps %}}
 ## Creating a Jail  
 
 This is my jail setup to prevent common WordPress attacks. The jail file is created in the `~/fail2ban/data/jail.d/jail.local` directory.  
@@ -419,28 +429,28 @@ With the prepared files, we are ready to run Fail2Ban using Docker.
         └── nginx-errors.conf
 ```
 
-### Ensure You Are in the `~/fail2ban` Directory:
+Ensure You Are in the `~/fail2ban` Directory:
 ```bash
 cd ~/fail2ban
 ```
 
-### Start Fail2Ban Docker:
+Start Fail2Ban Docker:
 ```bash
 # Run Fail2Ban in the background
 docker-compose up -d 
 ```
 
-### View Fail2Ban Logs:
+View Fail2Ban Logs:
 ```bash
 docker-compose logs -f
 ```
 
-### Check Banned IPs in All Jails:
+Check Banned IPs in All Jails:
 ```bash
 docker-compose exec fail2ban fail2ban-client status --all
 ```
 
-### Unban an IP:
+Unban an IP:
 Sometimes Fail2Ban may mistakenly block an IP. To unban `123.123.123.123` from the `nginx-errors` jail:
 ```bash
 docker-compose exec fail2ban fail2ban-client set nginx-errors unbanip 123.123.123.123
@@ -459,7 +469,7 @@ For example, to allow Google Bot, add the following lines to the file:
 ignoreip = 192.178.5.0/27 192.178.6.0/27 192.178.6.32/27 192.178.6.64/27 34.100.182.96/28 34.101.50.144/28 34.118.254.0/28 34.118.66.0/28 34.126.178.96/28 34.146.150.144/28 34.147.110.144/28 34.151.74.144/28 34.152.50.64/28 34.154.114.144/28 34.155.98.32/28 34.165.18.176/28 34.175.160.64/28 34.176.130.16/28 34.22.85.0/27 34.64.82.64/28 34.65.242.112/28 34.80.50.80/28 34.88.194.0/28 34.89.10.80/28 34.89.198.80/28 34.96.162.48/28 35.247.243.240/28 66.249.64.0/27 66.249.64.128/27 66.249.64.160/27 66.249.64.224/27 66.249.64.32/27 66.249.64.64/27 66.249.64.96/27 66.249.65.0/27 66.249.65.128/27 66.249.65.160/27 66.249.65.192/27 66.249.65.224/27 66.249.65.32/27 66.249.65.64/27 66.249.65.96/27 66.249.66.0/27 66.249.66.160/27 66.249.66.192/27 66.249.66.32/27 66.249.66.64/27 66.249.66.96/27 66.249.68.0/27 66.249.68.32/27 66.249.68.64/27 66.249.68.96/27 66.249.69.0/27 66.249.69.128/27 66.249.69.160/27 66.249.69.192/27 66.249.69.224/27 66.249.69.32/27 66.249.69.64/27 66.249.69.96/27 66.249.70.0/27 66.249.70.128/27 66.249.70.160/27 66.249.70.192/27 66.249.70.224/27 66.249.70.32/27 66.249.70.64/27 66.249.70.96/27 66.249.71.0/27 66.249.71.128/27 66.249.71.160/27 66.249.71.192/27 66.249.71.224/27 66.249.71.32/27 66.249.71.64/27 66.249.71.96/27 66.249.72.0/27 66.249.72.128/27 66.249.72.160/27 66.249.72.192/27 66.249.72.224/27 66.249.72.32/27 66.249.72.64/27 66.249.72.96/27 66.249.73.0/27 66.249.73.128/27 66.249.73.160/27 66.249.73.192/27 66.249.73.224/27 66.249.73.32/27 66.249.73.64/27 66.249.73.96/27 66.249.74.0/27 66.249.74.128/27 66.249.74.160/27 66.249.74.32/27 66.249.74.64/27 66.249.74.96/27 66.249.75.0/27 66.249.75.128/27 66.249.75.160/27 66.249.75.192/27 66.249.75.224/27 66.249.75.32/27 66.249.75.64/27 66.249.75.96/27 66.249.76.0/27 66.249.76.128/27 66.249.76.160/27 66.249.76.192/27 66.249.76.224/27 66.249.76.32/27 66.249.76.64/27 66.249.76.96/27 66.249.77.0/27 66.249.77.128/27 66.249.77.160/27 66.249.77.192/27 66.249.77.224/27 66.249.77.32/27 66.249.77.64/27 66.249.77.96/27 66.249.78.0/27 66.249.78.32/27 66.249.79.0/27 66.249.79.128/27 66.249.79.160/27 66.249.79.192/27 66.249.79.224/27 66.249.79.32/27 66.249.79.64/27 66.249.79.96/27
 ```
 
-### Recommended IPs to Whitelist
+**Recommended IPs to Whitelist**
 
 1. Home IP: 123.123.123.123  
 2. Internal Server IP: 127.0.0.1/8 ::1  
@@ -476,4 +486,4 @@ ignoreip = 192.178.5.0/27 192.178.6.0/27 192.178.6.32/27 192.178.6.64/27 34.100.
 
 ### References:
 
-https://github.com/crazy-max/docker-fail2ban
+[crazy-max/docker-fail2ban](https://github.com/crazy-max/docker-fail2ban)
