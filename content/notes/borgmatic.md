@@ -14,13 +14,19 @@ Borg/**Borgmatic** is an effective backup solution for web servers. It compresse
 graph LR
 
 	subgraph SERVER
-		BM((Borgmatic))
+		
+		subgraph "Borgmatic
+							Backup"
+		BM
+		end
 		direction TB
 		F@{ shape: processes, label: "Files" }
 		D[(Database)]
 		C@{ shape: docs, label: "Config files" }
 	end
-	
+	BM@{ shape: das, label: "Deduplication
+													Compression
+													Encryption" }
 	BB[("BORGBASE
 	repo 1
 	repo 1
@@ -43,6 +49,7 @@ graph LR
     style C fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
     %% Config files (Xanh nhạt)
     style SERVER stroke-width:2px,stroke-dasharray: 5 5
+
 
 ```
 Once again, we will deploy Borgmatic on Docker following the **EasyEngine** approach.  
