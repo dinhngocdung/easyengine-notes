@@ -32,5 +32,5 @@ Nếu bạn đang tìm hiểu cách xây dựng webserver đầu tiên của mì
 Bước đầu tiên của khám phá
 
 {{< cards >}}
-  {{< card link="review" title="Đánh giá EasyEngine 4" icon="document-text" subtitle="The reason you shouldn’t hesitate with EasyEnginee" >}}
+  {{< card link="review" title="Đánh giá EasyEngine 4" icon="document-text" subtitle="Lý do bạn không nên chần chừ bắt đầu với EasyEnginee" >}}
 {{< /cards >}}

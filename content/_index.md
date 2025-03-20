@@ -99,12 +99,5 @@ layout: hextra-home
   >}}
 {{< /hextra/feature-grid >}}
 
-## You have a Questions ?
-
-{{< callout emoji="❓" >}}
-  There are always problems that are difficult for one person but easy for another..
-  If you have an issue needing support, please use the official EasyEngine Github Discussion [Ask a question](https://github.com/EasyEngine/easyengine/discussions)!
-{{< /callout >}}
-
 
 
