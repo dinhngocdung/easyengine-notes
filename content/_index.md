@@ -35,7 +35,7 @@ layout: hextra-home
     image="/images/review.png"
     imageClass="hx-top-[40%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
-    link="/notes/review"
+    link="notes/review"
   >}}
   {{< hextra/feature-card
     title="Differences When Dockerizing"
@@ -44,7 +44,7 @@ layout: hextra-home
     image="/images/defferences.png"
     imageClass="hx-top-[40%] hx-left-[36px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.15),hsla(0,0%,100%,0));"
-    link="/notes/defferences"
+    link="notes/defferences"
   >}}
   {{< hextra/feature-card
     title="Deploying WordPress on EasyEngine"
@@ -53,32 +53,32 @@ layout: hextra-home
     image="/images/deploying.png"
     imageClass="hx-top-[40%] hx-left-[36px] hx-w-[110%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(221,210,59,0.15),hsla(0,0%,100%,0));"
-    link="/notes/deploying"
+    link="notes/deploying"
   >}}
   {{< hextra/feature-card
     title="Database Errors Due to Binlog"
     subtitle="Binlog data files exhaust server memory, causing Database Connection errors—a very common, discouraging situation but easily fixable."
-    link="/notes/binlog"
+    link="notes/binlog"
   >}}
   {{< hextra/feature-card
     title="SSL and Redirect"
     subtitle="Easily set up SSL and configure redirects in EasyEngine’s nginx system."
-    link="/notes/ssl-redirect"
+    link="notes/ssl-redirect"
   >}}
   {{< hextra/feature-card
     title="Caching at All Levels with Redis"
     subtitle="A single yet extremely effective caching solution, covering all levels from full-page cache, object cache, to proxy cache."
-    link="/notes/cache"
+    link="notes/cache"
   >}}
   {{< hextra/feature-card
     title="Fail2ban Docker"
     subtitle="Enhancing security with Fail2ban, and the unique aspects of a Dockerized system."
-    link="/notes/fail2ban"
+    link="notes/fail2ban"
   >}}
   {{< hextra/feature-card
     title="And a Few More Things..."
     icon="sparkles"
     subtitle="Automated backups with Borgmatic, configuration with Cloudflare, and small nginx tweaks for better SEO."
-    link="/notes"
+    link="notes"
   >}}
 {{< /hextra/feature-grid >}}
