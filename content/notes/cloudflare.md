@@ -83,6 +83,24 @@ EasyEngine handles this by ensuring that **proxy logs** still capture the correc
 - **Proxy logs** correctly record user IPs.  
 - **Site logs** may still show Cloudflare’s IPs instead of real user IPs, as Cloudflare is acting as a proxy.  
 
+```mermaid
+graph LR
+  C1([1.1.1.1]) -->|Requests| CF2(("Cloudflare
+  4.4.4.4"))
+  C2([2.2.2.2]) -->|Requests| CF2
+  CF2 -->|Requests| S3{"Nginx Proxy"}
+  S3 -->|Logs| L3@{ shape: doc, label: "Proxy Logs\n1.1.1.1\n2.2.2.2" }
+  S3 --> |forward| SS3{"Nginx Site"} --> LS3@{ shape: doc, label: "Site Logs\n4.4.4.4\n4.4.4.4" }
+
+  %% Style cho các thành phần
+  style C1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+  style C2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+  style CF2 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000  
+  style S3 fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
+  style L3 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+  style LS3 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000
+```
+
 To display real IPs in **site logs**, modify the Nginx configuration:  
 
 ```bash
@@ -110,7 +128,7 @@ Now, **both proxy logs and site logs will correctly reflect the real IP of visit
 
 Cloudflare WAF is the first line of defense in your firewall setup, protecting your server before traffic reaches **nftables** (assuming you're using Debian 12).  
 
-#### **Cloudflare WAF (Web Application Firewall)**  
+#### Cloudflare WAF (Web Application Firewall  
 Cloudflare WAF protects websites from attacks such as SQL injection, XSS, DDoS, and malicious bots. It acts as an intermediary proxy between users and the server, analyzing traffic to block malicious requests before they reach the origin server.  
 
 #### Advantages of Cloudflare WAF  

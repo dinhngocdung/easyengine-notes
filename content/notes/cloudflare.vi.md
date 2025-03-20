@@ -82,6 +82,24 @@ EasyEngine đã xử lý sẵn, nên nginx-proxy logs file vẫn ghi nhận đú
 - **Proxy logs** ghi nhận đúng IP người dùng.  
 - **Site logs** hiển thị IP của Cloudflare thay vì IP thực, vì Cloudflare đang đóng vai trò proxy.
 
+```mermaid
+graph LR
+  C1([1.1.1.1]) -->|Requests| CF2(("Cloudflare
+  4.4.4.4"))
+  C2([2.2.2.2]) -->|Requests| CF2
+  CF2 -->|Requests| S3{"Nginx Proxy"}
+  S3 -->|Logs| L3@{ shape: doc, label: "Proxy Logs\n1.1.1.1\n2.2.2.2" }
+  S3 --> |forward| SS3{"Nginx Site"} --> LS3@{ shape: doc, label: "Site Logs\n4.4.4.4\n4.4.4.4" }
+
+  %% Style cho các thành phần
+  style C1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+  style C2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+  style CF2 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000  
+  style S3 fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
+  style L3 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+  style LS3 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000
+```
+
 Để lấy IP thực cho **site logs**, cần chỉnh sửa file cấu hình Nginx:
 
 ```bash
@@ -90,11 +108,11 @@ nano /opt/easyengine/sites/sample.com/config/nginx/nginx.conf
 
 Tìm phần `Proxy Settings`, thay đổi dòng `real_ip_header X-Forwarded-For;` thành `real_ip_header CF-Connecting-IP;`:
 
-```bash
-    # Proxy Settings
-    set_real_ip_from      0.0.0.0/0;
-    real_ip_header  CF-Connecting-IP;
-    client_max_body_size 100m;
+```
+# Proxy Settings
+set_real_ip_from      0.0.0.0/0;
+real_ip_header  CF-Connecting-IP;
+client_max_body_size 100m;
 ```
 
 Sau đó, khởi động lại Nginx site:
