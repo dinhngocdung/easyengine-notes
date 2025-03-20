@@ -82,3 +82,11 @@ layout: hextra-home
     link="notes"
   >}}
 {{< /hextra/feature-grid >}}
+
+## Bạn có câu hỏi ?
+
+{{< callout emoji="❓" >}}
+  Luôn có những vấn đề khó với người này những dễ với người khác.
+  Nếu bạn có vấn đề cần hỗ trợ, hãy dùng diễn đàn chính thức của EasyEngine [Đặt câu hỏi](https://github.com/EasyEngine/easyengine/discussions)!
+{{< /callout >}}
+

@@ -20,3 +20,17 @@ Nếu bạn đang tìm hiểu cách xây dựng webserver đầu tiên của mì
 
 Đừng lo lắng về những cảnh báo liên quan đến Docker hay sự phức tạp của nó. Tôi cũng không biết gì về Docker trước khi sử dụng EasyEngine 4. Nhưng đội ngũ phát triển đã làm được điều phi thường: bạn không cần biết về Docker vẫn có thể vận hành webserver Docker hóa với EasyEngine.
 
+## Bạn có câu hỏi ?
+
+{{< callout emoji="❓" >}}
+  Luôn có những vấn đề khó với người này những dễ với người khác.
+  Nếu bạn có vấn đề cần hỗ trợ, hãy dùng diễn đàn chính thức của EasyEngine [Đặt câu hỏi](https://github.com/EasyEngine/easyengine/discussions)!
+{{< /callout >}}
+
+## Bắt đầu
+
+Bước đầu tiên của khám phá
+
+{{< cards >}}
+  {{< card link="review" title="Đánh giá EasyEngine 4" icon="document-text" subtitle="The reason you shouldn’t hesitate with EasyEnginee" >}}
+{{< /cards >}}

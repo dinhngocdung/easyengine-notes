@@ -21,3 +21,18 @@ If you are learning how to set up your first web server, looking for a better wa
 
 Don't worry about the warnings about Docker or its complexity. I knew nothing about Docker before using EasyEngine 4. The development team has truly achieved something remarkable: you don’t need any prior knowledge of Docker to operate a Dockerized web server with EasyEngine.
 
+## You have a Questions ?
+
+{{< callout emoji="❓" >}}
+  There are always problems that are difficult for one person but easy for another..
+  If you have an issue needing support, please use the official EasyEngine Github Discussion [Ask a question](https://github.com/EasyEngine/easyengine/discussions)!
+{{< /callout >}}
+
+## Next
+
+Dive right into the following section to get started:
+
+{{< cards >}}
+  {{< card link="review" title="Đánh giá EasyEngine 4" icon="document-text" subtitle="Why" >}}
+{{< /cards >}}
+
