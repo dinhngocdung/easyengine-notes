@@ -1,5 +1,7 @@
 ---
 title: Differences When Switching to EasyEngine 4
+type: docs
+prev: /
 next: first-page
 ---
 
