@@ -127,7 +127,7 @@ docker-compose up -d
 
 Before setting up backups, we need a storage location. If your website data is around 200GB, **BorgBase** is an excellent choice at only **$2/month**. For smaller websites, they offer **10GB free storage**.  
 
-### Steps to Set Up BorgBase  
+**Steps to Set Up BorgBase**
 
 1. Register and create an account if you don’t have one:  
    👉 [BorgBase Registration](https://www.borgbase.com/register)  

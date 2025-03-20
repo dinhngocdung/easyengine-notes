@@ -39,7 +39,7 @@ To use Cloudflare SSL with EasyEngine, follow these steps:
 
 When a website runs behind Cloudflare’s proxy, the server logs will not capture visitors' original IPs but instead show Cloudflare’s IPs. This happens because Cloudflare acts as an intermediary (proxy) between users and the web server.  
 
-### Normal Server Logs (Without Cloudflare)  
+Normal Server Logs (Without Cloudflare)  
 
 ```mermaid
 graph LR
@@ -53,7 +53,7 @@ graph LR
   style L1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
 ```
 
-### Server Logs with Cloudflare  
+Server Logs with Cloudflare  
 
 ```mermaid
 graph LR
@@ -128,10 +128,9 @@ Now, **both proxy logs and site logs will correctly reflect the real IP of visit
 
 Cloudflare WAF is the first line of defense in your firewall setup, protecting your server before traffic reaches **nftables** (assuming you're using Debian 12).  
 
-#### Cloudflare WAF (Web Application Firewall  
-Cloudflare WAF protects websites from attacks such as SQL injection, XSS, DDoS, and malicious bots. It acts as an intermediary proxy between users and the server, analyzing traffic to block malicious requests before they reach the origin server.  
+**Cloudflare WAF** (Web Application Firewall)Cloudflare WAF protects websites from attacks such as SQL injection, XSS, DDoS, and malicious bots. It acts as an intermediary proxy between users and the server, analyzing traffic to block malicious requests before they reach the origin server.  
 
-#### Advantages of Cloudflare WAF  
+**Advantages of Cloudflare WAF**
 - **Automatic Protection:** Regular updates with the latest security rules.  
 - **High Performance:** Runs on Cloudflare's global network, reducing server load.  
 - **Easy Integration:** No hardware required, activation with just a few clicks.  

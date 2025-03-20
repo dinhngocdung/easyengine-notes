@@ -135,21 +135,23 @@ Các bước thiết lập BorgBase:
    ```
 3. Tạo khóa **SSH** trên Borgmatic container:  
 
-```bash
-# Kết nối shell Borgmatic Docker
-cd ~/borgmatic && docker-compose exec borgmatic bash
+    ```bash
+    # Kết nối shell Borgmatic Docker
+    cd ~/borgmatic && docker-compose exec borgmatic bash
 
-# Tạo khóa SSH, bỏ qua khi nhắc passphrase
-ssh-keygen -o -a 100 -t ed25519
+    # Tạo khóa SSH, bỏ qua khi nhắc passphrase
+    ssh-keygen -o -a 100 -t ed25519
 
-# Xem khóa và lưu lại
-cat ~/.ssh/id_ed25519.pub
-```
+    # Xem khóa và lưu lại
+    
+    cat ~/.ssh/id_ed25519.pub
+    ```
 
-4. Thêm **public key** vào BorgBase: Nhấn **Add Key** trong mục SSH Keys, dán public key vừa tạo vào, đặt tên tùy ý và lưu lại.  
-5. Kết nối key vừa thêm vào repository: Nhấn nút chỉnh sửa, trong phần **Access**, chọn key vừa thêm, lưu lại và hoàn tất.  
+4. Thêm **public key** vào BorgBase: 
+  Nhấn **Add Key** trong mục SSH Keys, dán public key vừa tạo vào, đặt tên tùy ý và lưu lại.  
+5. Kết nối key vừa thêm vào repository: 
+  Nhấn nút chỉnh sửa, trong phần **Access**, chọn key vừa thêm, lưu lại và hoàn tất.  
 
----
 
 ## Thiết lập cách hoạt động của Borgmatic  
 
