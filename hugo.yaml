@@ -42,6 +42,8 @@ menu:
       weight: 6
       url: "https://easyengine.io/"
 
+# Parse Git commit
+enableGitInfo: true
 
 params:
   navbar:
@@ -55,6 +57,10 @@ params:
   editURL:
     enable: true
     base: "https://github.com/dinhngocdung/easyengine-notes/edit/main/content"
+    
+    # Display the last modification date
+  displayUpdatedDate: true
+  dateFormat: "January 2, 2006"
 
 defaultContentLanguage: en
 languages:
@@ -64,14 +70,6 @@ languages:
   vi:
     languageName: Tiếng Việt
     weight: 2
-
-# Parse Git commit
-enableGitInfo: true
-
-params:
-  # Display the last modification date
-  displayUpdatedDate: true
-  dateFormat: "January 2, 2006"
 
 services:
   googleAnalytics:
