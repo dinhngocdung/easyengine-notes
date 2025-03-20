@@ -1,8 +1,8 @@
 ---
 title: Differences When Switching to EasyEngine 4
 type: docs
-prev: /
-next: first-page
+prev: review
+next: differences
 ---
 
 If you're not familiar with Docker, no worries—EasyEngine 4 handles everything for you. You just need to use it with a few considerations about the differences and how you intervene compared to a traditional LEMP stack. However, taking some time to understand basic Docker concepts will be immensely helpful when operating EasyEngine. It will also make your work more interesting.

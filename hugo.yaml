@@ -20,7 +20,7 @@ markup:
 
 menu:
   main:
-    - name: Review EasyEngine
+    - name: EasyEngine Notes
       pageRef: /notes
       weight: 1
     - name: About

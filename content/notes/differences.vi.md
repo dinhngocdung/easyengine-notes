@@ -1,7 +1,7 @@
 ---
 title: So sánh sự khác biệt khi chuyển sang EasyEngine 4
 type: docs
-prev: /
+prev: review
 next: first-page
 ---
 
