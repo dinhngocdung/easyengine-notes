@@ -7,8 +7,6 @@ prev: deploying
 next: ssl-redirect
 ---
 
-# MariaDB Binlog Overflow Causing Database Connection Errors in EasyEngine  
-
 I am unsure why the EasyEngine development team configured Global MariaDB the way they did, but there is a major issue that many users encounter when deploying EasyEngine quickly. Because it is as simple as its name suggests, many users set it up in no time, only to soon face server failures.  
 
 The most common symptom is the website displaying the error `'Error establishing a database connection'`, while the database container keeps restarting repeatedly.  
