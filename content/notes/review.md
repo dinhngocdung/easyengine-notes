@@ -1,5 +1,5 @@
 ---
-title: EasyEngine 4 Review
+title: EasyEngine 4 Review in 2025
 linkTitle: EasyEngine 4 Review
 weight: 1
 type: docs

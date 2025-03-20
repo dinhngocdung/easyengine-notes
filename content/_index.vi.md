@@ -11,66 +11,66 @@ layout: hextra-home
 
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-headline >}}
-  Dũng's Notes&nbsp;<br class="sm:hx-block hx-hidden" />For EasyEngine
+  Dũng's Notes&nbsp;<br class="sm:hx-block hx-hidden" />For EasyEngine 4
 {{< /hextra/hero-headline >}}
 </div>
 
 <div class="hx-mb-12">
 {{< hextra/hero-subtitle >}}
-  Kinh nghiệm cá nhân của tôi&nbsp;<br class="sm:hx-block hx-hidden" />về một giải pháp server hiệu xuất, tin cậy, hiện đại.
+  Kinh nghiệm tôi đã xây dựng một webserver&nbsp;<br class="sm:hx-block hx-hidden" />nhanh, hiệu xuất, tin cậy và hiện đại.
 {{< /hextra/hero-subtitle >}}
 </div>
 
 <div class="hx-mb-6">
-{{< hextra/hero-button text="Đánh giá về EasyEngine" link="notes" >}}
+{{< hextra/hero-button text="Đánh giá về EasyEngine năm 2025" link="notes/review" >}}
 </div>
 
 <div class="hx-mt-6"></div>
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
-    title="Fast and Full-featured"
-    subtitle="Simple and easy to use, yet powerful and feature-rich."
+    title="Đánh giá về EasyEngine 4"
+    subtitle="Tôi thực sự đã dựng được một webserver nhanh nhất từng có."
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
-    image="images/hextra-doc.webp"
+    image="images/review.png"
     imageClass="hx-top-[40%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
-    title="Markdown is All You Need"
-    subtitle="Compose with just Markdown. Enrich with Shortcode components."
+    title="Những khác biệt khi Docker hoá"
+    subtitle="So sánh những khác biệt khi bạn chuyển đến EasyEngine từ LEMPstack thông thường."
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-lg:hx-min-h-[340px]"
-    image="images/hextra-markdown.webp"
+    image="images/defferences.webp"
     imageClass="hx-top-[40%] hx-left-[36px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
-    title="Full Text Search"
-    subtitle="Built-in full text search with FlexSearch, no extra setup required."
+    title="Triển khai Wordpress trên EasyEngine"
+    subtitle="Các bước đơn giản triển khai và quản lý vòng đời site Wordpress."
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
-    image="images/hextra-search.webp"
+    image="images/deploying.webp"
     imageClass="hx-top-[40%] hx-left-[36px] hx-w-[110%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(221,210,59,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
-    title="Lightweight as a Feather"
-    subtitle="No dependency or Node.js is needed to use Hextra. Powered by Hugo, one of *the fastest* static site generators, building your site in just seconds with a single binary."
+    title="Lỗi database vì binlog"
+    subtitle="File dữ liệu nhật ký Binlog làm cạn bộ nhớ server, gây lỗi Database Connection, một tình huống rất phổ biến dễ nản lòng nhưng khắc phục dễ dàng."
   >}}
   {{< hextra/feature-card
-    title="Responsive with Dark Mode Included"
-    subtitle="Looks great on different screen sizes. Built-in dark mode support, with auto-switching based on user's system preference."
+    title="SSL và Redirect"
+    subtitle="Cài đặt SSL dễ dàng và cách thiết lập Redirect trong hệ thống nginx của EasyEngine."
   >}}
   {{< hextra/feature-card
-    title="Build and Host for Free"
-    subtitle="Build with GitHub Actions, and host for free on GitHub Pages. Alternatively it can be hosted on any static hosting service."
+    title="Cache mọi cấp độ với Redis"
+    subtitle="Giải pháp cache duy nhất nhưng cự kì hiệu quả, với tất cả cấp độ từ full-pages-cache, object-cache lên đến proxy-cache."
   >}}
   {{< hextra/feature-card
-    title="Multi-Language Made Easy"
-    subtitle="Create multi-language pages by just adding locales suffix to the Markdown file. Adding i18n support to your site is intuitive."
+    title="Fail2ban Docker"
+    subtitle="Tăng cường bảo mật với Fail2ban, và những đặc biệt của riêng hệ thống docker hoá."
   >}}
   {{< hextra/feature-card
-    title="And Much More..."
+    title="Và vài điều khác..."
     icon="sparkles"
-    subtitle="Syntax highlighting / Table of contents / SEO / RSS / LaTeX / Mermaid / Customizable / and more..."
+    subtitle="Backup tự động với Borgmatic, cấu hình với Cloudflare, các thủ thuật nhỏ can thiệp vào nginx tốt cho SEO."
   >}}
 {{< /hextra/feature-grid >}}
