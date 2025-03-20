@@ -3,7 +3,7 @@ title: Dũng's Notes for EasyEngine
 layout: hextra-home
 ---
 
-{{< hextra/hero-badge link="https://github.com/EasyEngine/easyengine/discussions">>}}
+{{< hextra/hero-badge link="https://github.com/EasyEngine/easyengine/discussions">}}
   <div class="hx-w-2 hx-h-2 hx-rounded-full hx-bg-primary-400"></div>
   <span>Thảo luận về EasyEngine</span>
   {{< icon name="arrow-circle-right" attributes="height=14" >}}
