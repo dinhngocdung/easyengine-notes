@@ -1,6 +1,6 @@
 ---
 title: "Redis & Proxy-Cache: Giải Pháp Cache Toàn Diện Cho WordPress"
-linkTitle: Cache
+linkTitle: Redis Cache 
 weight: 6
 type: docs
 prev: ssl-redirect

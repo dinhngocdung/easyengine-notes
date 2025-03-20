@@ -1,6 +1,6 @@
 ---
 title: Cloudflare với Fail2ban Docker
-linkTitle: Cloudflare
+linkTitle: Cloudflare với Fail2ban
 weight: 8
 type: docs
 prev: fail2ban

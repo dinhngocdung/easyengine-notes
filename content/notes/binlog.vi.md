@@ -1,6 +1,6 @@
 ---
 title: Lỗi Database Connection do Binlog MariaDB trong EasyEngine
-linkTitle: Lỗi Binlog
+linkTitle: Lỗi Binlog Database
 weight: 4
 type: docs
 prev: deploying

@@ -1,6 +1,6 @@
 ---
-title: Review of EasyEngine 4
-linkTitle: Review
+title: EasyEngine 4 Review
+linkTitle: EasyEngine 4 Review
 weight: 1
 type: docs
 prev: /

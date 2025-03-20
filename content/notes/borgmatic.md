@@ -1,6 +1,6 @@
 ---
 title: Borgmatic – An Efficient Backup Solution for Web Servers
-linkTitle: Borgmatic Backup
+linkTitle: Borgmatic Sao Lưu
 weight: 10
 type: docs
 prev: seo-security

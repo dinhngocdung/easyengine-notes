@@ -1,6 +1,6 @@
 ---
 title: Đánh giá EasyEngine
-linkTitle: Đánh giá
+linkTitle: Đánh giá EasyEngine 4
 weight: 1
 type: docs
 prev: /

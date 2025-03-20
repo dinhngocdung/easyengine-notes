@@ -1,6 +1,6 @@
 ---
 title: Differences When Switching to EasyEngine 4
-linkTitle: Differences
+linkTitle: Switching EasyEngine
 weight: 2
 type: docs
 prev: review

@@ -1,6 +1,6 @@
 ---
 title: "Fail2ban Docker: Enhancing Security"
-linkTitle: Fail2ban
+linkTitle: Fail2ban Docker 
 weight: 7
 type: docs
 prev: cache

@@ -1,6 +1,6 @@
 ---
 title: Deploying WordPress with EasyEngine 4
-linkTitle: Deploying
+linkTitle: Deploying with WordPress
 weight: 3
 type: docs
 prev: differences

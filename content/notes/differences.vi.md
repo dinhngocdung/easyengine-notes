@@ -1,6 +1,6 @@
 ---
 title: So sánh sự khác biệt khi chuyển sang EasyEngine 4
-linkTitle: Khác biệt
+linkTitle: Những khác biệt
 weight: 2
 type: docs
 prev: review

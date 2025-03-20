@@ -1,6 +1,6 @@
 ---
 title: Triển khai WordPress với EasyEngine 4
-linkTitle: Triển khai
+linkTitle: Triển khai với Wordpress
 weight: 3
 type: docs
 prev: differences
