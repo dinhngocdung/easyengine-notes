@@ -128,5 +128,4 @@ Enable proxy cache:
 ee site update example.com --proxy-cache=on
 ```
 
-Reference: https://easyengine.io/handbook/proxy-cache-as-stale-on-nginx-proxy-in-easyengine-v4/
-
+Reference: [Proxy cache as stale on Nginx-Proxy in EasyEngine v4](https://easyengine.io/handbook/proxy-cache-as-stale-on-nginx-proxy-in-easyengine-v4/)

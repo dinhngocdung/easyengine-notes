@@ -32,7 +32,7 @@ layout: hextra-home
     title="Đánh giá về EasyEngine 4"
     subtitle="Tôi thực sự đã dựng được một webserver nhanh nhất từng có."
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
-    image="images/review.png"
+    image="https://cf-assets.www.cloudflare.com/slt3lc6tev37/2ayROOdYfMOVBVrhabhwj5/939f3c0f8c0eb3e0825a9f4a96b0e8ad/cloudflare-with-multicloud.png"
     imageClass="hx-top-[40%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
   >}}

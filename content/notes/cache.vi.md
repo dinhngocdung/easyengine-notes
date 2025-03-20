@@ -11,7 +11,7 @@ EasyEngine đã khôn ngoan khi chỉ sử dụng một công nghệ cache là R
 
 Khi sử dụng EasyEngine, bạn không cần dùng thêm bất kỳ công nghệ/plugin cache nào khác. Nó đã quá đủ và tốt. Hãy giữ website của bạn đơn giản như vậy.  
 
-## **Fullpage Cache Redis**  
+## Fullpage Cache Redis  
 
 Fullpage cache là công nghệ mạnh nhất, lưu trữ toàn bộ trang web dưới dạng HTML trong RAM, được quản lý bởi Redis. Nếu URL được kích hoạt, truy xuất sẽ không cần đến PHP/MariaDB.  
 
@@ -57,11 +57,11 @@ graph LR
     end
 ```
 
-## **Object Cache Redis**  
+## Object Cache Redis  
 
 Các trang động sẽ bị loại trừ khỏi fullpage cache. Lúc này, object cache hoạt động thay vì truy xuất database. Các object được lưu sẵn trong RAM và truy xuất nhanh hơn. Nó hữu ích với các trang động và khu vực admin.  
 
-## **Kích hoạt Redis Cache**  
+## Kích hoạt Redis Cache
 
 Với cờ `--cache` khi tạo website, cả fullpage cache và object cache đều được cài đặt và cấu hình sẵn cho website WordPress.  
 
@@ -76,7 +76,7 @@ Có hai plugin được cài sẵn khi bạn bật `--cache` để hỗ trợ ch
 1. **nginx-helper**: Giúp bạn bật/tắt, xóa cache từng trang/toàn bộ Redis cache ngay trong admin, thiết lập tự động xóa cache khi có update…  
 2. **object-cache.php**: Được thiết lập dưới dạng mu-plugin, thực hiện chức năng object cache. Bạn không cần thao tác gì với nó, và nó cũng không có giao diện điều khiển trong admin.  
 
-## **Sử dụng Redis-CLI**  
+## Sử dụng Redis-CLI  
 
 Truy cập vào Global Redis để sử dụng các lệnh Redis-CLI:  
 
@@ -87,7 +87,7 @@ cd /opt/easyengine/services && docker-compose exec global-redis bash
 redis-cli KEYS "sample.com_page:*"
 ```
 
-## **Proxy Cache**  
+## Proxy Cache
 
 Trong các trang web có lưu lượng truy cập cao, khi cache hết hạn, nhiều yêu cầu có thể cùng lúc gửi đến PHP để tạo lại cùng một trang, dẫn đến quá tải và cạn kiệt tài nguyên PHP.  
 
