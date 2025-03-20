@@ -9,7 +9,7 @@ layout: hextra-home
 {{< /hextra/hero-badge >}}
 
 {{< hextra/hero-container
-  image="https://easyengine.io/wp-content/uploads/sites/20/2019/06/EasyEngine-New-Logo-Avatar-Transparent-Background-1.png"
+  image="/images/logo-easyengine.png"
   imageClass="hx-block hx-overflow-hidden hx-rounded-3xl"
   imageWidth="300" imageHeight="300"
   imageTitle="AXIVO"
