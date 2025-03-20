@@ -96,7 +96,5 @@ Reference: [**EasyEngine v4 and updates**](https://easyengine.io/blog/easyengine
 
 In the end, I relate to what they once said about themselves, and my experience aligns perfectly:  
 
-> Looking back at reactions in the last two weeks, I can safely say,
-> we underestimated Docker like most skeptics on the fence! It’s running a lot smoother & better than anticipated.
-> But hey, this article is for the > ones who already decided to stay with v3! So let’s cut to the chase! ✂️
+> Looking back at reactions in the last two weeks, I can safely say, we underestimated Docker like most skeptics on the fence! It’s running a lot smoother & better than anticipated.But hey, this article is for the > ones who already decided to stay with v3! So let’s cut to the chase! ✂️<br>
 > — Rahul Bansal[↗](https://easyengine.io/blog/wordops-easyengine-v3-fork/) 

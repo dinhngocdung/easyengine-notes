@@ -96,5 +96,5 @@ Tham khảo: [**EasyEngine v4 and updates**](https://easyengine.io/blog/easyengi
 
 Cuối cùng, tôi thích câu họ từng nói về chính mình, và trải nghiệm của tôi cũng hoàn toàn tương tự:  
 
-> Khi nhìn lại những phản ứng trong hai tuần qua, tôi có thể tự tin nói rằng chúng tôi đã đánh giá thấp Docker, giống như hầu hết những người còn đang lưỡng lự! Nó chạy mượt mà và tốt hơn kỳ vọng. Nhưng thôi nào, bài viết này dành cho những người vẫn muốn ở lại với v3! Vậy nên, cắt ngay vào vấn đề thôi! ✂️
+> Khi nhìn lại những phản ứng trong hai tuần qua, tôi có thể tự tin nói rằng chúng tôi đã đánh giá thấp Docker, giống như hầu hết những người còn đang lưỡng lự! Nó chạy mượt mà và tốt hơn kỳ vọng. Nhưng thôi nào, bài viết này dành cho những người vẫn muốn ở lại với v3! Vậy nên, cắt ngay vào vấn đề thôi! ✂️<br>
 > — Rahul Bansal[↗](https://easyengine.io/blog/wordops-easyengine-v3-fork/) 
