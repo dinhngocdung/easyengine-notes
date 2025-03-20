@@ -15,8 +15,7 @@ graph LR
 
 	subgraph SERVER
 		
-		subgraph "Borgmatic
-							Backup"
+		subgraph Borgmatic
 		BM
 		end
 		direction TB
@@ -49,7 +48,7 @@ graph LR
     style C fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
     %% Config files (Xanh nhạt)
     style SERVER stroke-width:2px,stroke-dasharray: 5 5
-
+    style Borgmatic stroke-width:2px
 
 ```
 Once again, we will deploy Borgmatic on Docker following the **EasyEngine** approach.  
