@@ -3,74 +3,87 @@ title: Dũng's Notes for EasyEngine
 layout: hextra-home
 ---
 
-{{< hextra/hero-badge >}}
+{{< hextra/hero-badge link="https://github.com/EasyEngine/easyengine/discussions">}}
   <div class="hx-w-2 hx-h-2 hx-rounded-full hx-bg-primary-400"></div>
-  <span>My Notes, Your times</span>
+  <span>Discussion about EasyEngine</span>
   {{< icon name="arrow-circle-right" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
 
+{{< hextra/hero-container
+  image="https://easyengine.io/wp-content/uploads/sites/20/2019/06/EasyEngine-New-Logo-Avatar-Transparent-Background-1.png"
+  imageTitle="Regolith Desktop Environment"
+  imageWidth="853"
+>}}
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-headline >}}
-  Dũng's Notes&nbsp;<br class="sm:hx-block hx-hidden" />For EasyEngine
+  Dũng's Notes&nbsp;<br class="sm:hx-block hx-hidden" />For EasyEngine 4
 {{< /hextra/hero-headline >}}
 </div>
 
 <div class="hx-mb-12">
 {{< hextra/hero-subtitle >}}
-  Fast, easy and stated&nbsp;<br class="sm:hx-block hx-hidden" />for creating server websites
+  My experience in building a web server&nbsp;<br class="sm:hx-block hx-hidden" />that is fast, performance, reliable, and modern.
 {{< /hextra/hero-subtitle >}}
 </div>
 
 <div class="hx-mb-6">
-{{< hextra/hero-button text="Review EasyEngine" link="notes" >}}
+{{< hextra/hero-button text="Review of EasyEngine in 2025" link="notes/review" >}}
 </div>
 
 <div class="hx-mt-6"></div>
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
-    title="Fast and Full-featured"
-    subtitle="Simple and easy to use, yet powerful and feature-rich."
+    title="Review of EasyEngine in 2025"
+    subtitle="I truly built the fastest web server ever."
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
-    image="images/hextra-doc.webp"
+    image="/images/review.png"
     imageClass="hx-top-[40%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
+    link="/notes/review"
   >}}
   {{< hextra/feature-card
-    title="Markdown is All You Need"
-    subtitle="Compose with just Markdown. Enrich with Shortcode components."
+    title="Differences When Dockerizing"
+    subtitle="Comparing the differences when switching to EasyEngine from a traditional LEMP stack"
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-lg:hx-min-h-[340px]"
-    image="images/hextra-markdown.webp"
+    image="/images/defferences.png"
     imageClass="hx-top-[40%] hx-left-[36px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.15),hsla(0,0%,100%,0));"
+    link="/notes/defferences"
   >}}
   {{< hextra/feature-card
-    title="Full Text Search"
-    subtitle="Built-in full text search with FlexSearch, no extra setup required."
+    title="Deploying WordPress on EasyEngine"
+    subtitle="Simple steps to deploy and manage the WordPress site lifecycle."
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
-    image="images/hextra-search.webp"
+    image="/images/deploying.png"
     imageClass="hx-top-[40%] hx-left-[36px] hx-w-[110%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(221,210,59,0.15),hsla(0,0%,100%,0));"
+    link="/notes/deploying"
   >}}
   {{< hextra/feature-card
-    title="Lightweight as a Feather"
-    subtitle="No dependency or Node.js is needed to use Hextra. Powered by Hugo, one of *the fastest* static site generators, building your site in just seconds with a single binary."
+    title="Database Errors Due to Binlog"
+    subtitle="Binlog data files exhaust server memory, causing Database Connection errors—a very common, discouraging situation but easily fixable."
+    link="/notes/binlog"
   >}}
   {{< hextra/feature-card
-    title="Responsive with Dark Mode Included"
-    subtitle="Looks great on different screen sizes. Built-in dark mode support, with auto-switching based on user's system preference."
+    title="SSL and Redirect"
+    subtitle="Easily set up SSL and configure redirects in EasyEngine’s nginx system."
+    link="/notes/ssl-redirect"
   >}}
   {{< hextra/feature-card
-    title="Build and Host for Free"
-    subtitle="Build with GitHub Actions, and host for free on GitHub Pages. Alternatively it can be hosted on any static hosting service."
+    title="Caching at All Levels with Redis"
+    subtitle="A single yet extremely effective caching solution, covering all levels from full-page cache, object cache, to proxy cache."
+    link="/notes/cache"
   >}}
   {{< hextra/feature-card
-    title="Multi-Language Made Easy"
-    subtitle="Create multi-language pages by just adding locales suffix to the Markdown file. Adding i18n support to your site is intuitive."
+    title="Fail2ban Docker"
+    subtitle="Enhancing security with Fail2ban, and the unique aspects of a Dockerized system."
+    link="/notes/fail2ban"
   >}}
   {{< hextra/feature-card
-    title="And Much More..."
+    title="And a Few More Things..."
     icon="sparkles"
-    subtitle="Syntax highlighting / Table of contents / SEO / RSS / LaTeX / Mermaid / Customizable / and more..."
+    subtitle="Automated backups with Borgmatic, configuration with Cloudflare, and small nginx tweaks for better SEO."
+    link="/notes"
   >}}
 {{< /hextra/feature-grid >}}
