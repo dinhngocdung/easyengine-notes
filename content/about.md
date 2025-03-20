@@ -1,6 +1,6 @@
 ---
-title: About
+title: Đinh Ngọc Dũng
 type: about
 ---
 
-This is the about page.
+I'm not a developer, a tea master or an architect.

@@ -2,7 +2,7 @@
 title: Deploying WordPress with EasyEngine 4
 type: docs
 prev: differences
-next: first-page
+next: binlog
 ---
 
 Then, you should have the confidence to choose and a basic understanding of how EasyEngine 4 operates. Now, we can proceed with step-by-step deployment.  

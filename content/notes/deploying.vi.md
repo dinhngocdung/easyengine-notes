@@ -2,7 +2,7 @@
 title: Triển khai WordPress với EasyEngine 4
 type: docs
 prev: differences
-next: first-page
+next: binlog
 ---
 
 Đến đây, bạn đã tự tin lựa chọn và có đủ kiến thức cơ bản để hình dung về cách hoạt động của EasyEngine 4. Bây giờ, chúng ta có thể bắt đầu từng bước triển khai.
