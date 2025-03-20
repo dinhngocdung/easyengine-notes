@@ -35,7 +35,7 @@ layout: hextra-home
     image="/images/review.png"
     imageClass="hx-top-[40%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
-    link="/notes/review
+    link="/notes/review"
   >}}
   {{< hextra/feature-card
     title="Những khác biệt khi Docker hoá"
@@ -44,7 +44,7 @@ layout: hextra-home
     image="/images/defferences.png"
     imageClass="hx-top-[40%] hx-left-[36px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.15),hsla(0,0%,100%,0));"
-    link="/notes/defferences
+    link="/notes/defferences"
   >}}
   {{< hextra/feature-card
     title="Triển khai Wordpress trên EasyEngine"
@@ -53,7 +53,7 @@ layout: hextra-home
     image="/images/deploying.png"
     imageClass="hx-top-[40%] hx-left-[36px] hx-w-[110%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(221,210,59,0.15),hsla(0,0%,100%,0));"
-    link="/notes/deploying
+    link="/notes/deploying"
   >}}
   {{< hextra/feature-card
     title="Lỗi database vì binlog"
