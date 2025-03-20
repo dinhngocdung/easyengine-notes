@@ -2,7 +2,7 @@
 title: Differences When Switching to EasyEngine 4
 type: docs
 prev: review
-next: differences
+next: deploying
 ---
 
 If you're not familiar with Docker, no worries—EasyEngine 4 handles everything for you. You just need to use it with a few considerations about the differences and how you intervene compared to a traditional LEMP stack. However, taking some time to understand basic Docker concepts will be immensely helpful when operating EasyEngine. It will also make your work more interesting.
@@ -21,45 +21,45 @@ Below is a comparison table for easier understanding:
 | **Updates** | Upgrades packages on the host | Pulls new images and recreates containers |
 | **Security** | Manages permissions on the host | Isolates containers, manages container permissions |
 
-### Images
+**Images**
 - Instead of installing software directly on the host, you use Docker images, such as [nginx](https://hub.docker.com/_/nginx), [mysql](https://hub.docker.com/_/mysql), and [php](https://hub.docker.com/_/php). These images contain the code, libraries, and configurations needed to run the service.
 - You can build custom images via Dockerfile if necessary, such as adding PHP modules or special NGINX configurations.
 
-### Containers
+**Containers**
 - A container is a running instance of an image, each isolated and running a single service (NGINX, MySQL, PHP).
 - Unlike programs running directly on the host, containers have their own file systems and do not directly affect the host, making isolation and debugging easier.
 
-### Docker Compose
+**Docker Compose**
 - A tool for defining and managing multiple containers, replacing individual `docker run` commands.
 - For example, a `docker-compose.yml` file defines NGINX, PHP-FPM, MySQL, networks, and volumes, allowing the entire stack to be started with `docker-compose up`.
 - Compared to a traditional LEMP setup, this is like managing the entire stack through one file instead of configuring each service separately.
 
-### Volumes
+**Volumes**
 - Instead of storing data in host directories like `/var/lib/mysql`, you use volumes for persistent storage.
 - Example: Attaching a volume for MySQL: `-v mysql-data:/var/lib/mysql`, ensuring data is not lost if the container is removed.
 - This is crucial for databases and web files, different from storing them directly on the host.
 
-### Networks
+Networks**
 - In a traditional LEMP stack, services communicate via localhost (127.0.0.1). In Docker, you must create a network, e.g., `docker network create lemp-net`, and attach containers to it for communication.
 - Example: NGINX must connect to PHP-FPM via the network, using TCP (port mapping or network alias) instead of Unix sockets.
 
-### Port Mapping
+Port Mapping**
 - To access services externally, you map host ports to container ports, e.g., `-p 80:80` for NGINX.
 - Unlike traditional LEMP, where ports are directly bound on the host, this is a necessary step for container access.
 
-### Environment Variables
+Environment Variables**
 - Instead of editing configuration files on the host, you configure services via environment variables, e.g., `MYSQL_ROOT_PASSWORD` for MySQL.
 - This enhances flexibility, especially when deploying across different environments (development, production).
 
-### Container Lifecycle Management
+Container Lifecycle Management**
 - Instead of using `systemctl`, you manage containers with commands like `docker start`, `docker stop`, `docker restart`.
 - Docker Compose also supports lifecycle management, e.g., `docker-compose up -d` to run in the background, `docker-compose down` to stop.
 
-### Log Management
+**Log Management**
 - In a traditional LEMP stack, logs are stored in `/var/log/nginx`, `/var/log/mysql`. In Docker, logs are sent to stdout/stderr, viewable via `docker logs <container_name>`.
 - You can configure log drivers (like journald) to integrate with host logging systems.
 
-### Security
+**Security**
 - Avoid running containers with unnecessary root privileges and use secure volumes for sensitive data.
 - Containers isolate processes, reducing the risk of cross-service impacts.
 

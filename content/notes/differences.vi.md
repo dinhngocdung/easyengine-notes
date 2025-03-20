@@ -2,7 +2,7 @@
 title: So sánh sự khác biệt khi chuyển sang EasyEngine 4
 type: docs
 prev: review
-next: first-page
+next: deploying
 ---
 
 Nếu bạn chưa biết gì về Docker, cũng chẳng sao, EasyEngine 4 làm hết mọi việc và bạn chỉ cần sử dụng, kèm một vài lưu ý về sự khác biệt, cách bạn can thiệp so với LEMP stack thông thường. Nhưng dành một chút thời gian tìm hiểu về các khái niệm cơ bản của Docker sẽ hữu ích vô cùng khi bạn vận hành EasyEngine, nó cũng mang lại nhiều thú vị cho công việc của bạn.

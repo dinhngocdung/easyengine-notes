@@ -5,8 +5,6 @@ prev: /
 next: differences
 ---
 
-# Đánh giá EasyEngine 4
-
 Có lẽ lý do bạn đọc bài viết này là đang tìm hiểu về EasyEngine 4 và muốn biết liệu nó có phù hợp để sử dụng hay không. Dưới đây là những lý do tôi chọn EasyEngine 4 cho các trang web quan trọng của mình.
 
 Trước hết, tôi không phải là một lập trình viên hay quản trị viên chuyên nghiệp. Tôi tự quản lý các website của công ty mình suốt 20 năm qua, trải nghiệm nhiều công nghệ khác nhau và hiểu rõ những khó khăn có thể phát sinh theo thời gian. Việc này không đơn thuần là sở thích mà là một nhiệm vụ quan trọng, vì những website này đóng vai trò cốt lõi trong hoạt động kinh doanh của tôi.
