@@ -13,6 +13,41 @@ Borg/**Borgmatic** is an effective backup solution for web servers. It compresse
 
 **BorgBase** is an affordable, dedicated storage service for Borg, offering SSH key support, monitoring, and offsite backups. Combining it with Borgmatic ensures secure and cost-effective web data protection.  
 
+```mermaid
+graph LR
+
+	subgraph SERVER
+		BM((Borgmatic))
+		direction TB
+		F@{ shape: processes, label: "Files" }
+		D[(Database)]
+		C@{ shape: docs, label: "Config files" }
+	end
+	
+	BB[("BORGBASE
+	repo 1
+	repo 1
+	...")]
+	BM<-->|"Backup/
+					Restore"|BB
+	F <-->BM
+	D <-->BM
+	C <-->BM
+
+	%% Style theo nhóm
+    style BM fill:#f9f,stroke:#333,stroke-width:2px,color:#000
+    %% Borgmatic (Xanh nhạt, nét đứt)
+    style BB fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
+    %% BORGBASE (Vàng)
+    style F fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+    %% Files (Xanh nhạt)
+    style D fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+    %% Database (Vàng)
+    style C fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
+    %% Config files (Xanh nhạt)
+    style SERVER stroke-width:2px,stroke-dasharray: 5 5
+
+```
 Once again, we will deploy Borgmatic on Docker following the **EasyEngine** approach.  
 
 ## Creating a Borgmatic Container  
