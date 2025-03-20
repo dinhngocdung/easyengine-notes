@@ -419,7 +419,7 @@ ignoreregex = ^<HOST>.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|w
 
 With the prepared files, we are ready to run Fail2Ban using Docker.
 
-### File Structure:
+File Structure:
 ```bash
 ~/fail2ban/
 ├── docker-compose.yml

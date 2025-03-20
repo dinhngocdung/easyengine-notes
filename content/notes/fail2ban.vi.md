@@ -407,7 +407,7 @@ ignoreregex = ^<HOST>.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|w
               ^<HOST>.* "(GET|POST|HEAD) .*/wp-login\.php.* HTTP/.*"
 ```
 
-{{% steps %}}
+{{% /steps %}}
 
 ## Vận hành Fail2Ban Docker
 
@@ -462,9 +462,6 @@ Unban một IP
 docker-compose exec fail2ban fail2ban-client set nginx-errors unbanip 123.123.123.123
 ```
 
-Dưới đây là phiên bản đã được chỉnh sửa chính tả:  
-
----
 
 ## Whitelist
 
