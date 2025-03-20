@@ -88,6 +88,9 @@ Các bước tiến hành:
 
 ## docker-compose.yml
 
+{{% steps %}}
+
+### Tạo thư mục
 Lập thư mục chứa Fail2Ban Docker:
 
 ```bash
@@ -99,6 +102,7 @@ Tạo file `docker-compose.yml`, file chỉ thị cho Docker xây dựng Fail2Ba
 ```bash
 nano docker-compose.yml
 ```
+### Nội dung
 
 Chép nội dung này vào:
 
@@ -121,15 +125,21 @@ services:
       - F2B_DB_PURGE_AGE=1d
     restart: unless-stopped
 ```
+{{% /steps %}}
 
 ## Tạo Jail  
 
 Đây là jail của tôi, chống lại các tấn công phổ biến trên WordPress. Jail được tạo trong thư mục `~/fail2ban/data/jail.d/jail.local`  
 
+{{% steps %}}
+
+### Tạo file jail.local
+
 ```bash
 mkdir -p ~/fail2ban/data/jail.d
 nano ~/fail2ban/data/jail.d/jail.local
 ```  
+### Nội dung
 
 Chép nội dung sau đây vào file `jail.local` đang mở. Đặc biệt chú ý cài đặt `chain = DOCKER-USER`, Fail2Ban sẽ chèn lệnh cấm vào chain này để có tác dụng trong hệ thống Docker hóa.  
 
@@ -264,9 +274,13 @@ bantime  = 24h
 findtime = 2h
 maxretry = 6
 ```
+{{% /steps %}}
+
 ## Tạo Filter Fail2Ban
 
 Dưới đây là danh sách các tệp filter cấu hình cho Fail2Ban nhằm bảo vệ Nginx và WordPress khỏi các cuộc tấn công phổ biến.
+
+{{% steps %}}
 
 ### Tạo thư mục chứa Filter
 Trước khi tạo các tệp cấu hình, hãy đảm bảo thư mục `filter.d` tồn tại:
@@ -277,7 +291,8 @@ mkdir -p ~/fail2ban/data/filter.d
 
 ### Tạo và điền nội dung các tệp cấu hình
 
-#### `wp-login-fail.conf`
+
+`wp-login-fail.conf`
 ```bash
 nano ~/fail2ban/data/filter.d/wp-login-fail.conf
 ```
@@ -288,7 +303,7 @@ failregex = ^<HOST>.* "POST .*/wp-login.php([/?#\\].*)? HTTP/.*" 200
 ignoreregex =
 ```
 
-#### `nginx-req-limit.conf`
+`nginx-req-limit.conf`
 ```bash
 nano ~/fail2ban/data/filter.d/nginx-req-limit.conf
 ```
@@ -299,7 +314,7 @@ failregex = limiting requests, excess:.* by zone.*client: <HOST>
 ignoreregex =
 ```
 
-#### `nginx-badbots.conf`
+`nginx-badbots.conf`
 ```bash
 nano ~/fail2ban/data/filter.d/nginx-badbots.conf
 ```
@@ -310,7 +325,7 @@ failregex = ^<HOST> -.*"(GET|POST|HEAD).*HTTP.*"(?:badbots|badbotscustom)"$
 ignoreregex = .*Googlebot.*|.*Bingbot.*
 ```
 
-#### `nginx-http-auth.conf`
+`nginx-http-auth.conf`
 ```bash
 nano ~/fail2ban/data/filter.d/nginx-http-auth.conf
 ```
@@ -321,7 +336,7 @@ failregex = ^ \[error\] \d+#\d+: \*\d+ user "(?:[^"]+|.*?)":? (?:password mismat
 ignoreregex =
 ```
 
-#### `nginx-nohome.conf`
+`nginx-nohome.conf`
 ```bash
 nano ~/fail2ban/data/filter.d/nginx-nohome.conf
 ```
@@ -332,7 +347,7 @@ failregex = ^<HOST> -.*GET .*/~.*
 ignoreregex =
 ```
 
-#### `nginx-noproxy.conf`
+`nginx-noproxy.conf`
 ```bash
 nano ~/fail2ban/data/filter.d/nginx-noproxy.conf
 ```
@@ -343,7 +358,7 @@ failregex = ^<HOST> -.*GET http.*
 ignoreregex =
 ```
 
-#### `nginx-noscript.conf`
+`nginx-noscript.conf`
 ```bash
 nano ~/fail2ban/data/filter.d/nginx-noscript.conf
 ```
@@ -356,7 +371,7 @@ ignoreregex = ^<HOST>.* "(GET|POST) .*/wp-login\.php.*$"
               ^<HOST>.* "(GET|POST) .*/wp-json/.*$"
 ```
 
-#### `nginx-forbidden.conf`
+`nginx-forbidden.conf`
 ```bash
 nano ~/fail2ban/data/filter.d/nginx-forbidden.conf
 ```
@@ -367,7 +382,7 @@ failregex = ^.*\[error\] \d+#\d+: .* is forbidden, client: <HOST>.*$
 ignoreregex =
 ```
 
-#### `nginx-no-file-directory.conf`
+`nginx-no-file-directory.conf`
 ```bash
 nano ~/fail2ban/data/filter.d/nginx-no-file-directory.conf
 ```
@@ -378,7 +393,7 @@ failregex = ^.*\[error\] \d+#\d+: .*No such file or directory.*client: <HOST>.*$
 ignoreregex = ^.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|woff|woff2|svg|map)(\?.*)? HTTP/.*"
 ```
 
-#### `nginx-errors.conf`
+`nginx-errors.conf`
 ```bash
 nano ~/fail2ban/data/filter.d/nginx-errors.conf
 ```
@@ -391,6 +406,8 @@ ignoreregex = ^<HOST>.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|w
               ^<HOST>.* "(GET|POST|HEAD) .*/wp-admin/.* HTTP/.*"
               ^<HOST>.* "(GET|POST|HEAD) .*/wp-login\.php.* HTTP/.*"
 ```
+
+{{% steps %}}
 
 ## Vận hành Fail2Ban Docker
 
@@ -415,7 +432,7 @@ Như vậy, với các file đã chuẩn bị, chúng ta đã sẵn sàng vận 
         └── nginx-errors.conf
 ```
 
-### Chạy Fail2Ban Docker
+Chạy Fail2Ban Docker
 Đảm bảo bạn đang ở trong thư mục `~/fail2ban` để chạy các lệnh `docker-compose`:
 
 ```bash
@@ -428,17 +445,17 @@ Chạy Fail2Ban Docker:
 docker-compose up -d 
 ```
 
-### Xem nhật ký hoạt động Fail2Ban
+Xem nhật ký hoạt động Fail2Ban
 ```bash
 docker-compose logs -f
 ```
 
-### Xem các IP đang bị chặn trên tất cả các jail
+Xem các IP đang bị chặn trên tất cả các jail
 ```bash
 docker-compose exec fail2ban fail2ban-client status --all
 ```
 
-### Unban một IP
+Unban một IP
 Đôi khi Fail2Ban chặn nhầm, ví dụ: unban IP `123.123.123.123` trong jail `nginx-errors`:
 
 ```bash

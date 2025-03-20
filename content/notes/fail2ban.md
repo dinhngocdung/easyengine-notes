@@ -136,10 +136,16 @@ services:
 
 This is my jail setup to prevent common WordPress attacks. The jail file is created in the `~/fail2ban/data/jail.d/jail.local` directory.  
 
+{{% steps %}}
+
+### Created directory
+
 ```bash
 mkdir -p ~/fail2ban/data/jail.d
 nano ~/fail2ban/data/jail.d/jail.local
 ```  
+
+### Conten
 
 Copy and paste the following content into the `jail.local` file. Pay special attention to the `chain = DOCKER-USER` setting, as Fail2Ban will insert ban rules into this chain to be effective in a Dockerized system.  
 
@@ -274,19 +280,23 @@ bantime  = 24h
 findtime = 2h
 maxretry = 6
 ```
+{{% /steps %}}
 
 ## Creating Fail2Ban Filters  
 
 Below is a list of filter configuration files for Fail2Ban to protect Nginx and WordPress from common attacks.
 
+{{% steps %}}
+
 ### Creating the Filter Directory
+
 Before creating the configuration files, ensure the `filter.d` directory exists:
 
 ```bash
 mkdir -p ~/fail2ban/data/filter.d
 ```
 
-### Creating and Populating Configuration Files
+### Creating Configuration Files
 
 `wp-login-fail.conf`
 ```bash
@@ -403,7 +413,7 @@ ignoreregex = ^<HOST>.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|w
               ^<HOST>.* "(GET|POST|HEAD) .*/wp-login\.php.* HTTP/.*"
 ```
 
----
+{{% /steps %}}
 
 ## Running Fail2Ban with Docker
 
