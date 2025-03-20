@@ -87,10 +87,10 @@ By the way, I truly admire the mindset and problem-solving approach of rtCamp—
 Among all the server management solutions I’ve mentioned, EasyEngine stands out in its business mindset. At this level, its closest competitor is probably *Trellis* by Roots. However, if you only manage a few websites and aren’t a professional developer, stay away from Trellis.  
 
 Reference: 
-[EasyEngine v4 and updates](https://easyengine.io/blog/easyengine-v4-updates/)  
-[EasyEngine v4 Stable Release](https://easyengine.io/blog/v4-first-stable-release/)
-[EasyEngine v4 insights, progress and FAQ](https://easyengine.io/blog/easyengine-v4-insights-faq/)
-[EasyEngine v4 Development Begins](https://easyengine.io/blog/easyengine-v4-development-begins/)
+1. [EasyEngine v4 and updates](https://easyengine.io/blog/easyengine-v4-updates/)  
+2. [EasyEngine v4 Stable Release](https://easyengine.io/blog/v4-first-stable-release/)
+3. [EasyEngine v4 insights, progress and FAQ](https://easyengine.io/blog/easyengine-v4-insights-faq/)
+4. [EasyEngine v4 Development Begins](https://easyengine.io/blog/easyengine-v4-development-begins/)
 
 ## What I Gained from Using EasyEngine 4  
 

@@ -11,7 +11,7 @@ Then, you should have the confidence to choose and a basic understanding of how 
 
 EasyEngine 4 can be installed on any operating system as long as Docker, Docker Compose, and PHP are available. However, in this guide, I will assume Debian 12 (as the development team tests it on Debian/Ubuntu).  
 
-### Install with a single command  
+**Install with a single command**
 
 ```bash
 wget -qO ee https://rt.cx/ee4 && sudo bash ee
@@ -35,7 +35,7 @@ EasyEngine automatically installs, configures, and connects its site containers 
 ee site create sample.com --type=wp --ssl=le --cache
 ```  
 
-### Explanation:  
+Explanation:  
 - `sample.com`: Replace with your actual domain/subdomain.  
 - `--type=wp`: Creates a WordPress site (by default, EE creates a simple HTML site).  
 - `--ssl=le`: Automatically installs SSL with Let’s Encrypt.  

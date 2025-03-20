@@ -82,10 +82,10 @@ Nhân tiện, tôi thực sự ngưỡng mộ tư duy và cách giải quyết v
 Trong số các hệ thống quản lý server mà tôi đã đề cập, EasyEngine thực sự ở một đẳng cấp khác về tư duy doanh nghiệp. Nếu xét về đối thủ tương xứng, có lẽ chỉ có **Trellis** của Roots. Tuy nhiên, nếu bạn chỉ quản lý một vài website và không phải là lập trình viên chuyên nghiệp, tốt nhất là đừng đụng vào Trellis.  
 
 Tham khảo: 
-[EasyEngine v4 and updates](https://easyengine.io/blog/easyengine-v4-updates/)  
-[EasyEngine v4 Stable Release](https://easyengine.io/blog/v4-first-stable-release/)
-[EasyEngine v4 insights, progress and FAQ](https://easyengine.io/blog/easyengine-v4-insights-faq/)
-[EasyEngine v4 Development Begins](https://easyengine.io/blog/easyengine-v4-development-begins/)
+1. [EasyEngine v4 and updates](https://easyengine.io/blog/easyengine-v4-updates/)  
+2. [EasyEngine v4 Stable Release](https://easyengine.io/blog/v4-first-stable-release/)
+3. [EasyEngine v4 insights, progress and FAQ](https://easyengine.io/blog/easyengine-v4-insights-faq/)
+4. [EasyEngine v4 Development Begins](https://easyengine.io/blog/easyengine-v4-development-begins/)
 
 
 ## Những điều tôi có được khi sử dụng EasyEngine 4  
