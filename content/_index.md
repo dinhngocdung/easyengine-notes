@@ -9,7 +9,7 @@ layout: hextra-home
 {{< /hextra/hero-badge >}}
 
 {{< hextra/hero-container
-  image="/images/re-logo-easyengine-text.png"
+  image="/images/easyengine-note-origin-rotate.svg"
   imageClass="hx-block hx-overflow-hidden hx-rounded-3xl"
   imageWidth="300" imageHeight="300"
   imageTitle="AXIVO"
