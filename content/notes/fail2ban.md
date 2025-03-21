@@ -57,7 +57,7 @@ flowchart LR
     Fail2Ban --> DockerLogs
     
     %% Fail2Ban interacting with iptables (banning IPs)
-    iptables <-->|Ban IP| Fail2Ban
+    nftables <-->|Ban IP| Fail2Ban
     
     %% Apply styles
     style nftables fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
