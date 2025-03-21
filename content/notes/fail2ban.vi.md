@@ -23,13 +23,13 @@ Fail2Ban hoạt động dựa trên ba bước chính:
 
 1. **Giám sát nhật ký**: Công cụ quét các tệp nhật ký của hệ thống hoặc dịch vụ (ví dụ: nhật ký SSH, web server) để tìm các mẫu (patterns) (dựa theo filter) cho thấy hành vi bất thường, chẳng hạn như nhiều lần đăng nhập thất bại từ một địa chỉ IP.
 2. **Phát hiện vi phạm**: Khi số lần thất bại vượt quá ngưỡng được định nghĩa trước trong một khoảng thời gian cụ thể (ví dụ: 5 lần thất bại trong 10 phút), Fail2Ban xác định đó là hành vi đáng ngờ.
-3. **Áp dụng quy tắc cấm**: Fail2Ban sau đó thêm quy tắc vào iptables để chặn địa chỉ IP đó trong một khoảng thời gian nhất định. Đối với container Docker, quy tắc này được thêm vào chuỗi `DOCKER-USER` của iptables, đảm bảo rằng lưu lượng từ IP bị chặn không thể đến container.
+3. **Áp dụng quy tắc cấm**: Fail2Ban sau đó thêm quy tắc vào nftables để chặn địa chỉ IP đó trong một khoảng thời gian nhất định. Đối với container Docker, quy tắc này được thêm vào chuỗi `DOCKER-USER` của nftables, đảm bảo rằng lưu lượng từ IP bị chặn không thể đến container.
 
 ```mermaid
 flowchart LR
     %% Định nghĩa các thành phần
     subgraph Docker Host
-        subgraph iptables
+        subgraph nftables
         direction TB
             INPUT[[INPUT]]
             DOCKER-USER[[DOCKER-USER]]
@@ -56,11 +56,11 @@ flowchart LR
     DOCKER-USER --> Docker
     Fail2Ban --> DockerLogs
     
-    %% Fail2Ban tương tác với iptables (chặn IP)
-    iptables <-->|Ban IP| Fail2Ban
+    %% Fail2Ban tương tác với nftables (chặn IP)
+    nftables <-->|Ban IP| Fail2Ban
     
     %% Áp dụng màu sắc
-    style iptables fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
+    style nftables fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
     style Fail2Ban fill:#f9f,stroke:#333,stroke-width:2px,color:#000  
     style SSH stroke:#333,color:#000  
     style Docker fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  

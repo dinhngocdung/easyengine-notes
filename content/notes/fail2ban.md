@@ -23,7 +23,7 @@ Fail2Ban operates in three main steps:
 
 1. **Monitoring logs**: It scans system or service log files (e.g., SSH logs, web server logs) to detect suspicious activity patterns (defined by filters), such as multiple failed login attempts from the same IP.
 2. **Detecting violations**: When the number of failed attempts exceeds a predefined threshold within a specific time (e.g., 5 failed logins in 10 minutes), Fail2Ban flags the IP as suspicious.
-3. **Applying ban rules**: Fail2Ban then adds rules to **iptables** to block the IP for a set period. In a Docker environment, these rules are applied to the **DOCKER-USER** chain in iptables, ensuring that traffic from banned IPs is blocked before reaching the container.
+3. **Applying ban rules**: Fail2Ban then adds rules to **nftables** to block the IP for a set period. In a Docker environment, these rules are applied to the **DOCKER-USER** chain in nftables, ensuring that traffic from banned IPs is blocked before reaching the container.
 
 ```mermaid
 flowchart LR
@@ -56,7 +56,7 @@ flowchart LR
     DOCKER-USER --> Docker
     Fail2Ban --> DockerLogs
     
-    %% Fail2Ban interacting with iptables (banning IPs)
+    %% Fail2Ban interacting with nftables (banning IPs)
     nftables <-->|Ban IP| Fail2Ban
     
     %% Apply styles

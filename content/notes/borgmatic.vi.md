@@ -165,7 +165,7 @@ nano data/borgmatic.d/config.yaml
 
 Chép nội dung sau vào, nhớ thay thế `repositories` và `encryption_passphrase` phù hợp:  
 
-```yaml
+```yaml  {filename="~/borgmatic/data/borgmatic.d/config.yaml"}
 source_directories:
     - /mnt/source/easyengine 
     - /mnt/source/volumes 
