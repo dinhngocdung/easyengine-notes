@@ -60,7 +60,7 @@ flowchart LR
     iptables <-->|Ban IP| Fail2Ban
     
     %% Apply styles
-    style iptables fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
+    style nftables fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
     style Fail2Ban fill:#f9f,stroke:#333,stroke-width:2px,color:#000  
     style SSH stroke:#333,color:#000  
     style Docker fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
