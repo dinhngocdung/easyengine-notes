@@ -50,7 +50,13 @@ enableGitInfo: true
 params:
   navbar:
     displayTitle: true
-    displayLogo: false
+    displayLogo: true
+    logo:
+      path: images/easyengine-notes.svg
+      dark: images/easyengine-notes-dark.svg
+      link: /
+      width: 40
+      height: 20
 
   footer:
     displayCopyright: true
