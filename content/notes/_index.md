@@ -4,13 +4,13 @@ next: review
 ---
 
 {{< cards >}}
-  {{< card link="review" title="EasyEngine 4 Review" icon="warning" >}}
-  {{< card link="differences" title="Switching EasyEngine" icon="card" >}}
-  {{< card link="deploying" title="Deploying with WordPress" icon="chevron-right" >}}
-  {{< card link="cache" title="Redis Cache" icon="folder-tree" >}}
-  {{< card link="fail2ban" title="Fail2ban Docker" icon="badge-check" >}}
-  {{< card link="cloudflare" title="Cloudflare with Fail2Ban" icon="one" >}}
-  {{< card link="borgmatic" title="Borgmatic Backup" icon="collection" >}}
+  {{< card link="review" title="EasyEngine 4 Review" icon="heart" >}}
+  {{< card link="differences" title="Switching EasyEngine" icon="reply" >}}
+  {{< card link="deploying" title="Deploying with WordPress" icon="code" >}}
+  {{< card link="cache" title="Redis Cache" icon="lightning-bolt" >}}
+  {{< card link="fail2ban" title="Fail2ban Docker" icon="shield-check" >}}
+  {{< card link="cloudflare" title="Cloudflare with Fail2Ban" icon="cloud" >}}
+  {{< card link="borgmatic" title="Borgmatic Backup" icon="cloud-upload" >}}
 {{< /cards >}}
 
 I am amazed by the convenience and performance of EasyEngine 4 and find it unfairly underrated despite the team's effort and dedication—simply because it uses Docker, a progressive choice. That is why I am writing these notes, making it easier for those unfamiliar with Docker to deploy and benefit from this excellent community project. In doing so, it may also support the EasyEngine team in continuing this proud journey.
