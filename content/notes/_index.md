@@ -33,6 +33,6 @@ Don't worry about the warnings about Docker or its complexity. I knew nothing ab
 Dive right into the following section to get started:
 
 {{< cards >}}
-  {{< card link="review" title="Đánh giá EasyEngine 4" icon="document-text" subtitle="The reason you shouldn’t hesitate with EasyEngine" >}}
+  {{< card link="review" title="EasyEngine 4 Revew" icon="document-text" subtitle="The reason you shouldn’t hesitate with EasyEngine" >}}
 {{< /cards >}}
 
