@@ -75,7 +75,7 @@ params:
     displayPoweredBy: false
 
   editURL:
-    enable: true
+    enable: false
     base: "https://github.com/dinhngocdung/easyengine-notes/edit/main/content"
     
     # Display the last modification date
