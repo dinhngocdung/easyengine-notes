@@ -1,5 +1,5 @@
 ---
-title: Dũng's Notes for EasyEngine
+title: Dũng’s EasyEngine Notes
 layout: hextra-home
 ---
 {{< hextra/hero-badge link="https://github.com/EasyEngine/easyengine/discussions">}}
@@ -17,7 +17,7 @@ layout: hextra-home
 
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-headline >}}
-  Dũng's Notes&nbsp;<br class="sm:hx-block hx-hidden" />For EasyEngine 4
+  Dũng's &nbsp;<br class="sm:hx-block hx-hidden" />EasyEngine Notes
 {{< /hextra/hero-headline >}}
 </div>
 
