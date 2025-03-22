@@ -231,37 +231,6 @@ Reference: [EasyEngine HTTP Request Cycle](https://easyengine.io/handbook/intern
 
 Now, let's review where your data is stored. This will help you know where to upload website content and how to modify configurations.
 
-{{< filetree/container >}}
-  {{< filetree/folder name="sample-site.com" >}}
-    {{< filetree/folder name="app" >}}
-      {{< filetree/folder name="htdocs" >}}
-      {{< /filetree/folder >}}
-      {{< filetree/file name="wp-config.php" >}}
-    {{< /filetree/folder >}}
-    {{< filetree/folder name="config" >}}
-      {{< filetree/folder name="nginx" >}}
-      {{< /filetree/folder >}}
-      {{< filetree/folder name="php" >}}
-      {{< /filetree/folder >}}
-      {{< filetree/folder name="postfix" >}}
-      {{< /filetree/folder >}}
-    {{< /filetree/folder >}}
-    {{< filetree/folder name="logs" >}}
-      {{< filetree/folder name="nginx" >}}
-      {{< /filetree/folder >}}
-      {{< filetree/folder name="php" >}}
-      {{< /filetree/folder >}}
-    {{< /filetree/folder >}}
-    {{< filetree/folder name="services" >}}
-      {{< filetree/folder name="postfix" >}}
-      {{< /filetree/folder >}}
-    {{< /filetree/folder >}}
-    {{< filetree/file name="docker-compose.yml" >}}
-    {{< filetree/file name="docker-compose-admin.yml" >}}
-  {{< /filetree/folder >}}
-{{< /filetree/container >}}
-
-
 ```bash
 sample-site.com
 ├── app
