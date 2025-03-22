@@ -46,9 +46,7 @@ graph LR
 
 ```
 
-Một lần nữa chúng ta sẽ triển khai Borgmatic trên Docker theo đúng tinh thần EasyEngine.  
-
----
+Một lần nữa chúng ta sẽ triển khai Borgmatic trên Docker theo đúng tinh thần EasyEngine. 
 
 ## Tạo Borgmatic container
 
