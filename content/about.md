@@ -7,3 +7,5 @@ type: about
 # not a tea master 
 # or not an architect.
 # :)
+
+![](/images/easyengine-note-origin-rotate.svg)
