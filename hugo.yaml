@@ -46,6 +46,15 @@ menu:
     - name: EasyEngine ↗
       weight: 6
       url: "https://easyengine.io/"
+  
+  sidebar:
+    - name: ---
+      params:
+        type: separator
+      weight: 1
+    - name: "Discussion about this Notes ↗"
+      url: "https://github.com/dinhngocdung/easyengine-notes/discussions"
+      weight: 2
 
 # Parse Git commit
 enableGitInfo: true
