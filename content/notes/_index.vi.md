@@ -5,7 +5,7 @@ next: review
 {{< cards >}}
   {{< card link="review" title="Đánh giá EasyEngine 4" icon="thumb-up" >}}
   {{< card link="differences" title="Chuyển qua EasyEngine" icon="truck" >}}
-  {{< card link="deploying" title="Cài đặt với WordPress" icon="chevron-right" >}}
+  {{< card link="deploying" title="Cài đặt với WordPress" icon="cursor-click" >}}
   {{< card link="cache" title="Redis Cache" icon="trending-up" >}}
   {{< card link="fail2ban" title="Fail2ban Docker" icon="shield-check" >}}
   {{< card link="cloudflare" title="Cloudflare với Fail2Ban" icon="globe" >}}
