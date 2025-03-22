@@ -10,4 +10,4 @@ type: about
 
 I'm an EasyEngine lover.
 
-![](/images/easyengine-note-origin-rotate.svg)
+![](/images/re-logo-easyengine-text.png)
