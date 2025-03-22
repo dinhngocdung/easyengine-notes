@@ -105,50 +105,56 @@ Reference for site management commands: [ee site](https://easyengine.io/commands
 
 ## Migrating an Existing WordPress Website to EasyEngine  
 
-1. **Prepare your website data:**  
-   - Website source files: typically found in `/wp-content`.  
-   - Database: Export a `.sql` file using `wp db export`.  
+{{% steps %}}
 
-2. **Create a WordPress site without SSL (to avoid errors):**  
+### Prepare your website data:
+- Website source files: typically found in `/wp-content`.  
+- Database: Export a `.sql` file using `wp db export`.  
 
-   ```bash
-   ee site create sample.com --type=wp --ssl=no --cache
+### Create a WordPress site without SSL (to avoid errors):
+
+```bash
+ee site create sample.com --type=wp --ssl=no --cache
    ```  
 
-3. **Copy the source files to EasyEngine's directory:**  
+### Copy the source files to EasyEngine's directory:
 
-   ```bash
-   rsync -avhP /path/to/source/wp-content/ /opt/easyengine/sites/sample.com/app/htdocs/wp-content/
-   ```  
+```bash
+rsync -avhP /path/to/source/wp-content/ /opt/easyengine/sites/sample.com/app/htdocs/wp-content/
+```  
 
-   Check file permissions after copying.  
+Check file permissions after copying.  
 
-4. **Restore the database:**  
+### Restore the database: 
 
-   ```bash
-   # Copy the database file
-   rsync -avhP /path/to/source/database.sql /opt/easyengine/sites/sample.com/app/htdocs/
+```bash
+# Copy the database file
+rsync -avhP /path/to/source/database.sql /opt/easyengine/sites/sample.com/app/htdocs/
 
-   # Enter the container shell
-   ee shell sample.com
+# Enter the container shell
+ee shell sample.com
 
-   # Import using WP-CLI
-   wp db import database.sql
+# Import using WP-CLI
+wp db import database.sql
 
-   # Flush cache and exit
-   wp cache flush && exit
-   ```  
+# Flush cache and exit
+wp cache flush && exit
+```  
 
-5. **Check `wp-config.php`, verify permissions (must be `www-data:www-data`).**  
-6. **Point the domain’s DNS to the EasyEngine server.**  
-7. **Enable SSL:**  
+### Check `wp-config.php`, verify permissions (must be `www-data:www-data`).
 
-   ```bash
-   ee site update sample.com --ssl=le
-   ```  
+### Point the domain’s DNS to the EasyEngine server.
 
-8. **Verify caching setup:**  
-   - EasyEngine uses the `nginx-helper` plugin.  
-   - Ensure it's enabled and configured for Redis caching.  
+### Enable SSL: 
+
+```bash
+ee site update sample.com --ssl=le
+```  
+
+### Verify caching setup:
+- EasyEngine uses the `nginx-helper` plugin.  
+- Ensure it's enabled and configured for Redis caching.  
+
+{{% /steps %}}
 
 Reference: [EasyEngine Commands](https://easyengine.io/commands/)

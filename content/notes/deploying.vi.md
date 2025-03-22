@@ -102,59 +102,62 @@ Tham khảo danh sách các lệnh quản lý website: [ee site](https://easyeng
 
 ## Chuyển website WordPress có sẵn vào EasyEngine
 
-1. **Chuẩn bị dữ liệu**
+{{% steps %}}
+
+### Chuẩn bị dữ liệu
 
 - **Source site**: thư mục mã nguồn website, thường là `/wp-content/`.
 - **Database**: file database (tốt nhất là sử dụng `wp db export` để xuất file này).
 
-2. **Tạo website WordPress trên EasyEngine (không bật SSL để tránh lỗi)**
+### Tạo website WordPress trên EasyEngine (không bật SSL để tránh lỗi)
 
-    ```bash
-    ee site create sample.com --type=wp --ssl=no --cache
-    ```
+```bash
+ee site create sample.com --type=wp --ssl=no --cache
+```
 
-3. **Sao chép source vào thư mục EasyEngine**
+### Sao chép source vào thư mục EasyEngine
 
-    ```bash
-    # Sao chép source
-    rsync -avhP /path/to/source/wp-content/ /opt/easyengine/sites/sample.com/app/htdocs/wp-content/
-    ```
+```bash
+# Sao chép source
+rsync -avhP /path/to/source/wp-content/ /opt/easyengine/sites/sample.com/app/htdocs/wp-content/
+```
 
-    Sau khi sao chép, kiểm tra và đảm bảo quyền sở hữu là `www-data:www-data`.
+Sau khi sao chép, kiểm tra và đảm bảo quyền sở hữu là `www-data:www-data`.
 
-4. **Nhập database vào website EasyEngine**
+### Nhập database vào website EasyEngine
 
-    ```bash
-    # Sao chép file database vào thư mục htdocs
-    rsync -avhP /path/to/source/database.sql /opt/easyengine/sites/sample.com/app/htdocs/
+```bash
+# Sao chép file database vào thư mục htdocs
+rsync -avhP /path/to/source/database.sql /opt/easyengine/sites/sample.com/app/htdocs/
 
-    # Truy cập vào shell container
-    ee shell sample.com
+# Truy cập vào shell container
+ee shell sample.com
 
-    # Import database sử dụng WP-CLI
-    wp db import database.sql
+# Import database sử dụng WP-CLI
+wp db import database.sql
 
-    # Flush cache và thoát khỏi shell
-    wp cache flush && exit
-    ```
+# Flush cache và thoát khỏi shell
+wp cache flush && exit
+```
 
-5. **Cấu hình lại website**
+### Cấu hình lại website
 
 - Kiểm tra lại file `wp-config.php`.
 - Kiểm tra quyền sở hữu trên thư mục `wp-content/` (phải là `www-data:www-data`).
 - Cập nhật DNS về server EasyEngine.
 
-6. **Kích hoạt SSL**
+### Kích hoạt SSL**
 
-    ```bash
-    ee site update sample.com --ssl=le
-    ```
+```bash
+ee site update sample.com --ssl=le
+```
 
-7. **Kiểm tra và kích hoạt cache**
+### Kiểm tra và kích hoạt cache
 
-    EasyEngine sử dụng **nginx-helper plugin**, đảm bảo plugin này được bật và đang sử dụng **Redis**.
+EasyEngine sử dụng **nginx-helper plugin**, đảm bảo plugin này được bật và đang sử dụng **Redis**.
 
----
+{{% /steps %}}
+
 
 Tham khảo thêm:  
 [EasyEngine Commands](https://easyengine.io/commands/)
