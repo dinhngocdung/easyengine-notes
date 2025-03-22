@@ -22,13 +22,16 @@ markup:
 
 menu:
   main:
-    - name: EasyEngine Notes
+    - identifier: notes
+      name: EasyEngine Notes
       pageRef: /notes
       weight: 1
-    - name: About
+    - identifier: about
+      name: About
       pageRef: /about
       weight: 2
-    - name: Discussion ↗
+    - dentifier: disussions
+      name: Discussions ↗
       url: "https://github.com/EasyEngine/easyengine/discussions"
       weight: 3
     - name: Search
