@@ -52,7 +52,8 @@ menu:
       params:
         type: separator
       weight: 1
-    - name: "Help improve these notes ↗"
+    - identifier: navHelp
+      name: "Help improve these Notes ↗"
       url: "https://github.com/dinhngocdung/easyengine-notes/discussions"
       weight: 2
 
