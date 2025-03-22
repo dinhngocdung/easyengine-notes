@@ -52,7 +52,7 @@ menu:
       params:
         type: separator
       weight: 1
-    - name: "Discussion about this Notes ↗"
+    - name: "Help improve these notes ↗"
       url: "https://github.com/dinhngocdung/easyengine-notes/discussions"
       weight: 2
 
