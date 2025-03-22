@@ -30,7 +30,7 @@ menu:
       name: About
       pageRef: /about
       weight: 2
-    - dentifier: navDisussions
+    - identifier: navDisussions
       name: Discussions ↗
       url: "https://github.com/EasyEngine/easyengine/discussions"
       weight: 3
