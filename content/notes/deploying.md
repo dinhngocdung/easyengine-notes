@@ -141,9 +141,10 @@ wp db import database.sql
 wp cache flush && exit
 ```  
 
-### Check `wp-config.php`, verify permissions (must be `www-data:www-data`).
-
-### Point the domain’s DNS to the EasyEngine server.
+### Checking permissions and DNS
+- Check `wp-config.php`
+- Verify permissions (must be `www-data:www-data`).
+- Point the domain’s DNS to the EasyEngine server.
 
 ### Enable SSL: 
 

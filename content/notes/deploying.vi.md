@@ -146,7 +146,7 @@ wp cache flush && exit
 - Kiểm tra quyền sở hữu trên thư mục `wp-content/` (phải là `www-data:www-data`).
 - Cập nhật DNS về server EasyEngine.
 
-### Kích hoạt SSL**
+### Kích hoạt SSL
 
 ```bash
 ee site update sample.com --ssl=le
