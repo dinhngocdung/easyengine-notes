@@ -57,7 +57,6 @@ params:
     logo:
       path: images/easyengine-notes.svg
       dark: images/easyengine-notes-dark.svg
-      link: /easyengine-notes/
       width: 30
       height: 30
 
