@@ -8,4 +8,6 @@ type: about
 # nào có là kiến trúc sư.
 # :)
 
+I'm an EasyEngine lover.
+
 ![](/images/easyengine-note-origin-rotate.svg)

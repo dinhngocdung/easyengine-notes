@@ -8,4 +8,6 @@ type: about
 # or not an architect.
 # :)
 
+I'm an EasyEngine lover.
+
 ![](/images/easyengine-note-origin-rotate.svg)
