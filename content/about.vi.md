@@ -7,3 +7,5 @@ type: about
 # không là trà sư,
 # nào có là kiến trúc sư.
 # :)
+
+![](images/easyengine-note-origin-rotate.svg)
