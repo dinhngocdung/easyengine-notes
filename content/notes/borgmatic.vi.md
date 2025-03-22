@@ -118,8 +118,6 @@ Khởi tạo Borgmatic Docker:
 docker-compose up -d
 ```
 
----
-
 ## Kết nối Borgmatic với BorgBase  
 
 Trước khi nghĩ đến backup như thế nào, chúng ta cần chọn nơi lưu trữ backup. Với quy mô một website, dữ liệu khoảng 200GB, thì BorgBase là lựa chọn hợp lý với gói $2/tháng. Nếu trang web nhỏ, họ miễn phí luôn 10GB.  
@@ -214,8 +212,6 @@ Kiểm tra lại file config:
 docker-compose exec borgmatic borgmatic config validate
 ```
 
----
-
 ## Khởi tạo kho BorgBase  
 
 Thực hiện trong Borgmatic container, thay `BORG_REPO=` bằng URL BorgBase repository của bạn:  
@@ -225,8 +221,6 @@ cd ~/borgmatic && docker-compose exec borgmatic bash
 borgmatic --init --encryption repokey-blake2
 export BORG_REPO=ssh://123abc@def45678.repo.borgbase.com/./repo
 ```
-
----
 
 ## Các lệnh quản lý Borgmatic  
 
@@ -247,8 +241,6 @@ Trích xuất file `path/1` trong bản lưu mới nhất và lưu vào `/restor
 ```bash
 docker-compose exec borgmatic borgmatic extract --archive latest --path path/1 --destination /restore
 ```
-
----
 
 ## Lên lịch chạy định kỳ  
 
@@ -289,8 +281,6 @@ Thêm lịch trình:
 ```
 
 Như vậy, 3 AM mỗi ngày, Docker sẽ chạy backup, sau đó container tự xóa.  
-
----
 
 Tham khảo:  
 - [Borgmatic](https://torsion.org/borgmatic/)  
