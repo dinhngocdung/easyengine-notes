@@ -102,18 +102,18 @@ Tham khảo danh sách các lệnh quản lý website: [ee site](https://easyeng
 
 ## Chuyển website WordPress có sẵn vào EasyEngine
 
-**1. Chuẩn bị dữ liệu**
+1. **Chuẩn bị dữ liệu**
 
-    - **Source site**: thư mục mã nguồn website, thường là `/wp-content/`.
-    - **Database**: file database (tốt nhất là sử dụng `wp db export` để xuất file này).
+- **Source site**: thư mục mã nguồn website, thường là `/wp-content/`.
+- **Database**: file database (tốt nhất là sử dụng `wp db export` để xuất file này).
 
-**2. Tạo website WordPress trên EasyEngine (không bật SSL để tránh lỗi)**
+2. **Tạo website WordPress trên EasyEngine (không bật SSL để tránh lỗi)**
 
     ```bash
     ee site create sample.com --type=wp --ssl=no --cache
     ```
 
-**3. Sao chép source vào thư mục EasyEngine**
+3. **Sao chép source vào thư mục EasyEngine**
 
     ```bash
     # Sao chép source
@@ -122,7 +122,7 @@ Tham khảo danh sách các lệnh quản lý website: [ee site](https://easyeng
 
     Sau khi sao chép, kiểm tra và đảm bảo quyền sở hữu là `www-data:www-data`.
 
-**4. Nhập database vào website EasyEngine**
+4. **Nhập database vào website EasyEngine**
 
     ```bash
     # Sao chép file database vào thư mục htdocs
@@ -138,19 +138,19 @@ Tham khảo danh sách các lệnh quản lý website: [ee site](https://easyeng
     wp cache flush && exit
     ```
 
-**5. Cấu hình lại website**
+5. **Cấu hình lại website**
 
 - Kiểm tra lại file `wp-config.php`.
 - Kiểm tra quyền sở hữu trên thư mục `wp-content/` (phải là `www-data:www-data`).
 - Cập nhật DNS về server EasyEngine.
 
-**6. Kích hoạt SSL**
+6. **Kích hoạt SSL**
 
     ```bash
     ee site update sample.com --ssl=le
     ```
 
-**7. Kiểm tra và kích hoạt cache**
+7. **Kiểm tra và kích hoạt cache**
 
     EasyEngine sử dụng **nginx-helper plugin**, đảm bảo plugin này được bật và đang sử dụng **Redis**.
 
