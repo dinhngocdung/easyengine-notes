@@ -55,9 +55,9 @@ ee site list
 
 Disable a site:  
 
-```bash
-ee site disable example.com
-```  
+   ```bash
+   ee site disable example.com
+   ```  
 
 Restart Nginx, PHP, and other services without restarting the container:  
 
@@ -111,41 +111,41 @@ Reference for site management commands: [ee site](https://easyengine.io/commands
 
 2. **Create a WordPress site without SSL (to avoid errors):**  
 
-```bash
-ee site create sample.com --type=wp --ssl=no --cache
-```  
+   ```bash
+   ee site create sample.com --type=wp --ssl=no --cache
+   ```  
 
 3. **Copy the source files to EasyEngine's directory:**  
 
-```bash
-rsync -avhP /path/to/source/wp-content/ /opt/easyengine/sites/sample.com/app/htdocs/wp-content/
-```  
+   ```bash
+   rsync -avhP /path/to/source/wp-content/ /opt/easyengine/sites/sample.com/app/htdocs/wp-content/
+   ```  
 
-Check file permissions after copying.  
+   Check file permissions after copying.  
 
 4. **Restore the database:**  
 
-```bash
-# Copy the database file
-rsync -avhP /path/to/source/database.sql /opt/easyengine/sites/sample.com/app/htdocs/
+   ```bash
+   # Copy the database file
+   rsync -avhP /path/to/source/database.sql /opt/easyengine/sites/sample.com/app/htdocs/
 
-# Enter the container shell
-ee shell sample.com
+   # Enter the container shell
+   ee shell sample.com
 
-# Import using WP-CLI
-wp db import database.sql
+   # Import using WP-CLI
+   wp db import database.sql
 
-# Flush cache and exit
-wp cache flush && exit
-```  
+   # Flush cache and exit
+   wp cache flush && exit
+   ```  
 
 5. **Check `wp-config.php`, verify permissions (must be `www-data:www-data`).**  
 6. **Point the domain’s DNS to the EasyEngine server.**  
 7. **Enable SSL:**  
 
-```bash
-ee site update sample.com --ssl=le
-```  
+   ```bash
+   ee site update sample.com --ssl=le
+   ```  
 
 8. **Verify caching setup:**  
    - EasyEngine uses the `nginx-helper` plugin.  
