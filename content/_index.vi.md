@@ -1,17 +1,17 @@
 ---
-title: Dũng's Notes for EasyEngine
+title: Ghi chép của Dũng về EasyEngine 4
 layout: hextra-home
 ---
 
 {{< hextra/hero-badge link="https://github.com/EasyEngine/easyengine/discussions">}}
   <div class="hx-w-2 hx-h-2 hx-rounded-full hx-bg-primary-400"></div>
-  <span>Thảo luận về EasyEngine</span>
+  <span>Đặt câu hỏi về EasyEngine</span>
   {{< icon name="arrow-circle-right" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
 
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-headline >}}
-  Dũng's Notes&nbsp;<br class="sm:hx-block hx-hidden" />For EasyEngine 4
+  Ghi chép của Dũng&nbsp;<br class="sm:hx-block hx-hidden" />về EasyEngine 4
 {{< /hextra/hero-headline >}}
 </div>
 
@@ -22,7 +22,7 @@ layout: hextra-home
 </div>
 
 <div class="hx-mb-6">
-{{< hextra/hero-button text="Theo tôi nào" link="notes" >}}
+{{< hextra/hero-button text="Xem" link="notes" >}}
 </div>
 
 <div class="hx-mt-6"></div>

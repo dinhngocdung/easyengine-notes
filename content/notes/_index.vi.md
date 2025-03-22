@@ -1,5 +1,5 @@
 ---
-title: EasyEngine 4 Notes
+title: Ghi chép về EasyEngine 4
 next: review
 ---
 {{< cards >}}
