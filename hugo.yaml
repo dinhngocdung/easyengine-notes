@@ -48,7 +48,7 @@ menu:
       url: "https://easyengine.io/"
   
   sidebar:
-    - name: ---
+    - name: ___
       params:
         type: separator
       weight: 1
