@@ -17,9 +17,9 @@ Even those experienced with traditional LEMP stacks may struggle to troubleshoot
 graph LR
 	DB[(MariaDB)]
 	LOG@{ shape: docs, label: "mariadb-bin.000001
-														mariadb-bin.000002
-														mariadb-bin.000003
-														..." }
+							   mariadb-bin.000002
+							   mariadb-bin.000003
+							   ..." }
 
 	DB-->|MriaDB Binlog|LOG
 	

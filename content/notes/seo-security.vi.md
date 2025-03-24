@@ -16,7 +16,7 @@ Một số biện pháp bảo mật và tối ưu tôi đã áp dụng cho hệ 
 Chỉnh sửa file `user.conf`:  
 
 ```bash
-nano /opt/easyengine/sites/www.traviet.com/config/nginx/custom/user.conf
+nano /opt/easyengine/sites/sample.com/config/nginx/custom/user.conf
 ```
 
 Thêm đoạn sau vào:  
@@ -84,7 +84,7 @@ Giải pháp: Chỉ sử dụng URL gốc để kiểm tra cache trong Redis. N�
 Chỉnh sửa file `main.conf` (lưu ý các thay đổi này sẽ bị mất khi cập nhật `ee cli update`, cần lưu lại để áp dụng lại sau):  
 
 ```bash
-nano /opt/easyengine/sites/www.traviet.com/config/nginx/conf.d/main.conf
+nano /opt/easyengine/sites/sample.com/config/nginx/conf.d/main.conf
 ```
 
 Thêm đoạn sau (thay `sample.com` bằng domain của bạn):  

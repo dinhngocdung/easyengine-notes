@@ -16,7 +16,7 @@ The `xmlrpc.php` file is still necessary for WooCommerce functions, but it is of
 Edit the `user.conf` file:  
 
 ```bash
-nano /opt/easyengine/sites/www.traviet.com/config/nginx/custom/user.conf
+nano /opt/easyengine/sites/sample.com/config/nginx/custom/user.conf
 ```
 
 Add the following lines:  
@@ -83,7 +83,7 @@ My solution is to make Redis ignore specific query strings like `fbclid=`, `_gl=
 To implement this, modify the `main.conf` file. Note that these changes may be lost when updating EasyEngine (`ee cli update`), so you should keep a backup of the modifications.  
 
 ```bash
-nano /opt/easyengine/sites/www.traviet.com/config/nginx/conf.d/main.conf
+nano /opt/easyengine/sites/sample.com/config/nginx/conf.d/main.conf
 ```
 
 Modify the relevant sections and replace `sample.com` with your domain:  
