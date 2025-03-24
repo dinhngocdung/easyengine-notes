@@ -5,15 +5,27 @@
   <title>Redirecting...</title>
   <script>
     window.onload = function() {
-      console.log("Script chạy"); // Debug kiểm tra script có chạy không
-      
-      // Xóa phần tên repo nếu GitHub Pages tự động thêm vào
-      var path = window.location.pathname.replace(/^\/easyengine-notes/, ""); 
-      window.location.replace("https://easyengine-notes.pages.dev" + path + window.location.search);
+      // Lấy đường dẫn hiện tại
+      var path = window.location.pathname;
+
+      // Loại bỏ phần "/easyengine-notes" nếu nó đứng ở đầu
+      if (path.startsWith("/easyengine-notes")) {
+        path = path.replace("/easyengine-notes", "");
+      }
+
+      // Tạo URL đích
+      var newURL = "https://easyengine-notes.pages.dev" + path + window.location.search;
+
+      console.log("Redirecting to:", newURL); // Debug để kiểm tra
+
+      window.location.replace(newURL);
     };
   </script>
 </head>
 <body>
-  <p>If you are not redirected, <a href="https://easyengine-notes.pages.dev/">click here</a>.</p>
+  <p>If you are not redirected, <a id="redirect-link" href="#">click here</a>.</p>
+  <script>
+    document.getElementById("redirect-link").href = "https://easyengine-notes.pages.dev" + window.location.pathname.replace("/easyengine-notes", "") + window.location.search;
+  </script>
 </body>
 </html>
