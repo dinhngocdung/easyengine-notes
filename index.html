@@ -1,37 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecting...</title>
-  <script>
-    window.onload = function() {
-      // Lấy đường dẫn hiện tại và loại bỏ phần "/easyengine-notes/"
-      var path = window.location.pathname.replace(/^\/easyengine-notes\//, "/");
-
-      // Nếu đường dẫn bị trống sau khi cắt, đặt lại là "/"
-      if (path === "") {
-        path = "/";
-      }
-
-      // Xây dựng URL mới
-      var newURL = "https://easyengine-notes.pages.dev" + path + window.location.search;
-
-      // Cập nhật lịch sử trình duyệt trước khi redirect
-      window.history.replaceState(null, "", newURL);
-
-      // Chuyển hướng
-      window.location.replace(newURL);
-    };
-  </script>
+    <meta charset="utf-8">
+    <script>
+        // Lấy toàn bộ path sau '/easyengine-notes/'
+        const fullPath = window.location.pathname.split('/easyengine-notes/')[1] || '';
+        
+        // Redirect sang Cloudflare Pages
+        window.location.replace(`https://easyengine-notes.pages.dev/${fullPath}${window.location.search}${window.location.hash}`);
+    </script>
 </head>
 <body>
-  <p>If you are not redirected, <a id="redirect-link" href="#">click here</a>.</p>
-  <script>
-    var path = window.location.pathname.replace(/^\/easyengine-notes\//, "/");
-    if (path === "") {
-      path = "/";
-    }
-    document.getElementById("redirect-link").href = "https://easyengine-notes.pages.dev" + path + window.location.search;
-  </script>
+    Redirecting to Cloudflare Pages...
 </body>
 </html>
