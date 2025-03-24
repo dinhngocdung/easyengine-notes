@@ -8,16 +8,15 @@
       // Lấy đường dẫn hiện tại
       var path = window.location.pathname;
 
-      // Loại bỏ phần "/easyengine-notes" nếu nó đứng ở đầu
-      if (path.startsWith("/easyengine-notes")) {
-        path = path.replace("/easyengine-notes", "");
-      }
+      // Loại bỏ mọi lần xuất hiện của "/easyengine-notes" ở đầu URL
+      var fixedPath = path.replace(/^\/easyengine-notes\/?/, "/");
 
-      // Tạo URL đích
-      var newURL = "https://easyengine-notes.pages.dev" + path + window.location.search;
+      // Tạo URL đích đúng
+      var newURL = "https://easyengine-notes.pages.dev" + fixedPath + window.location.search;
 
-      console.log("Redirecting to:", newURL); // Debug để kiểm tra
+      console.log("Redirecting to:", newURL); // Debug kiểm tra
 
+      // Thực hiện chuyển hướng
       window.location.replace(newURL);
     };
   </script>
@@ -25,7 +24,9 @@
 <body>
   <p>If you are not redirected, <a id="redirect-link" href="#">click here</a>.</p>
   <script>
-    document.getElementById("redirect-link").href = "https://easyengine-notes.pages.dev" + window.location.pathname.replace("/easyengine-notes", "") + window.location.search;
+    // Cập nhật liên kết fallback
+    var path = window.location.pathname.replace(/^\/easyengine-notes\/?/, "/");
+    document.getElementById("redirect-link").href = "https://easyengine-notes.pages.dev" + path + window.location.search;
   </script>
 </body>
 </html>
