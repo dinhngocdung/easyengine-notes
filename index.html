@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirecting...</title>
-  <meta http-equiv="refresh" content="0; url=https://easyengine-notes.pages.dev/">
+  <script>
+    window.onload = function() {
+      console.log("Script chạy"); // Debug kiểm tra script có chạy không
+      
+      // Xóa phần tên repo nếu GitHub Pages tự động thêm vào
+      var path = window.location.pathname.replace(/^\/easyengine-notes/, ""); 
+      window.location.replace("https://easyengine-notes.pages.dev" + path + window.location.search);
+    };
+  </script>
 </head>
 <body>
   <p>If you are not redirected, <a href="https://easyengine-notes.pages.dev/">click here</a>.</p>
