@@ -13,6 +13,20 @@ The most common symptom is the website displaying the error `'Error establishing
 
 Even those experienced with traditional LEMP stacks may struggle to troubleshoot this issue. It is so widespread that it overshadows the remarkable convenience and efficiency of EasyEngine 4.  
 
+```mermaid {align="left" zoom="true"}
+graph LR
+	DB[(MariaDB)]
+	LOG@{ shape: docs, label: "mariadb-bin.000001
+														mariadb-bin.000002
+														mariadb-bin.000003
+														mariadb-bin.000004
+														..." }
+
+	DB-->|MriaDB Binlog|LOG
+	
+	style DB fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000
+```
+ 
 ## Binary Log (Binlog) in MariaDB  
 
 MariaDB has a modern logging mechanism called the **Binary Log (Binlog)**, which records all changes to the database except for read-only queries like `SELECT`. The binlog is primarily used for:  
