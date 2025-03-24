@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script>
+        // Lấy toàn bộ path sau '/easyengine-notes/'
+        const fullPath = window.location.pathname.split('/easyengine-notes/')[1] || '';
+        
+        // Redirect sang Cloudflare Pages
+        window.location.replace(`https://easyengine-notes.pages.dev/${fullPath}${window.location.search}${window.location.hash}`);
+    </script>
+</head>
+<body>
+    Redirecting to Cloudflare Pages...
+</body>
+</html>
