@@ -5,18 +5,26 @@
   <title>Redirecting...</title>
   <script>
     window.onload = function() {
-      // Lấy đường dẫn hiện tại
+      // Lấy đường dẫn hiện tại từ URL
       var path = window.location.pathname;
 
-      // Loại bỏ mọi lần xuất hiện của "/easyengine-notes" ở đầu URL
-      var fixedPath = path.replace(/^\/easyengine-notes\/?/, "/");
+      // Kiểm tra nếu đường dẫn bắt đầu bằng `/easyengine-notes/`
+      if (path.startsWith("/easyengine-notes/")) {
+        // Cắt bỏ đúng phần `/easyengine-notes/`
+        path = path.substring(17); // 17 là độ dài của "/easyengine-notes/"
 
-      // Tạo URL đích đúng
-      var newURL = "https://easyengine-notes.pages.dev" + fixedPath + window.location.search;
+        // Đảm bảo đường dẫn không bị trống
+        if (path === "") {
+          path = "/";
+        }
+      }
+
+      // Tạo URL đích chính xác
+      var newURL = "https://easyengine-notes.pages.dev" + path + window.location.search;
 
       console.log("Redirecting to:", newURL); // Debug kiểm tra
 
-      // Thực hiện chuyển hướng
+      // Chuyển hướng đến URL mới
       window.location.replace(newURL);
     };
   </script>
@@ -24,8 +32,13 @@
 <body>
   <p>If you are not redirected, <a id="redirect-link" href="#">click here</a>.</p>
   <script>
-    // Cập nhật liên kết fallback
-    var path = window.location.pathname.replace(/^\/easyengine-notes\/?/, "/");
+    var path = window.location.pathname;
+    if (path.startsWith("/easyengine-notes/")) {
+      path = path.substring(17);
+      if (path === "") {
+        path = "/";
+      }
+    }
     document.getElementById("redirect-link").href = "https://easyengine-notes.pages.dev" + path + window.location.search;
   </script>
 </body>
