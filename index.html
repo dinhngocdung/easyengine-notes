@@ -4,14 +4,10 @@
   <meta charset="UTF-8">
   <title>Redirecting...</title>
   <script>
-    // Lấy đường dẫn hiện tại
-    var path = window.location.pathname;
-    // Nếu đường dẫn bắt đầu với "/easyengine-notes", loại bỏ nó
-    if (path.indexOf("/easyengine-notes") === 0) {
-      path = path.replace("/easyengine-notes", "");
-    }
-    var newURL = "https://easyengine-notes.pages.dev" + path + window.location.search;
-    window.location.replace(newURL);
+    window.onload = function() {
+      console.log("Script chạy"); // Debug để kiểm tra script có chạy không
+      window.location.replace("https://easyengine-notes.pages.dev" + window.location.pathname + window.location.search);
+    };
   </script>
 </head>
 <body>
