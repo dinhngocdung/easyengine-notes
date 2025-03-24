@@ -10,6 +10,12 @@ prev: seo-security
 
 **BorgBase** là dịch vụ lưu trữ rẻ, chuyên dụng cho Borg, hỗ trợ SSH key, giám sát và sao lưu dự phòng. Kết hợp với Borgmatic giúp bảo vệ dữ liệu web an toàn, tiết kiệm chi phí.  
 
+{{< mermaid align="center" zoom="true" >}}
+graph LR;
+  If --> Then
+  Then --> Else
+{{< /mermaid >}}
+
 ```mermaid
 graph LR
 
