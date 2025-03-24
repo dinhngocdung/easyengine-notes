@@ -19,7 +19,6 @@ graph LR
 	LOG@{ shape: docs, label: "mariadb-bin.000001
 														mariadb-bin.000002
 														mariadb-bin.000003
-														mariadb-bin.000004
 														..." }
 
 	DB-->|MriaDB Binlog|LOG
