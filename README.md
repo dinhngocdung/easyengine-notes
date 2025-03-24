@@ -1,1 +1,0 @@
-Redirect old url https://dinhngocdung.github.io/easyengine-notes/ to new https://easyengine-notes.pages.dev/
