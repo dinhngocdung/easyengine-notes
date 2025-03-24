@@ -81,7 +81,7 @@ In a traditional LEMP stack, all components (Nginx, MariaDB, PHP) are installed 
 1. **Global Services**: Nginx Proxy, MariaDB, Redis (if caching is used), and Cron Scheduler
 2. **Sites**: Nginx site, PHP, Postfix, Admin Tools (optional). If you install another WordPress site, a similar set of site containers is added.
 
-```mermaid
+```mermaid 
 graph RL
 
   %% Aggregate block containing all services
@@ -134,7 +134,7 @@ Reference:
 
 First, let's review how the traditional LEMP stack works. I’ve added Redis to help you visualize and compare more easily.
 
-```mermaid
+```mermaid {align="left" zoom="true"}
 graph LR
     A([Users]) <--> B((Internet))
     B -- "1 request (port 80,443)" --> C{Nginx}
