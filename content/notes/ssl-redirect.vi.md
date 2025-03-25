@@ -1,5 +1,5 @@
 ---
-title: Thiết Lập SSL, Domain và Redirect
+title: Thiết Lập SSL, Domain và Chuyển hướng Redirect
 linkTitle: SSL, Redirects
 weight: 5
 type: docs

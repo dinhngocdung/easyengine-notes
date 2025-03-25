@@ -1,5 +1,5 @@
 ---
-title: Tips Security & SEO
+title: Tips Security & SEO with EasyEngine
 linkTitle: Security & SEO
 weight: 9
 type: docs

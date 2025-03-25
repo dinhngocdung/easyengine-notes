@@ -1,5 +1,5 @@
 ---
-title: "EasyEngine Caching: Full-Page, Object, and Proxy Cache Explained"
+title: "EasyEngine Caching: Redis Full-Page, Object Cache, and Proxy Cache Explained"
 linkTitle: Redis Cache
 weight: 6
 type: docs

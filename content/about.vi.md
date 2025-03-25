@@ -1,5 +1,5 @@
 ---
-title: Đinh Ngọc Dũng
+title: Là Đinh Ngọc Dũng
 type: about
 ---
 
@@ -8,6 +8,6 @@ type: about
 # nào có là kiến trúc sư.
 # :)
 
-I'm an EasyEngine lover.
+Một người yêu thích EasyEngine.
 
 ![](/images/easyengine-note-origin-rotate.svg)

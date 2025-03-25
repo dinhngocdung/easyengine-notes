@@ -1,5 +1,5 @@
 ---
-title: "Borgmatic: Sao lưu server nhanh, rẻ, an toàn"
+title: "Borgmatic Docker: Sao lưu website nhanh, rẻ, an toàn"
 linkTitle: Sao lưu với Borgmatic
 weight: 10
 type: docs

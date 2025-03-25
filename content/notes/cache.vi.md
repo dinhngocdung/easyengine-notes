@@ -1,5 +1,5 @@
 ---
-title: "Redis & Proxy-Cache: Giải Pháp Cache Toàn Diện Cho WordPress"
+title: "Redis Cache & Proxy-Cache: Giải Pháp Cache Toàn Diện Cho WordPress"
 linkTitle: Redis Cache 
 weight: 6
 type: docs

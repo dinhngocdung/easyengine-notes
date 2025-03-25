@@ -1,5 +1,5 @@
 ---
-title: Mẹo nhỏ Bảo mật và SEO
+title: Mẹo nhỏ Bảo mật và SEO với EasyEngine
 linkTitle: Security & SEO
 weight: 9
 type: docs
