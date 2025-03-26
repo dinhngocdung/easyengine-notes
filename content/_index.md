@@ -66,7 +66,7 @@ layout: hextra-home
     title="Deploying WordPress on EasyEngine"
     subtitle="Simple steps to deploy and manage the WordPress site lifecycle."
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
-    image="/images/fail2ban.png"
+    image="/images/borgmatic-docker-easyengine.svg"
     imageClass="hx-top-[40%] hx-left-[36px] hx-w-[110%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(221,210,59,0.15),hsla(0,0%,100%,0));"
     link="notes/deploying"
