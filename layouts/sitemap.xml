@@ -1,9 +1,8 @@
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {{- range .Site.Pages }}
   <url>
-    <loc>{{ .Permalink }}</loc>
+    <loc>{{ .Permalink | absURL }}</loc>  <!-- Sử dụng absURL thay vì chỉ .Permalink -->
     <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
   </url>
   {{- end }}
