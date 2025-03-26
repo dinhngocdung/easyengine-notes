@@ -25,50 +25,7 @@ Fail2Ban hoạt động dựa trên ba bước chính:
 2. **Phát hiện vi phạm**: Khi số lần thất bại vượt quá ngưỡng được định nghĩa trước trong một khoảng thời gian cụ thể (ví dụ: 5 lần thất bại trong 10 phút), Fail2Ban xác định đó là hành vi đáng ngờ.
 3. **Áp dụng quy tắc cấm**: Fail2Ban sau đó thêm quy tắc vào nftables để chặn địa chỉ IP đó trong một khoảng thời gian nhất định. Đối với container Docker, quy tắc này được thêm vào chuỗi `DOCKER-USER` của nftables, đảm bảo rằng lưu lượng từ IP bị chặn không thể đến container.
 
-```mermaid
-flowchart LR
-    %% Định nghĩa các thành phần
-    subgraph Docker Host
-        subgraph nftables
-        direction TB
-            INPUT[[INPUT]]
-            DOCKER-USER[[DOCKER-USER]]
-        end
-        Fail2Ban{{"Fail2Ban
-        Docker"}}
-               
-        subgraph SSH
-           SSHLogs@{ shape: doc, label: "Logfiles" }
-        end       
-        subgraph Docker["Nginx
-        Container"]
-        DockerLogs@{ shape: doc, label: "Logfiles" }
-        end
-    end
-    
-    %% Lưu lượng truy cập cổng 22
-    in22(((Port 22))) --> INPUT
-    INPUT --> SSH
-    Fail2Ban --> SSHLogs
-
-    %% Lưu lượng truy cập cổng 80
-    in80(((Port 80))) --> DOCKER-USER
-    DOCKER-USER --> Docker
-    Fail2Ban --> DockerLogs
-    
-    %% Fail2Ban tương tác với nftables (chặn IP)
-    nftables <-->|Ban IP| Fail2Ban
-    
-    %% Áp dụng màu sắc
-    style nftables fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-    style Fail2Ban fill:#f9f,stroke:#333,stroke-width:2px,color:#000  
-    style SSH stroke:#333,color:#000  
-    style Docker fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-    style SSHLogs stroke-width:2px
-    style DockerLogs fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-    style INPUT fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-    style DOCKER-USER fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-```
+![Fail2ban Flow](/images/fail2ban-docker.svg)
 
 Hoạt động của Fail2Ban dựa trên ba thành phần chính: **Jail**, **Filter** và **Action**:
 

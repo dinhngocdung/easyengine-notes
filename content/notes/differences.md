@@ -81,49 +81,8 @@ In a traditional LEMP stack, all components (Nginx, MariaDB, PHP) are installed 
 1. **Global Services**: Nginx Proxy, MariaDB, Redis (if caching is used), and Cron Scheduler
 2. **Sites**: Nginx site, PHP, Postfix, Admin Tools (optional). If you install another WordPress site, a similar set of site containers is added.
 
-```mermaid 
-graph RL
+![EasyEengine Structure](/images/structure-easyengine.svg)
 
-  %% Aggregate block containing all services
-  subgraph SERVER - Docker Host
-    
-  subgraph wp-site2[WordPress Site 2 Services]
-    nginx-site2{Nginx Site 2}
-    PHP2[PHP Site 2]
-    Postfix2[Postfix Site 2]
-    admin-tools2([Admin Tools 2])
-  end
-
-  %% WordPress website services
-  subgraph wp-site[WordPress Site Services]
-    nginx-site{Nginx Site}
-    PHP
-    Postfix
-    admin-tools([Admin Tools])
-  end
-
-  %% Global system-wide services
-  subgraph service[Global Services]
-    nginx-proxy{Nginx Proxy}
-    global-db[(Global MariaDB)]
-    global-redis[(Global Redis)]
-    global-cron(Cron Scheduler)
-  end
-  end
-
-  %% Color styling optimized for both Dark Mode and Light Mode
- style nginx-proxy fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000 
-   style global-db fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000 
-   style PHP fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000 
-   style nginx-site fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000 
-   style global-redis fill:#FFDD57,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5,color:#000 
-   style admin-tools stroke-dasharray: 5 5 
-   style wp-site2 stroke-width:2px,stroke-dasharray: 5 5
-   style admin-tools2 stroke-width:2px,stroke-dasharray: 5 5
-   style PHP2 stroke-width:2px,stroke-dasharray: 5 5
-   style nginx-site2 stroke-width:2px,stroke-dasharray: 5 5
-   style Postfix2 stroke-width:2px,stroke-dasharray: 5 5
-```
 You find it too complicated, don't you? I'll explain right away how it works intelligently, making it simple again for you.
 
 Reference:
@@ -134,77 +93,15 @@ Reference:
 
 First, let's review how the traditional LEMP stack works. I’ve added Redis to help you visualize and compare more easily.
 
-```mermaid {align="left" zoom="true"}
-graph LR
-    A([Users]) <--> B((Internet))
-    B -- "1 request (port 80,443)" --> C{Nginx}
-    C <-- "3 no cache" --> I[PHP-FPM]
-    C <-. "2 cache" .-> R[(Redis)]
-    I <-- "request data" --> F[(MariaDB)]
-    C -- "4 return response" --> B
+![LEMP Stack](/images/lempstack-server.svg)
 
-    %% Color groups optimized for both Dark Mode and Light Mode
-    style C fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-    %% Yellow for Nginx
-    style I fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-    %% Light blue for PHP-FPM
-    style F fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-    %% Yellow for MariaDB
-    style R fill:#FFDD57,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5,color:#000  
-    %% Yellow dashed for Redis
-
-    subgraph LEMP Stack Host
-        R
-        C
-        F
-        I
-    end
-```
 
 With just Nginx, PHP, and MariaDB, all websites share these services. A user requests a webpage through ports 80/443, Nginx processes it, sends it to PHP and MariaDB, and returns the response. If Redis is enabled, Nginx checks Redis first.
 
 However, when using Docker/containers, EasyEngine works like this:
 
-```mermaid
-graph LR
-    A([Users]) <--> B((Internet))
-    B -- "request (port 80,443)" --> C{Nginx Proxy}
-    C -- "1 forward request Site A" --> D{Nginx Site A}
-    D <-."2 cache Site A".-> E[(Global Redis)]
-    D <-- "3 no cache" --> I[PHP Site A]
-    I <-- "request data Site A" --> F[(Global MariaDB)]
-    D -- "4 return response" --> C
-    C -- "delivery response" --> B
+![EasyEngine Flow](/images/easyengine-server.svg)
 
-    C -- "1 forward request Site B" --> D2{Nginx Site B}
-    D2 <-."2 cache Site B".-> E[(Global Redis)]
-    D2 <-- "3 no cache" --> I2[PHP Site B]
-    I2 <-- "request data Site B" --> F[(Global MariaDB)]
-    D2 -- "4 return response" --> C
-
-    %% Keep the original number of colors
-    style C fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000
-    style D fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000
-    style D2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000
-    style I fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000
-    style I2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000
-    style F fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000
-    style E fill:#FFDD57,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5,color:#000
-
-    subgraph DOCKER HOST
-        C
-        E
-        F
-        subgraph Wordpress Site App A
-            D
-            I
-        end
-        subgraph Wordpress Site App B
-            D2
-            I2
-        end
-    end
-```
 
 **Nginx Proxy**
 

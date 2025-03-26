@@ -91,50 +91,7 @@ Trong khi LEMP stack truyền thống, tất cả được cài đặt trong ser
 1. **Global Services**: Nginx Proxy, MariaDB, Redis (nếu dùng cache) và Cron Scheduler
 2. **Site**: Nginx site, PHP, Postfix, Admin Tools (mặc định không cài). Nếu bạn cài thêm một site WordPress, một nhóm container site như này sẽ được cài thêm cho site đó.
 
-```mermaid
-graph RL
-
-   %% Khối tổng hợp chứa tất cả dịch vụ
-   subgraph SERVER - Docker Host
-   
-   subgraph wp-site2[WordPress Site 2 Services]
-   nginx-site2{Nginx Site 2}
-   PHP2[PHP Site 2]
-   Postfix2[Postfix Site 2]
-   admin-tools2([Admin Tools 2])
-   end
-
-   %% Dịch vụ trang web WordPress
-   subgraph wp-site[WordPress Site Services]
-   nginx-site{Nginx Site}
-   PHP
-   Postfix
-   admin-tools([Admin Tools])
-   end
-
-   %% Dịch vụ dùng chung toàn hệ thống
-   subgraph service[Global Services]
-   nginx-proxy{Nginx Proxy}
-   global-db[(Global MariaDB)]
-   global-redis[(Global Redis)]
-   global-cron(Cron Scheduler)
-   end
-   end
-
-   %% Màu sắc theo nhóm, tối ưu cho cả Dark Mode và Light Mode
-   style nginx-proxy fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000 
-   style global-db fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000 
-   style PHP fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000 
-   style nginx-site fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000 
-   style global-redis fill:#FFDD57,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5,color:#000 
-   style admin-tools stroke-dasharray: 5 5 
-   style wp-site2 stroke-width:2px,stroke-dasharray: 5 5
-   style admin-tools2 stroke-width:2px,stroke-dasharray: 5 5
-   style PHP2 stroke-width:2px,stroke-dasharray: 5 5
-   style nginx-site2 stroke-width:2px,stroke-dasharray: 5 5
-   style Postfix2 stroke-width:2px,stroke-dasharray: 5 5
-
-```
+![EasyEengine Structure](/images/structure-easyengine.svg)
 
 Bạn đang thấy nó quá rối đúng không? Tôi sẽ giải thích ngay cách nó làm việc thông minh ra sao và điều đó sẽ làm bạn thấy nó đơn giản trở lại.
 
@@ -146,77 +103,13 @@ Tham khảo:
 
 Trước hết, ôn lại cách làm việc của LEMP stack truyền thống, tôi thêm Redis để bạn dễ hình dung và so sánh.
 
-```mermaid
-graph LR
-    A([Users]) <--> B((Internet))
-    B -- "1 request (port 80,443)" --> C{Nginx}
-    C <-- "3 no cache" --> I[PHP-FPM]
-    C <-. "2 cache" .-> R[(Redis)]
-    I <-- "request data" --> F[(MariaDB)]
-    C -- "4 return response" --> B
-
-    %% Màu sắc theo nhóm, tối ưu cho cả Dark Mode và Light Mode
-    style C fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-    %% Vàng cho Nginx
-    style I fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-    %% Xanh nhạt cho PHP-FPM
-    style F fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-    %% Vàng cho MariaDB
-    style R fill:#FFDD57,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5,color:#000  
-    %% Vàng nét đứt cho Redis
-
-    subgraph LEMP Stack Host
-        R
-        C
-        F
-        I
-    end
-```
+![LEMP Stack](/images/lempstack-server.svg)
 
 Với chỉ Nginx-PHP-MariaDB, nó xử lý cho mọi website bạn cài đặt, tất cả dùng chung các chương trình này. User yêu cầu một trang web qua cổng 80/443, Nginx phân tích các yêu cầu này và xử lý qua PHP-MariaDB và phản hồi yêu cầu đó. Nếu có dùng Redis, Nginx sẽ kiểm tra Redis trước.
 
 Nhưng khi sử dụng Docker/container, EasyEngine hoạt động như thế này:
 
-```mermaid
-graph LR
-    A([Users]) <--> B((Internet))
-    B -- "request (port 80,443)" --> C{Nginx Proxy}
-    C -- "1 forward request Site A" --> D{Nginx Site A}
-    D <-."2 cache Site A".-> E[(Global Redis)]
-    D <-- "3 no cache" --> I[PHP Site A]
-    I <-- "request data Site A" --> F[(Global MariaDB)]
-    D -- "4 return response" --> C
-    C -- "delivery response" --> B
-
-    C -- "1 forward request Site B" --> D2{Nginx Site B}
-    D2 <-."2 cache Site B".-> E[(Global Redis)]
-    D2 <-- "3 no cache" --> I2[PHP Site B]
-    I2 <-- "request data Site B" --> F[(Global MariaDB)]
-    D2 -- "4 return response" --> C
-
-    %% Màu sắc theo nhóm, giữ nguyên số lượng màu gốc
-    style C fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000
-    style D fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000
-    style D2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000
-    style I fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000
-    style I2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000
-    style F fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000
-    style E fill:#FFDD57,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5,color:#000
-
-    subgraph DOCKER HOST
-        C
-        E
-        F
-        subgraph Wordpress Site App A
-            D
-            I
-        end
-        subgraph Wordpress Site App B
-            D2
-            I2
-        end
-    end
-```
+![EasyEngine Flow](/images/easyengine-server.svg)
 
 **Nginx Proxy**
 

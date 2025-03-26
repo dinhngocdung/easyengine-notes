@@ -15,47 +15,7 @@ Khi sử dụng EasyEngine, bạn không cần dùng thêm bất kỳ công ngh�
 
 Fullpage cache là công nghệ mạnh nhất, lưu trữ toàn bộ trang web dưới dạng HTML trong RAM, được quản lý bởi Redis. Nếu URL được kích hoạt, truy xuất sẽ không cần đến PHP/MariaDB.  
 
-```mermaid
-graph LR
-    A([Users]) <--> B((Internet))
-    B -- "request (port 80,443)" --> C{Nginx Proxy}
-
-    C -- "1 forward request Site A" --> D{Nginx Site A}
-    D <-."2 cache Site A".-> E[(Global Redis)]
-    D <-- "3 no cache" --> I[PHP Site A]
-    I <-- "request data Site A" --> F[(Global MariaDB)]
-    D -- "4 return response" --> C
-    C -- "delivery response" --> B
-
-    C -- "1 forward request Site B" --> D2{Nginx Site B}
-    D2 <-."2 cache Site B".-> E[(Global Redis)]
-    D2 <-- "3 no cache" --> I2[PHP Site B]
-    I2 <-- "request data Site B" --> F[(Global MariaDB)]
-    D2 -- "4 return response" --> C
-
-    %% Màu sắc theo nhóm, giữ nguyên số lượng màu gốc
-    style C fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000 
-    style D fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000 
-    style D2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-    style I fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000 
-    style I2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-    style F fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000 
-    style E fill:#FFDD57,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5,color:#000  
-
-    subgraph DOCKER HOST
-        C
-        E
-        F
-        subgraph Wordpress Site App A
-            D
-            I
-        end
-        subgraph Wordpress Site App B
-            D2
-            I2
-        end
-    end
-```
+![Redis Cache on EasyEngine](/images/easyengine-server.svg)
 
 ## Object Cache Redis  
 
@@ -95,24 +55,7 @@ Trong các trang web có lưu lượng truy cập cao, khi cache hết hạn, nh
 
 Bộ nhớ đệm proxy-cache mặc định là 1 giây, sau đó hết hạn nhưng không bị xóa ngay. Khi bộ nhớ đệm hết hạn, Nginx-Proxy container tiếp tục phục vụ bộ nhớ đệm cũ trong khi chỉ có một yêu cầu được gửi đến Nginx để làm mới cache.  
 
-```mermaid
-graph LR
-    B((Internet))-- "request
-    (port 80,443)" --> C{NGINX PROXY}
-
-    C -- "2
-    request build cache" --> D{SITE NGINX}
-    C <--"1
-    cache"--> E[(PROXY CACHE)]
-    D <-- "3
-    cache" --> I[(REDIS CACHE)]
-
-    %% Màu sắc theo nhóm, giữ nguyên số lượng màu gốc
-    style C fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000 
-    style D fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000 
-    style I fill:#FFDD57,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5,color:#000  
-    style E stroke-dasharray: 5 5 
-```
+![Proxy-Cache EasyEngine](/images/proxy-cache-easyengine.svg)
 
 **Quy trình kiểm tra cache:**  
 

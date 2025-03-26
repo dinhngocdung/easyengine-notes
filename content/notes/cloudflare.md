@@ -41,34 +41,11 @@ When a website runs behind Cloudflare’s proxy, the server logs will not captur
 
 Normal Server Logs (Without Cloudflare)  
 
-```mermaid
-graph LR
-  A1([1.1.1.1]) -->|Requests| S1{Server}
-  A2([2.2.2.2]) -->|Requests| S1
-  S1 -->|Logs| L1@{ shape: doc, label: "Logs\n1.1.1.1\n2.2.2.2" }
-
-  style A1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style A2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style S1 fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-  style L1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-```
+![Server logs](/images/server-logs.svg)
 
 Server Logs with Cloudflare  
 
-```mermaid
-graph LR
-  B1([1.1.1.1]) -->|Requests| CF1(("Cloudflare
-                                    4.4.4.4"))
-  B2([2.2.2.2]) -->|Requests| CF1
-  CF1 -->|Requests| S2{Server}
-  S2 -->|Logs| L2@{ shape: doc, label: "Logs\n4.4.4.4\n4.4.4.4" }
-
-  style B1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style B2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style CF1 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000  
-  style S2 fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-  style L2 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000    
-```
+![Cloudflare logs](/images/cloudflare-logs.svg)
 
 Without restoring the original IP, server logs will only display Cloudflare’s IPs, making tracking and security difficult. Anti-DDoS systems or IP-based restrictions may not function properly.  
 
@@ -83,23 +60,7 @@ EasyEngine handles this by ensuring that **proxy logs** still capture the correc
 - **Proxy logs** correctly record user IPs.  
 - **Site logs** may still show Cloudflare’s IPs instead of real user IPs, as Cloudflare is acting as a proxy.  
 
-```mermaid
-graph LR
-  C1([1.1.1.1]) -->|Requests| CF2(("Cloudflare
-  4.4.4.4"))
-  C2([2.2.2.2]) -->|Requests| CF2
-  CF2 -->|Requests| S3{"Nginx Proxy"}
-  S3 -->|Logs| L3@{ shape: doc, label: "Proxy Logs\n1.1.1.1\n2.2.2.2" }
-  S3 --> |forward| SS3{"Nginx Site"} --> LS3@{ shape: doc, label: "Site Logs\n4.4.4.4\n4.4.4.4" }
-
-  %% Style cho các thành phần
-  style C1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style C2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style CF2 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000  
-  style S3 fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-  style L3 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style LS3 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000
-```
+![EasyEngine logs](/images/easyengine-cloudflare-logs.svg)
 
 To display real IPs in **site logs**, modify the Nginx configuration:  
 
@@ -137,22 +98,7 @@ Cloudflare WAF is the first line of defense in your firewall setup, protecting y
 
 Cloudflare WAF is widely used for its strong protection, ease of use, and website performance optimization.  
 
-```mermaid
-graph LR
-U((User))-->C-->N-->S
-C@{ shape: lin-rect, label: "Cloudflare WAF"}
-
-subgraph Server
-N@{ shape: lin-rect, label: "nftables"}
-S[Server]
-end
-subgraph Cloudflare
-C
-end
-
-style C fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000 
-style N fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-```  
+![Cloudflare WAF](/images/cloudflare-waf.svg)
 
 ### How Fail2Ban Works with Cloudflare  
 
@@ -166,20 +112,7 @@ Instead, Fail2Ban can:
 
 This approach improves security, reduces server load, and mitigates threats early.  
 
-```mermaid
-graph BT
-F{{Fail2Ban}}-.->|Ban API|C
-F-.->|Ban IP |N
-F-.->|Logs|S
-subgraph request user IP
-C@{ shape: lin-rect, label: "Cloudflare WAF"}
-N@{ shape: lin-rect, label: "nftables"}
-S[Server]
-end
-style C fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000 
-style N fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-style F fill:#f9f,stroke:#333,stroke-width:2px,color:#000  
-```  
+![Cloudflare Fail2bann](/images/cloudflare-fail2ban.svg)
 
 ## Adding Fail2Ban Actions for Cloudflare WAF  
 

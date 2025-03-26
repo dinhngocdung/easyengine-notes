@@ -25,50 +25,7 @@ Fail2Ban operates in three main steps:
 2. **Detecting violations**: When the number of failed attempts exceeds a predefined threshold within a specific time (e.g., 5 failed logins in 10 minutes), Fail2Ban flags the IP as suspicious.
 3. **Applying ban rules**: Fail2Ban then adds rules to **nftables** to block the IP for a set period. In a Docker environment, these rules are applied to the **DOCKER-USER** chain in nftables, ensuring that traffic from banned IPs is blocked before reaching the container.
 
-```mermaid
-flowchart LR
-    %% Define components
-    subgraph Docker Host
-        subgraph nftables
-        direction TB
-            INPUT[[INPUT]]
-            DOCKER-USER[[DOCKER-USER]]
-        end
-        Fail2Ban{{"Fail2Ban
-        Docker"}}
-               
-        subgraph SSH
-           SSHLogs@{ shape: doc, label: "Logfiles" }
-        end       
-        subgraph Docker["Nginx
-        Container"]
-        DockerLogs@{ shape: doc, label: "Logfiles" }
-        end
-    end
-    
-    %% Traffic to port 22
-    in22(((Port 22))) --> INPUT
-    INPUT --> SSH
-    Fail2Ban --> SSHLogs
-
-    %% Traffic to port 80
-    in80(((Port 80))) --> DOCKER-USER
-    DOCKER-USER --> Docker
-    Fail2Ban --> DockerLogs
-    
-    %% Fail2Ban interacting with nftables (banning IPs)
-    nftables <-->|Ban IP| Fail2Ban
-    
-    %% Apply styles
-    style nftables fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-    style Fail2Ban fill:#f9f,stroke:#333,stroke-width:2px,color:#000  
-    style SSH stroke:#333,color:#000  
-    style Docker fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-    style SSHLogs stroke-width:2px
-    style DockerLogs fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-    style INPUT fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-    style DOCKER-USER fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-```
+![Fail2ban Flow](/images/fail2ban-docker.svg)
 
 Fail2Ban operates using three key components: **Jail, Filter, and Action**.
 

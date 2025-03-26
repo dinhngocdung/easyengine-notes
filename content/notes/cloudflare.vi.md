@@ -41,34 +41,11 @@ Khi website chạy qua Cloudflare proxy, địa chỉ IP trong log máy chủ s�
 
 Với máy chủ bình thường không chạy qua Cloudflare:
 
-```mermaid
-graph LR
-  A1([1.1.1.1]) -->|Requests| S1{Server}
-  A2([2.2.2.2]) -->|Requests| S1
-  S1 -->|Logs| L1@{ shape: doc, label: "Logs\n1.1.1.1\n2.2.2.2" }
-
-  style A1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style A2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style S1 fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-  style L1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-```
+![Server logs](/images/server-logs.svg)
 
 Với máy chủ chạy qua Cloudflare:
 
-```mermaid
-graph LR
-  B1([1.1.1.1]) -->|Requests| CF1(("Cloudflare
-                                    4.4.4.4"))
-  B2([2.2.2.2]) -->|Requests| CF1
-  CF1 -->|Requests| S2{Server}
-  S2 -->|Logs| L2@{ shape: doc, label: "Logs\n4.4.4.4\n4.4.4.4" }
-
-  style B1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style B2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style CF1 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000  
-  style S2 fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-  style L2 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000  
-```
+![Cloudflare logs](/images/cloudflare-logs.svg)
 
 Nếu không khôi phục IP gốc, log server chỉ hiển thị IP của Cloudflare, gây khó khăn trong việc tracking & bảo mật. Các hệ thống chống DDoS hoặc giới hạn IP có thể không hoạt động chính xác.
 
@@ -83,23 +60,7 @@ EasyEngine đã xử lý sẵn, nên nginx-proxy logs file vẫn ghi nhận đú
 - **Proxy logs** ghi nhận đúng IP người dùng.  
 - **Site logs** hiển thị IP của Cloudflare thay vì IP thực, vì Cloudflare đang đóng vai trò proxy.
 
-```mermaid
-graph LR
-  C1([1.1.1.1]) -->|Requests| CF2(("Cloudflare
-  4.4.4.4"))
-  C2([2.2.2.2]) -->|Requests| CF2
-  CF2 -->|Requests| S3{"Nginx Proxy"}
-  S3 -->|Logs| L3@{ shape: doc, label: "Proxy Logs\n1.1.1.1\n2.2.2.2" }
-  S3 --> |forward| SS3{"Nginx Site"} --> LS3@{ shape: doc, label: "Site Logs\n4.4.4.4\n4.4.4.4" }
-
-  %% Style cho các thành phần
-  style C1 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style C2 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style CF2 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000  
-  style S3 fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-  style L3 fill:#A6C8FF,stroke:#333,stroke-width:2px,color:#000  
-  style LS3 fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000
-```
+![EasyEngine logs](/images/easyengine-cloudflare-logs.svg)
 
 Để lấy IP thực cho **site logs**, cần chỉnh sửa file cấu hình Nginx:
 
@@ -139,22 +100,7 @@ Cloudflare WAF đứng trước tiên trong hàng rào tường lửa và bảo 
 
 Cloudflare WAF phổ biến vì khả năng bảo vệ mạnh mẽ, dễ sử dụng và giúp tối ưu hiệu suất website.  
 
-```mermaid
-graph LR
-U((User))-->C-->N-->S
-C@{ shape: lin-rect, label: "Cloudflare WAF"}
-
-subgraph Server
-N@{ shape: lin-rect, label: "nftables"}
-S[Server]
-end
-subgraph Cloudflare
-C
-end
-
-style C fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000 
-style N fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-```  
+![Cloudflare WAF](/images/cloudflare-waf.svg)
 
 Fail2Ban hoạt động bằng cách giám sát log server để phát hiện các hành vi đáng ngờ, sau đó thực hiện biện pháp chặn phù hợp. Khi hệ thống sử dụng Cloudflare, Fail2Ban không thể trực tiếp chặn IP trên firewall máy chủ do tất cả lưu lượng đều đi qua Cloudflare.  
 
@@ -166,20 +112,8 @@ Thay vào đó, Fail2Ban có thể:
 
 Cách tiếp cận này giúp bảo vệ hệ thống tốt hơn, giảm tải cho máy chủ và ngăn chặn các mối đe dọa từ sớm.  
 
-```mermaid
-graph BT
-F{{Fail2Ban}}-.->|Ban API|C
-F-.->|Ban IP |N
-F-.->|Logs|S
-subgraph request user IP
-C@{ shape: lin-rect, label: "Cloudflare WAF"}
-N@{ shape: lin-rect, label: "nftables"}
-S[Server]
-end
-style C fill:#FFAA33,stroke:#333,stroke-width:2px,color:#000 
-style N fill:#FFDD57,stroke:#333,stroke-width:2px,color:#000  
-style F fill:#f9f,stroke:#333,stroke-width:2px,color:#000  
-```  
+![Cloudflare Fail2bann](/images/cloudflare-fail2ban.svg)
+
 
 ## Thêm Action cho Fail2Ban  
 
