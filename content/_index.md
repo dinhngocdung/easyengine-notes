@@ -57,7 +57,7 @@ layout: hextra-home
     title="Differences When Dockerizing"
     subtitle="Comparing the differences when switching to EasyEngine from a traditional LEMP stack"
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-lg:hx-min-h-[340px]"
-    image="/images/proxycache.png"
+    image="/images/binlog-mariadb.svg"
     imageClass="hx-top-[40%] hx-left-[36px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.15),hsla(0,0%,100%,0));"
     link="notes/differences"

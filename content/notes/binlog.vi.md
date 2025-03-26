@@ -13,6 +13,8 @@ Biểu hiện phổ biến là website hiển thị lỗi `'Error establishing a
 
 Kinh nghiệm với LEMP stack truyền thống cũng khó giúp bạn khắc phục sự cố này. Lỗi này phổ biến đến mức nó trở thành một trong những nguyên nhân chính làm lu mờ nỗ lực và sự xuất sắc của EasyEngine 4.  
 
+![Binlog MariaDB](/images/binlog-mariadb.svg)
+
 ## Binary Log (Binlog) của MariaDB  
 
 MariaDB có một cơ chế ghi log hiện đại gọi là Binary Log (Binlog), giúp ghi nhận mọi thay đổi đối với dữ liệu, ngoại trừ các truy vấn chỉ đọc như `SELECT`. Binlog chủ yếu được sử dụng cho:  
