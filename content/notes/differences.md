@@ -81,7 +81,7 @@ In a traditional LEMP stack, all components (Nginx, MariaDB, PHP) are installed 
 1. **Global Services**: Nginx Proxy, MariaDB, Redis (if caching is used), and Cron Scheduler
 2. **Sites**: Nginx site, PHP, Postfix, Admin Tools (optional). If you install another WordPress site, a similar set of site containers is added.
 
-![EasyEengine Structure](/images/structure-easyengine.svg)
+![EasyEengine Structure](/images/easyengine-structure.svg)
 
 You find it too complicated, don't you? I'll explain right away how it works intelligently, making it simple again for you.
 

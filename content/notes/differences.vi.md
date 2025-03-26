@@ -91,7 +91,7 @@ Trong khi LEMP stack truyền thống, tất cả được cài đặt trong ser
 1. **Global Services**: Nginx Proxy, MariaDB, Redis (nếu dùng cache) và Cron Scheduler
 2. **Site**: Nginx site, PHP, Postfix, Admin Tools (mặc định không cài). Nếu bạn cài thêm một site WordPress, một nhóm container site như này sẽ được cài thêm cho site đó.
 
-![EasyEengine Structure](/images/structure-easyengine.svg)
+![EasyEengine Structure](/images/easyengine-structure.svg)
 
 Bạn đang thấy nó quá rối đúng không? Tôi sẽ giải thích ngay cách nó làm việc thông minh ra sao và điều đó sẽ làm bạn thấy nó đơn giản trở lại.
 

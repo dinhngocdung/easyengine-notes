@@ -57,7 +57,7 @@ To prevent this, the "proxy cache" mechanism allows NGINX-PROXY to serve an expi
 
 By default, proxy cache duration is 1 second before it expires but is not deleted. When cache expires, the Nginx-Proxy container continues serving the old cache while only one request is forwarded to the Nginx site.
 
-![Redis Cache on EasyEngine](/images/easyengine-server.svg)
+![Proxy-Cache EasyEngine](/images/proxy-cache-easyengine.svg)
 
 Check whether cache is available:
 
