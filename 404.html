@@ -6,7 +6,7 @@
     // Lấy toàn bộ path sau '/easyengine-notes/'
     const fullPath = window.location.pathname.split('/easyengine-notes/')[1] || '';
     // Tạo URL chuyển hướng tương ứng
-    const redirectUrl = `https://easyengine-notes.pages.dev/${fullPath}${window.location.search}${window.location.hash}`;
+    const redirectUrl = `https://easyengine.pages.dev/${fullPath}${window.location.search}${window.location.hash}`;
 
     // Tạo thẻ canonical và thêm vào head
     const canonicalLink = document.createElement('link');
