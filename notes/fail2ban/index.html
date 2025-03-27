@@ -1,24 +1,10 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <script>
-    // Lấy toàn bộ path sau '/easyengine-notes/'
-    const fullPath = window.location.pathname.split('/easyengine-notes/')[1] || '';
-    // Tạo URL chuyển hướng tương ứng
-    const redirectUrl = `https://easyengine.pages.dev/${fullPath}${window.location.search}${window.location.hash}`;
-
-    // Tạo thẻ canonical và thêm vào head
-    const canonicalLink = document.createElement('link');
-    canonicalLink.setAttribute('rel', 'canonical');
-    canonicalLink.setAttribute('href', redirectUrl);
-    document.head.appendChild(canonicalLink);
-
-    // Thực hiện chuyển hướng
-    window.location.replace(redirectUrl);
-  </script>
-</head>
-<body>
-  Redirecting to Cloudflare Pages...
-</body>
+<html lang="en-us">
+  <head>
+    <title>https://easyengine.pages.dev/notes/fail2ban/</title>
+    <link rel="canonical" href="https://easyengine.pages.dev/notes/fail2ban/">
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url=https://easyengine.pages.dev/notes/fail2ban/">
+  </head>
 </html>
