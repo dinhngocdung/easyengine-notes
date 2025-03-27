@@ -41,7 +41,7 @@ Khi website chạy qua Cloudflare proxy, địa chỉ IP trong log máy chủ s�
 
 Với máy chủ bình thường không chạy qua Cloudflare:
 
-<img src="/images/server-logs.svg" width="70%" alt="Server logs">
+<img src="/images/server-logs.svg" width="70%" float="left" alt="Server logs">
 
 
 Với máy chủ chạy qua Cloudflare:
