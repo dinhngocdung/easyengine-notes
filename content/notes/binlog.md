@@ -82,3 +82,97 @@ max_binlog_size         = 100M
 - [Enable and Use Binary Log in MySQL](https://snapshooter.com/learn/mysql/enable-and-use-binary-log-mysql)  
 - [MariaDB Binary Log Documentation](https://mariadb.com/kb/en/binary-log/)  
 
+
+## Controlling Log Files from Growing Indefinitely with Logrotate
+
+Besides MariaDB’s binlog, the Nginx and PHP log files of websites, as well as Nginx proxy logs, can also grow significantly over time, especially for sites with high traffic or those experiencing access errors. In such cases, **logrotate** is the recommended tool to use.
+
+### 1. **What is Logrotate?**
+- Logrotate is a log file management tool that helps rotate, compress, and delete old log files to prevent them from taking up too much space.
+
+### 2. **How It Works (Basic Overview)**
+- **Scheduled Execution**: Logrotate is typically scheduled to run daily via cron (`/etc/cron.daily/logrotate`).
+- **Configuration-Based**: It reads configuration files in `/etc/logrotate.conf` and `/etc/logrotate.d/` to determine how to handle each type of log.
+- **Process**:
+  1. Checks rotation conditions (time, size, etc.).
+  2. Renames the current log file (e.g., `access.log` → `access.log.1`).
+  3. Creates a new log file (if the `create` option is specified).
+  4. Compresses old logs (if `compress` is enabled).
+  5. Deletes logs that exceed the retention limit (based on `rotate`).
+  6. Runs additional scripts (if `postrotate` is defined).
+
+### 3. **Logrotate Configuration for EasyEngine**
+
+For Nginx proxy logs:
+```
+nano /etc/logrotate.d/ee-nginx-proxy-log
+```
+
+``` {filename="~/etc/logrotate.d/ee-nginx-proxy-log"}
+/opt/easyengine/services/nginx-proxy/logs/*.log {
+    weekly
+    missingok
+    copytruncate
+    rotate 12
+    compress
+    delaycompress
+    notifempty
+    create 0640 www-data adm
+    sharedscripts
+}
+```
+
+For website logs in EasyEngine:
+```
+nano /etc/logrotate.d/ee-sites-log
+```
+
+File content:
+``` {filename="~/etc/logrotate.d/ee-sites-log"}
+/var/lib/docker/volumes/*log_php/_data/*.log
+/var/lib/docker/volumes/*log_nginx/_data/*.log {
+    weekly
+    missingok
+    rotate 12
+    compress
+    delaycompress
+    notifempty
+    sharedscripts
+    postrotate
+        for site in $(/usr/local/bin/ee site list --format=text --enabled); do
+            absolute_site_php=$(echo $site | sed -e 's/\.//g')-php-1
+            absolute_site_nginx=$(echo $site | sed -e 's/\.//g')-nginx-1
+            $(docker inspect -f '{{ .State.Pid }}' $absolute_site_nginx | xargs kill -USR1) || echo "ok"
+            $(docker inspect -f '{{ .State.Pid }}' $absolute_site_php | xargs kill -USR1) || echo "ok"
+            echo "$(date +'[%d/%m/%Y %H:%M:%S]') LogRotate.INFO: Rotated logs for $site" >> /opt/easyengine/logs/ee.log
+        done
+    endscript
+}
+```
+
+- **Log Pattern**: `/var/lib/docker/volumes/*log_nginx/_data/*.log` – applies to all `.log` files for all sites in EasyEngine.
+- **Options**:
+  - `daily`, `weekly`, `monthly`: Rotation frequency.
+  - `rotate <number>`: Number of old logs to retain.
+  - `compress`: Compresses old logs (usually to `.gz`).
+  - `create <permissions> <user> <group>`: Creates a new log file.
+  - `postrotate`: Notifies the service (e.g., Nginx) to reload logs.
+
+### 4. **Real-World Process**
+- Suppose there’s an `access.log`:
+  1. Logrotate renames it: `access.log` → `access.log.1`.
+  2. Creates a new `access.log` (if `create` is enabled).
+  3. If `access.log.1` already exists, it becomes `access.log.2`, and so on.
+  4. Compresses `access.log.2` to `access.log.2.gz` (if `compress` is enabled).
+  5. Deletes logs exceeding the `rotate` limit (e.g., `access.log.8` if `rotate 7`).
+
+### 5. **Useful Commands**
+- **Run Manually**: `logrotate /etc/logrotate.conf`
+- **Force Execution**: `logrotate -f /etc/logrotate.d/ee-sites-log`
+- **Simulate (Debug Mode)**: `logrotate -d /etc/logrotate.d/ee-sites-log`
+- **Check Status**: View `/var/lib/logrotate/status`.
+
+### 6. **Notes**
+- If a service (e.g., Nginx) doesn’t reload logs after rotation, a `postrotate` script is needed to send a signal (typically `USR1`).
+- Missing the `create` option may result in no new log file being created.
+

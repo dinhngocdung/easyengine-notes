@@ -91,7 +91,107 @@ Sau khi chỉnh sửa, khởi động lại dịch vụ MariaDB để áp dụng
 docker-compose restart global-db
 ```  
 
-## Tham Khảo  
+### Tham Khảo  
 
 - [Hướng dẫn sử dụng Binary Log trong MySQL](https://snapshooter.com/learn/mysql/enable-and-use-binary-log-mysql)  
 - [Tài liệu chính thức của MariaDB về Binary Log](https://mariadb.com/kb/en/binary-log/)  
+
+## Không chế các file log không phình ra vô hạn với logrotate
+
+Ngoài binlog của MaridaDB, cac file log nginx và php của website, nginx-prooxy cũng có thể có kích thước lớn lên theo thời gian, đặc biệt là các site có nhiều truy cập hoặc sile có lỗi truy cập. Trong trường hợp này, logrotate là chương trình được khuyến nghị sử dụng.
+
+### 1. **Logrotate là gì?**
+- Logrotate là công cụ quản lý tệp log, giúp luân chuyển (rotate), nén, và xóa các tệp log cũ để tránh chiếm quá nhiều dung lượng.
+
+
+### 2. **Cách hoạt động cơ bản**
+- **Chạy định kỳ**: Logrotate thường được lên lịch chạy hàng ngày qua cron (`/etc/cron.daily/logrotate`).
+- **Dựa trên cấu hình**: Đọc các tệp cấu hình trong `/etc/logrotate.conf` và `/etc/logrotate.d/` để biết cách xử lý từng loại log.
+- **Quy trình**:
+  1. Kiểm tra điều kiện luân chuyển (thời gian, kích thước, v.v.).
+  2. Đổi tên tệp log hiện hành (ví dụ: `access.log` → `access.log.1`).
+  3. Tạo tệp log mới (nếu có tùy chọn `create`).
+  4. Nén tệp cũ (nếu bật `compress`).
+  5. Xóa tệp quá cũ (dựa trên `rotate`).
+  6. Chạy script bổ sung (nếu có `postrotate`).
+
+
+### 3. **Cấu hình logrotate cho EasyEngine **
+
+Với nginx-proxy log:
+
+```
+nano /etc/logrotate.d/ee-nginx-proxy-log
+```
+
+``` {filename="~/etc/logrotate.d/ee-nginx-proxy-log"}
+/opt/easyengine/services/nginx-proxy/logs/*.log {
+    weekly
+    missingok
+    copytruncate
+    rotate 12
+    compress
+    delaycompress
+    notifempty
+    create 0640 www-data adm
+    sharedscripts
+}
+```
+Với các log website trên EasyEngine:
+
+```
+nano /etc/logrotate.d/ee-sites-log
+```
+
+Nội dung file:
+
+``` {filename="~/etc/logrotate.d/ee-sites-log"}
+var/lib/docker/volumes/*log_php/_data/*.log                                                                                                                          >
+/var/lib/docker/volumes/*log_nginx/_data/*.log {
+        weekly
+        missingok
+        rotate 12
+        compress
+        delaycompress
+        notifempty
+        sharedscripts
+        postrotate
+            for site in $(/usr/local/bin/ee site list --format=text --enabled); do
+                absolute_site_php=$(echo $site | sed -e 's/\.//g' )-php-1
+                absolute_site_nginx=$(echo $site | sed -e 's/\.//g' )-nginx-1
+                $(docker inspect -f '{{ .State.Pid }}' $absolute_site_nginx | xargs kill -USR1) || echo "ok"
+                $(docker inspect -f '{{ .State.Pid }}' $absolute_site_php | xargs kill -USR1) || echo "ok"
+                echo "$(date +'[%d/%m/%Y %H:%M:%S]') LogRotate.INFO: Rotated logs for $site" >> /opt/easyengine/logs/ee.log
+            done
+        endscript
+}
+```
+
+- **Mẫu log**: `/var/lib/docker/volumes/*log_nginx/_data/*.log` – áp dụng cho tất cả tệp `.log` của tất cả các sites trong EasyEngine.
+- **Tùy chọn**:
+  - `daily`, `weekly`, `monthly`: Tần suất xoay.
+  - `rotate <số>`: Số bản cũ giữ lại.
+  - `compress`: Nén tệp cũ (thường thành `.gz`).
+  - `create <quyền> <user> <group>`: Tạo tệp log mới.
+  - `postrotate`: Thông báo dịch vụ (như Nginx) reload log.
+
+
+### 4. **Quy trình thực tế**
+- Giả sử có `access.log`:
+  1. Logrotate đổi tên: `access.log` → `access.log.1`.
+  2. Tạo `access.log` mới (nếu có `create`).
+  3. Nếu `access.log.1` đã tồn tại, nó thành `access.log.2`, và cứ thế.
+  4. Nén `access.log.2` thành `access.log.2.gz` (nếu bật `compress`).
+  5. Xóa tệp vượt quá `rotate` (ví dụ: `access.log.8` nếu `rotate 7`).
+
+
+### 5. **Lệnh hữu ích**
+- **Chạy thủ công**: `logrotate /etc/logrotate.conf`
+- **Ép buộc chạy**: `logrotate -f /etc/logrotate.d/ee-sites-log`
+- **Xem mô phỏng**: `logrotate -d /etc/logrotate.d/ee-sites-log` (debug mode).
+- **Kiểm tra trạng thái**: Xem `/var/lib/logrotate/status`.
+
+
+### 6. **Lưu ý**
+- Nếu dịch vụ (như Nginx) không reload log sau khi xoay, cần `postrotate` để gửi tín hiệu (thường là `USR1`).
+- Thiếu `create` có thể dẫn đến không tạo tệp log mới.
