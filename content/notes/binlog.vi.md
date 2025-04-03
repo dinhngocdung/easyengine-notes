@@ -100,11 +100,11 @@ docker-compose restart global-db
 
 Ngoài binlog của MaridaDB, cac file log nginx và php của website, nginx-prooxy cũng có thể có kích thước lớn lên theo thời gian, đặc biệt là các site có nhiều truy cập hoặc sile có lỗi truy cập. Trong trường hợp này, logrotate là chương trình được khuyến nghị sử dụng.
 
-### 1. **Logrotate là gì?**
+### 1. Logrotate là gì?
 - Logrotate là công cụ quản lý tệp log, giúp luân chuyển (rotate), nén, và xóa các tệp log cũ để tránh chiếm quá nhiều dung lượng.
 
 
-### 2. **Cách hoạt động cơ bản**
+### 2. Cách hoạt động cơ bản
 - **Chạy định kỳ**: Logrotate thường được lên lịch chạy hàng ngày qua cron (`/etc/cron.daily/logrotate`).
 - **Dựa trên cấu hình**: Đọc các tệp cấu hình trong `/etc/logrotate.conf` và `/etc/logrotate.d/` để biết cách xử lý từng loại log.
 - **Quy trình**:
@@ -116,7 +116,7 @@ Ngoài binlog của MaridaDB, cac file log nginx và php của website, nginx-pr
   6. Chạy script bổ sung (nếu có `postrotate`).
 
 
-### 3. **Cấu hình logrotate cho EasyEngine **
+### 3. Cấu hình logrotate cho EasyEngine
 
 Với nginx-proxy log:
 
@@ -176,7 +176,7 @@ var/lib/docker/volumes/*log_php/_data/*.log                                     
   - `postrotate`: Thông báo dịch vụ (như Nginx) reload log.
 
 
-### 4. **Quy trình thực tế**
+### 4. Quy trình thực tế
 - Giả sử có `access.log`:
   1. Logrotate đổi tên: `access.log` → `access.log.1`.
   2. Tạo `access.log` mới (nếu có `create`).
@@ -185,13 +185,13 @@ var/lib/docker/volumes/*log_php/_data/*.log                                     
   5. Xóa tệp vượt quá `rotate` (ví dụ: `access.log.8` nếu `rotate 7`).
 
 
-### 5. **Lệnh hữu ích**
+### 5. Lệnh hữu ích
 - **Chạy thủ công**: `logrotate /etc/logrotate.conf`
 - **Ép buộc chạy**: `logrotate -f /etc/logrotate.d/ee-sites-log`
 - **Xem mô phỏng**: `logrotate -d /etc/logrotate.d/ee-sites-log` (debug mode).
 - **Kiểm tra trạng thái**: Xem `/var/lib/logrotate/status`.
 
 
-### 6. **Lưu ý**
+### 6. Lưu ý
 - Nếu dịch vụ (như Nginx) không reload log sau khi xoay, cần `postrotate` để gửi tín hiệu (thường là `USR1`).
 - Thiếu `create` có thể dẫn đến không tạo tệp log mới.
