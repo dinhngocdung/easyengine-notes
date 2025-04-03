@@ -191,7 +191,3 @@ var/lib/docker/volumes/*log_php/_data/*.log                                     
 - **Xem mô phỏng**: `logrotate -d /etc/logrotate.d/ee-sites-log` (debug mode).
 - **Kiểm tra trạng thái**: Xem `/var/lib/logrotate/status`.
 
-
-### 6. Lưu ý
-- Nếu dịch vụ (như Nginx) không reload log sau khi xoay, cần `postrotate` để gửi tín hiệu (thường là `USR1`).
-- Thiếu `create` có thể dẫn đến không tạo tệp log mới.

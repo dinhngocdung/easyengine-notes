@@ -172,7 +172,4 @@ File content:
 - **Simulate (Debug Mode)**: `logrotate -d /etc/logrotate.d/ee-sites-log`
 - **Check Status**: View `/var/lib/logrotate/status`.
 
-### 6. Notes
-- If a service (e.g., Nginx) doesn’t reload logs after rotation, a `postrotate` script is needed to send a signal (typically `USR1`).
-- Missing the `create` option may result in no new log file being created.
 
