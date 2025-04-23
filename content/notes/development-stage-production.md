@@ -17,6 +17,8 @@ The **Development (Dev)**, **Stage**, and **Production** workflow is a standard 
 
 **EasyEngine 4** integrates commands like `ee site clone`, `ee site sync`, and `ee site share` to support this workflow. This guide explains how to use EasyEngine 4 on macOS, with accurate flags for `clone` and `sync`, using placeholder images when skipping large `uploads` directories, and deploying for a website at **YOUR-SITE.COM** on the server **YOUR-SERVER-IP**.
 
+![Development, Stage, and Production](/images/development.svg)
+
 
 ## 2. Creating a Local Development Environment on macOS
 
