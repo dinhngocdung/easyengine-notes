@@ -24,9 +24,7 @@ Quy trình **Development (Dev)**, **Stage**, và **Production** là tiêu chuẩ
 - Cài đặt **Homebrew** (nếu chưa có):
     
     ```bash
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    echo 'eval $(/opt/homebrew/bin/brew shellenv)' >> ~/.zprofile
-    eval $(/opt/homebrew/bin/brew shellenv)
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     ```
     
 - Cài đặt **EasyEngine 4** qua Homebrew:
