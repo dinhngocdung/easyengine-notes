@@ -1,13 +1,11 @@
 ---
-title: Development, Stage, Production với EasyEngine 4
+title: Hướng dẫn triển khai Development, Stage và Production với EasyEngine 4 với macOS
 linkTitle: Development, Stage và Production
-weight: 3
+weight: 11
 type: docs
 prev: borgmatic
 next: migrate
 ---
-
-# Hướng dẫn triển khai Development, Stage và Production với EasyEngine 4 trên macOS
 
 ## 1. Giới thiệu quy trình Dev-Stage-Production và EasyEngine 4
 

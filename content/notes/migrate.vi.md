@@ -1,13 +1,11 @@
 ---
-title: Chuyển webserver chạy EasyEngine
-linkTitle: Migrate
-weight: 3
+title: Hướng dẫn di chuyển server EasyEngine sang server mới
+linkTitle: Chuyển server
+weight: 12
 type: docs
 prev: development-stage-production
 next: review
 ---
-
-# Hướng dẫn di chuyển server EasyEngine sang server mới
 
 Đây là cách di chuyển server chạy **EasyEngine** từ OLD-SERVER-IP sang server mới (NEW-SERVER-IP), đảm bảo các website WordPress (ví dụ: `YOUR-SITE.COM`) hoạt động bình thường. Quy trình sử dụng `rsync` để đồng bộ dữ liệu và khởi động lại các dịch vụ Docker. 
 
@@ -145,3 +143,5 @@ Di chuyển server EasyEngine yêu cầu sao chép các thư mục chính (`/opt
 ## Kết luận
 
 Di chuyển server EasyEngine từ OLD-SERVER-IP sang NEW-SERVER-IP là một quy trình đơn giản với các bước: thiết lập server mới, cài đặt EasyEngine và Docker, đồng bộ dữ liệu bằng `rsync`, và khởi động container. Quy trình này đảm bảo các website WordPress như `YOUR-SITE.COM` hoạt động liền mạch trên server mới.
+
+Credit: [ssuess](https://github.com/EasyEngine/easyengine/discussions/1895)
