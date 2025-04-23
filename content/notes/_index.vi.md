@@ -10,8 +10,8 @@ next: review
   {{< card link="fail2ban" title="Fail2ban Docker" icon="shield-check" >}}
   {{< card link="cloudflare" title="Cloudflare với Fail2Ban" icon="globe" >}}
   {{< card link="borgmatic" title="Sao lưu Borgmatic" icon="cloud-upload" >}}
-  {{< card link="development-stage-production" title="Development, Stage, và Production" icon="beaker" >}}
   {{< card link="migrate" title="Chuyển server mới" icon="truck" >}}
+  {{< card link="development-stage-production" title="Development, Stage, và Production" icon="beaker" >}}
 {{< /cards >}}
 
 Tôi kinh ngạc trước sự thuận tiện và hiệu suất của EasyEngine 4, và nhận thấy rằng nó bị đánh giá thấp một cách bất công dù đội ngũ phát triển đã nỗ lực không nhỏ, chỉ vì nó sử dụng Docker — một lựa chọn tiến bộ. Đó là lý do tôi viết ghi chú này, giúp những người chưa quen với Docker có thể triển khai và hưởng lợi từ một dự án cộng đồng tuyệt vời. Đồng thời, điều này cũng có thể góp phần giúp đội ngũ EasyEngine tiếp tục hành trình đáng tự hào của họ.
