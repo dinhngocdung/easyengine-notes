@@ -148,7 +148,7 @@ When Production changes, use `ee site sync` to synchronize. According to EasyEng
 Typically, only the database is synced:
 
 ```bash
-ee site sync --source=root@YOUR-SERVER-IP:YOUR-SITE.COM --destination=dev.YOUR-SITE.test --db
+ee site sync root@YOUR-SERVER-IP:YOUR-SITE.COM dev.YOUR-SITE.test --db
 ```
 
 ### 3.4. Clear Cache on Dev
@@ -169,7 +169,7 @@ When plugins, themes, or features on Dev are ready, you can deploy directly from
 Sync the database from Dev to Production:
 
 ```bash
-ee site sync --source=dev.YOUR-SITE.test --destination=root@YOUR-SERVER-IP:YOUR-SITE.COM --db
+ee site sync dev.YOUR-SITE.test root@YOUR-SERVER-IP:YOUR-SITE.COM --db
 ```
 
 ### 4.2. Remove Placeholder Before Syncing Files
@@ -187,7 +187,7 @@ Remove the placeholder code.
 Sync files, skipping `uploads` if not needed:
 
 ```bash
-ee site sync --source=dev.YOUR-SITE.test --destination=root@YOUR-SERVER-IP:YOUR-SITE.COM --files
+ee site sync dev.YOUR-SITE.test root@YOUR-SERVER-IP:YOUR-SITE.COM --files
 ```
 
 ### 4.4. Clear Cache on Production
