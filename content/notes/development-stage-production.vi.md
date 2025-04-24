@@ -146,7 +146,7 @@ Khi Production có thay đổi, dùng `ee site sync` để đồng bộ. Theo Ea
 Thông thường, chỉ đồng bộ database:
 
 ```bash
-ee site syncroot@YOUR-SERVER-IP:YOUR-SITE.COM dev.YOUR-SITE.test --db
+ee site sync root@YOUR-SERVER-IP:YOUR-SITE.COM dev.YOUR-SITE.test --db
 ```
 
 ### 3.4. Xóa cache trên Dev
