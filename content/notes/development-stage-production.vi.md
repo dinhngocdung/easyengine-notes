@@ -17,7 +17,7 @@ Quy trình **Development (Dev)**, **Stage**, và **Production** là tiêu chuẩ
 
 **EasyEngine 4** tích hợp các lệnh `ee site clone`, `ee site sync`, và `ee site share` để hỗ trợ quy trình này. Bài viết hướng dẫn sử dụng EasyEngine 4 trên macOS, với các cờ chính xác cho `clone` và `sync`, sử dụng ảnh placeholder khi không đồng bộ thư mục `uploads` lớn, và triển khai cho website tại **YOUR-SITE.COM** trên server **YOUR-SERVER-IP**.
 
-<img src="/images/development.svg" width="65%" alt="Development, Stage và Production">
+![Development, Stage, và Production](/images/development.svg)
 
 ## 2. Tạo môi trường Development cục bộ trên macOS
 
