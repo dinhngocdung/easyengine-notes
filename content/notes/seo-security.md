@@ -16,7 +16,7 @@ The `xmlrpc.php` file is still necessary for WooCommerce functions, but it is of
 Edit the `user.conf` file:  
 
 ```bash
-nano /opt/easyengine/sites/sample.com/config/nginx/custom/user.conf
+nano /opt/easyengine/sites/YOUR-SITE.COM/config/nginx/custom/user.conf
 ```
 
 Add the following lines:  
@@ -44,7 +44,7 @@ location = /xmlrpc.php {
 Reload the Nginx configuration for the site:  
 
 ```bash
-ee site reload sample.com 
+ee site reload YOUR-SITE.COM 
 ```
 
 ## Securing SSH  
@@ -83,10 +83,10 @@ My solution is to make Redis ignore specific query strings like `fbclid=`, `_gl=
 To implement this, modify the `main.conf` file. Note that these changes may be lost when updating EasyEngine (`ee cli update`), so you should keep a backup of the modifications.  
 
 ```bash
-nano /opt/easyengine/sites/sample.com/config/nginx/conf.d/main.conf
+nano /opt/easyengine/sites/YOUR-SITE.COM/config/nginx/conf.d/main.conf
 ```
 
-Modify the relevant sections and replace `sample.com` with your domain:  
+Modify the relevant sections and replace `YOUR-SITE.COM` with your domain:  
 
 ```yaml
 # Ignore specific tracking query parameters from Google, Facebook, and other ad platforms
@@ -110,9 +110,9 @@ location /redis-store {
 }
 
 # Set cache key based on the cleaned URL
-set $key "sample.com_page:http$request_method$host$clean_uri"; 
+set $key "YOUR-SITE.COM_page:http$request_method$host$clean_uri"; 
 # Update key if using HTTPS
 if ($HTTP_X_FORWARDED_PROTO = "https") {
-	set $key "sample.com_page:https$request_method$host$clean_uri";
+	set $key "YOUR-SITE.COM_page:https$request_method$host$clean_uri";
 }
 ```

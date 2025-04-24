@@ -55,13 +55,13 @@ ee site update example.com --add-alias-domains='a.com,*.a.com,b.com,c.com'
 Nếu bạn muốn thêm các redirect, hãy chèn chúng vào `user.conf` hoặc tạo một file `.conf` mới trong thư mục `nginx/custom/`. Những thay đổi này sẽ được giữ nguyên khi cập nhật EasyEngine.  
 
 ```bash
-nano /opt/easyengine/sites/sample.com/config/nginx/custom/user.conf
+nano /opt/easyengine/sites/YOUR-SITE.COM/config/nginx/custom/user.conf
 ```  
 
 Sau khi chỉnh sửa, restart Nginx:  
 
 ```bash
-ee site reload sample.com
+ee site reload YOUR-SITE.COM
 ```  
 
 Lưu ý rằng file cấu hình này sẽ được chèn vào khối `server` của Nginx cho từng site cụ thể.  

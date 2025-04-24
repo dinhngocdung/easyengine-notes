@@ -34,12 +34,12 @@ Tham khảo: [**Installation Guide**](https://easyengine.io/handbook/install/)
 EasyEngine tự động cài đặt, cấu hình và kết nối các container của site và các dịch vụ toàn cục.
 
 ```bash
-ee site create sample.com --type=wp --ssl=le --cache
+ee site create YOUR-SITE.COM --type=wp --ssl=le --cache
 ```
 
 Giải thích:
 
-- `sample.com`: thay bằng domain/subdomain của bạn.
+- `YOUR-SITE.COM`: thay bằng domain/subdomain của bạn.
 - `--type=wp`: tạo website WordPress (mặc định, EasyEngine tạo website HTML đơn giản).
 - `--ssl=le`: tự động cài đặt SSL với Let’s Encrypt.
 - `--cache`: cài đặt full-page cache + Redis object cache.
@@ -65,12 +65,12 @@ ee site disable example.com
 
 **Khởi động lại các dịch vụ Nginx, PHP mà không khởi động lại container:**
 ```bash
-ee site reload sample.com
+ee site reload YOUR-SITE.COM
 ```
 
 **Khởi động lại website và cập nhật chỉnh sửa `docker-compose.yaml`:**
 ```bash
-ee site refresh sample.com
+ee site refresh YOUR-SITE.COM
 ```
 
 **Cập nhật toàn bộ server (bao gồm dịch vụ toàn cục và site):**
@@ -78,24 +78,24 @@ ee site refresh sample.com
 ee cli update
 ```
 
-**Clone một website, ví dụ tạo `sample.test` từ `sample.com` để thử nghiệm tính năng mới:**
+**Clone một website, ví dụ tạo `sample.test` từ `YOUR-SITE.COM` để thử nghiệm tính năng mới:**
 ```bash
-ee site clone sample.com sample.test
+ee site clone YOUR-SITE.COM sample.test
 ```
 
 **Truy cập vào shell trong container của website (để chạy lệnh quản lý WordPress qua WP-CLI):**
 ```bash
-ee shell sample.com
+ee shell YOUR-SITE.COM
 ```
 
 **Xem thông tin chi tiết của website (vị trí lưu trữ, user, password, database…):**
 ```bash
-ee site info sample.com
+ee site info YOUR-SITE.COM
 ```
 
 **Xóa website:**
 ```bash
-ee site remove sample.com
+ee site remove YOUR-SITE.COM
 ```
 
 Tham khảo danh sách các lệnh quản lý website: [ee site](https://easyengine.io/commands/site/)
@@ -112,14 +112,14 @@ Tham khảo danh sách các lệnh quản lý website: [ee site](https://easyeng
 ### Tạo website WordPress trên EasyEngine (không bật SSL để tránh lỗi)
 
 ```bash
-ee site create sample.com --type=wp --ssl=no --cache
+ee site create YOUR-SITE.COM --type=wp --ssl=no --cache
 ```
 
 ### Sao chép source vào thư mục EasyEngine
 
 ```bash
 # Sao chép source
-rsync -avhP /path/to/source/wp-content/ /opt/easyengine/sites/sample.com/app/htdocs/wp-content/
+rsync -avhP /path/to/source/wp-content/ /opt/easyengine/sites/YOUR-SITE.COM/app/htdocs/wp-content/
 ```
 
 Sau khi sao chép, kiểm tra và đảm bảo quyền sở hữu là `www-data:www-data`.
@@ -128,10 +128,10 @@ Sau khi sao chép, kiểm tra và đảm bảo quyền sở hữu là `www-data:
 
 ```bash
 # Sao chép file database vào thư mục htdocs
-rsync -avhP /path/to/source/database.sql /opt/easyengine/sites/sample.com/app/htdocs/
+rsync -avhP /path/to/source/database.sql /opt/easyengine/sites/YOUR-SITE.COM/app/htdocs/
 
 # Truy cập vào shell container
-ee shell sample.com
+ee shell YOUR-SITE.COM
 
 # Import database sử dụng WP-CLI
 wp db import database.sql
@@ -149,7 +149,7 @@ wp cache flush && exit
 ### Kích hoạt SSL
 
 ```bash
-ee site update sample.com --ssl=le
+ee site update YOUR-SITE.COM --ssl=le
 ```
 
 ### Kiểm tra và kích hoạt cache

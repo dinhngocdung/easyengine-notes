@@ -45,8 +45,8 @@ Access the Global Redis container to execute Redis CLI commands.
 cd /opt/easyengine/services && docker-compose exec global-redis bash
 
 # Execute Redis CLI commands,
-# Example: View keys for sample.com
-redis-cli KEYS "sample.com_page:*"
+# Example: View keys for example.com
+redis-cli KEYS "example.com_page:*"
 ```
 
 ## Proxy Cache

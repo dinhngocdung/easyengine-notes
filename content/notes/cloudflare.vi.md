@@ -28,7 +28,7 @@ Khi muốn sử dụng SSL Cloudflare với EasyEngine, bạn thực hiện các
 1. Thiết lập SSL với EasyEngine như bình thường, để bảo vệ kết nối giữa máy chủ và Cloudflare:
 
     ```bash
-    ee site update sample.com --ssl=le
+    ee site update YOUR-SITE.COM --ssl=le
     ```
 
 2. Cài đặt SSL trên Cloudflare:
@@ -66,7 +66,7 @@ EasyEngine đã xử lý sẵn, nên nginx-proxy logs file vẫn ghi nhận đú
 Để lấy IP thực cho **site logs**, cần chỉnh sửa file cấu hình Nginx:
 
 ```bash
-nano /opt/easyengine/sites/sample.com/config/nginx/nginx.conf
+nano /opt/easyengine/sites/YOUR-SITE.COM/config/nginx/nginx.conf
 ```
 
 Tìm phần `Proxy Settings`, thay đổi dòng `real_ip_header X-Forwarded-For;` thành `real_ip_header CF-Connecting-IP;`:
@@ -81,7 +81,7 @@ client_max_body_size 100m;
 Sau đó, khởi động lại Nginx site:
 
 ```bash
-ee site reload sample.com
+ee site reload YOUR-SITE.COM
 ```
 
 Lúc này, **cả Proxy logs và Site logs đều phản ánh đúng IP thật của người truy cập**, sẵn sàng cho Fail2Ban hoạt động chính xác.

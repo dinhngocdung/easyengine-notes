@@ -56,13 +56,13 @@ ee site update example.com --add-alias-domains='a.com,*.a.com,b.com,c.com'
 If you need to set up redirects, add the rules to `user.conf` by creating a new `.conf` file inside the `nginx/custom/` directory. These custom configurations will remain unchanged during EasyEngine updates.  
 
 ```bash
-nano /opt/easyengine/sites/sample.com/config/nginx/custom/user.conf
+nano /opt/easyengine/sites/YOUR-SITE.COM/config/nginx/custom/user.conf
 ```
 
 Restart Nginx after making changes:  
 
 ```bash
-ee site reload sample.com
+ee site reload YOUR-SITE.COM
 ```
 
 Keep in mind that this configuration will be placed inside the Nginx `server` block and will only apply to the specific site.  

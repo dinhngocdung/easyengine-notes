@@ -138,7 +138,7 @@ source_directories:
 
 repositories:
     - path: ssh://123abc@def45678.repo.borgbase.com/./repo 
-      label: "Backup for sample.com on BorgBase"
+      label: "Backup for YOUR-SITE.COM on BorgBase"
 
 exclude_patterns:
     - '*.pyc'
@@ -146,7 +146,7 @@ exclude_patterns:
 
 compression: auto,zstd
 encryption_passphrase: "passphrase_borg" # Replace with your password
-archive_name_format: 'sample.com-{now:%Y-%m-%d-%H%M%S}'
+archive_name_format: 'YOUR-SITE.COM-{now:%Y-%m-%d-%H%M%S}'
 
 retries: 5
 retry_wait: 5
@@ -170,7 +170,7 @@ after_backup:
 mariadb_databases:
     - name: sample_com
       hostname: services_global-db_1
-      username: sample.com-AlJolB
+      username: YOUR-SITE.COM-AlJolB
       password: passwordmaiadb_sample_com
 ```
 

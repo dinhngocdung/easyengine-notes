@@ -186,7 +186,7 @@ Tham khảo: [EasyEngine Site Filesystem Structure](https://easyengine.io/handbo
 | **Cài phần mềm** | Cài qua `apt/yum`, ví dụ `apt install nginx`, hoặc được cài đặt và cấu hình tự động với Centminmod, WordOps... | Dùng Docker image, ví dụ `docker pull nginx` | Tự động kéo image Docker và cấu hình qua lệnh `ee site create` |
 | **Cấu hình** | Chỉnh file trên host, ví dụ `/etc/nginx` | Dùng volumes/biến môi trường | Cấu hình site `/opt/easyengine/sites/example.com/config/`  
 Cấu hình các dịch vụ Global `/opt/easyengine/services/nginx-proxy/` |
-| **Quản lý dịch vụ** | Sử dụng systemctl, ví dụ: `systemctl start nginx` | Lệnh Docker, ví dụ: `docker start nginx-container` | Lệnh `ee`, dịch vụ site: `ee site reload sample.com`  
+| **Quản lý dịch vụ** | Sử dụng systemctl, ví dụ: `systemctl start nginx` | Lệnh Docker, ví dụ: `docker start nginx-container` | Lệnh `ee`, dịch vụ site: `ee site reload YOUR-SITE.COM`  
 Dịch vụ global: `ee service reload --nginx` |
 | **Lưu dữ liệu** | Lưu trên host, ví dụ `/var/lib/mysql` | Dùng volumes, ví dụ `-v mysql-data:/var/lib/mysql` | Lưu tại `/opt/easyengine/services/mariadb/data` |
 | **Giao tiếp dịch vụ** | Qua localhost (`127.0.0.1`) | Qua mạng Docker, cần cấu hình | Dùng mạng nội bộ của Docker do EasyEngine tự tạo |

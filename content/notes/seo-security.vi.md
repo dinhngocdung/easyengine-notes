@@ -16,7 +16,7 @@ Một số biện pháp bảo mật và tối ưu tôi đã áp dụng cho hệ 
 Chỉnh sửa file `user.conf`:  
 
 ```bash
-nano /opt/easyengine/sites/sample.com/config/nginx/custom/user.conf
+nano /opt/easyengine/sites/YOUR-SITE.COM/config/nginx/custom/user.conf
 ```
 
 Thêm đoạn sau vào:  
@@ -44,7 +44,7 @@ location = /xmlrpc.php {
 Reload lại Nginx của site:  
 
 ```bash
-ee site reload sample.com 
+ee site reload YOUR-SITE.COM 
 ```
 
 ## Bảo mật SSH  
@@ -84,10 +84,10 @@ Giải pháp: Chỉ sử dụng URL gốc để kiểm tra cache trong Redis. N�
 Chỉnh sửa file `main.conf` (lưu ý các thay đổi này sẽ bị mất khi cập nhật `ee cli update`, cần lưu lại để áp dụng lại sau):  
 
 ```bash
-nano /opt/easyengine/sites/sample.com/config/nginx/conf.d/main.conf
+nano /opt/easyengine/sites/YOUR-SITE.COM/config/nginx/conf.d/main.conf
 ```
 
-Thêm đoạn sau (thay `sample.com` bằng domain của bạn):  
+Thêm đoạn sau (thay `YOUR-SITE.COM` bằng domain của bạn):  
 
 ```nginx
 # Bỏ qua cache với các query string theo dõi từ Google, Facebook, quảng cáo
@@ -112,10 +112,10 @@ location /redis-store {
 }
 
 # Tạo key cache chỉ dựa trên URL gốc đã xử lý
-set $key "sample.com_page:http$request_method$host$clean_uri"; 
+set $key "YOUR-SITE.COM_page:http$request_method$host$clean_uri"; 
 
 # Nếu sử dụng HTTPS, cập nhật key cho phù hợp
 if ($http_x_forwarded_proto = "https") {
-    set $key "sample.com_page:https$request_method$host$clean_uri";
+    set $key "YOUR-SITE.COM_page:https$request_method$host$clean_uri";
 }
 ```

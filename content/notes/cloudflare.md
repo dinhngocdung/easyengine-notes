@@ -28,7 +28,7 @@ To use Cloudflare SSL with EasyEngine, follow these steps:
 1. Set up SSL on EasyEngine as usual to secure the connection between the server and Cloudflare:  
 
     ```bash
-    ee site update sample.com --ssl=le
+    ee site update YOUR-SITE.COM --ssl=le
     ```
 
 2. Configure SSL on Cloudflare:  
@@ -65,7 +65,7 @@ EasyEngine handles this by ensuring that **proxy logs** still capture the correc
 To display real IPs in **site logs**, modify the Nginx configuration:  
 
 ```bash
-nano /opt/easyengine/sites/sample.com/config/nginx/nginx.conf
+nano /opt/easyengine/sites/YOUR-SITE.COM/config/nginx/nginx.conf
 ```
 
 Locate the `Proxy Settings` section and change `real_ip_header X-Forwarded-For;` to `real_ip_header CF-Connecting-IP;`:  
@@ -80,7 +80,7 @@ Locate the `Proxy Settings` section and change `real_ip_header X-Forwarded-For;`
 Then, reload the Nginx site:  
 
 ```bash
-ee site reload sample.com
+ee site reload YOUR-SITE.COM
 ```
 
 Now, **both proxy logs and site logs will correctly reflect the real IP of visitors**, allowing Fail2Ban to function properly.  

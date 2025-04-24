@@ -34,11 +34,11 @@ Reference: [**Installation Guide**](https://easyengine.io/handbook/install/)
 EasyEngine automatically installs, configures, and connects its site containers and global services.  
 
 ```bash
-ee site create sample.com --type=wp --ssl=le --cache
+ee site create YOUR-SITE.COM --type=wp --ssl=le --cache
 ```  
 
 Explanation:  
-- `sample.com`: Replace with your actual domain/subdomain.  
+- `YOUR-SITE.COM`: Replace with your actual domain/subdomain.  
 - `--type=wp`: Creates a WordPress site (by default, EE creates a simple HTML site).  
 - `--ssl=le`: Automatically installs SSL with Let’s Encrypt.  
 - `--cache`: Enables full-page caching + Redis object cache.  
@@ -62,13 +62,13 @@ Disable a site:
 Restart Nginx, PHP, and other services without restarting the container:  
 
 ```bash
-ee site reload sample.com
+ee site reload YOUR-SITE.COM
 ```  
 
 Restart the site and apply updates to `docker-compose.yaml`:  
 
 ```bash
-ee site refresh sample.com
+ee site refresh YOUR-SITE.COM
 ```  
 
 Update the entire server, including global and site services:  
@@ -77,28 +77,28 @@ Update the entire server, including global and site services:
 ee cli update
 ```  
 
-Clone an existing website, e.g., create `sample.test` from `sample.com` to test new features:  
+Clone an existing website, e.g., create `sample.test` from `YOUR-SITE.COM` to test new features:  
 
 ```bash
-ee site clone sample.com sample.test
+ee site clone YOUR-SITE.COM sample.test
 ```  
 
 Access the shell within the website container, e.g., to run WordPress management commands via WP-CLI:  
 
 ```bash
-ee shell sample.com
+ee shell YOUR-SITE.COM
 ```  
 
 View site information, including storage location, user, password, database details:  
 
 ```bash
-ee site info sample.com
+ee site info YOUR-SITE.COM
 ```  
 
 Remove a website:  
 
 ```bash
-ee site remove sample.com
+ee site remove YOUR-SITE.COM
 ```  
 
 Reference for site management commands: [ee site](https://easyengine.io/commands/site/)  
@@ -114,13 +114,13 @@ Reference for site management commands: [ee site](https://easyengine.io/commands
 ### Create a WordPress site without SSL (to avoid errors):
 
 ```bash
-ee site create sample.com --type=wp --ssl=no --cache
+ee site create YOUR-SITE.COM --type=wp --ssl=no --cache
    ```  
 
 ### Copy the source files to EasyEngine's directory:
 
 ```bash
-rsync -avhP /path/to/source/wp-content/ /opt/easyengine/sites/sample.com/app/htdocs/wp-content/
+rsync -avhP /path/to/source/wp-content/ /opt/easyengine/sites/YOUR-SITE.COM/app/htdocs/wp-content/
 ```  
 
 Check file permissions after copying.  
@@ -129,10 +129,10 @@ Check file permissions after copying.
 
 ```bash
 # Copy the database file
-rsync -avhP /path/to/source/database.sql /opt/easyengine/sites/sample.com/app/htdocs/
+rsync -avhP /path/to/source/database.sql /opt/easyengine/sites/YOUR-SITE.COM/app/htdocs/
 
 # Enter the container shell
-ee shell sample.com
+ee shell YOUR-SITE.COM
 
 # Import using WP-CLI
 wp db import database.sql
@@ -149,7 +149,7 @@ wp cache flush && exit
 ### Enable SSL: 
 
 ```bash
-ee site update sample.com --ssl=le
+ee site update YOUR-SITE.COM --ssl=le
 ```  
 
 ### Verify caching setup:

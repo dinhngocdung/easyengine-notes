@@ -178,7 +178,7 @@ Reference: [EasyEngine Site Filesystem Structure](https://easyengine.io/handbook
 | **Software Installation** | Installed via `apt/yum`, e.g., `apt install nginx`, or automatically installed and configured with Centminmod, WordOps, etc. | Uses Docker images, e.g., `docker pull nginx` | Automatically pulls Docker images and configures them via the `ee site create` command |
 | **Configuration** | Modify files on the host, e.g., `/etc/nginx` | Uses volumes/environment variables | Site configuration: `/opt/easyengine/sites/example.com/config/`  
 Global service configuration: `/opt/easyengine/services/nginx-proxy/` |
-| **Service Management** | Uses systemctl, e.g., `systemctl start nginx` | Uses Docker commands, e.g., `docker start nginx-container` | Uses `ee` commands, site services: `ee site reload sample.com`  
+| **Service Management** | Uses systemctl, e.g., `systemctl start nginx` | Uses Docker commands, e.g., `docker start nginx-container` | Uses `ee` commands, site services: `ee site reload YOUR-SITE.COM`  
 Global services: `ee service reload --nginx` |
 | **Data Storage** | Stored on the host, e.g., `/var/lib/mysql` | Uses volumes, e.g., `-v mysql-data:/var/lib/mysql` | Stored at `/opt/easyengine/services/mariadb/data` |
 | **Service Communication** | Through localhost (`127.0.0.1`) | Through Docker network, requires configuration | Uses EasyEngine's automatically created internal Docker network |

@@ -26,7 +26,7 @@ Các trang động sẽ bị loại trừ khỏi fullpage cache. Lúc này, obje
 Với cờ `--cache` khi tạo website, cả fullpage cache và object cache đều được cài đặt và cấu hình sẵn cho website WordPress.  
 
 ```bash
-ee site create example.com --cache
+ee site create YOUR-SITE.COM --cache
 ```
 
 Nó được thiết lập ngay khi tạo site và không có lệnh sẵn để bật/tắt cho website đã có sẵn.  
@@ -43,8 +43,8 @@ Truy cập vào Global Redis để sử dụng các lệnh Redis-CLI:
 ```bash
 # Vào container global redis
 cd /opt/easyengine/services && docker-compose exec global-redis bash
-# Thực hiện các lệnh redis-cli, ví dụ: xem keys của sample.com
-redis-cli KEYS "sample.com_page:*"
+# Thực hiện các lệnh redis-cli, ví dụ: xem keys của YOUR-SITE.COM
+redis-cli KEYS "YOUR-SITE.COM_page:*"
 ```
 
 ## Proxy Cache
@@ -66,7 +66,7 @@ Bộ nhớ đệm proxy-cache mặc định là 1 giây, sau đó hết hạn nh
 **Kích hoạt Proxy-cache:**  
 
 ```bash
-ee site update example.com --proxy-cache=on
+ee site update YOUR-SITE.COM --proxy-cache=on
 ```
 
 Tham khảo: [Proxy Cache in EasyEngine](https://easyengine.io/handbook/proxy-cache-as-stale-on-nginx-proxy-in-easyengine-v4/)  

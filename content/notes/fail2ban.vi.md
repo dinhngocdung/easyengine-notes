@@ -75,7 +75,7 @@ services:
     volumes:
       - "./data:/data"  # Chứa custom jails, actions, filters và Fail2Ban persistent database
       - "/opt/easyengine/services/nginx-proxy/logs:/var/log/nginx-proxy:ro"  # Log của nginx-proxy
-      - "/opt/easyengine/sites/sample.com/logs/nginx:/var/log/sample.com-nginx:ro"  # Log của site Nginx
+      - "/opt/easyengine/sites/YOUR-SITE.COM/logs/nginx:/var/log/YOUR-SITE.COM-nginx:ro"  # Log của site Nginx
     environment:
       - F2B_LOG_TARGET=STDOUT
       - F2B_LOG_LEVEL=INFO
