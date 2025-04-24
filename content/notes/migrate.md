@@ -147,4 +147,4 @@ Synchronize two directories: `/opt/easyengine` (EasyEngine configuration) and `/
 
 Migrating an EasyEngine server from OLD-SERVER-IP to NEW-SERVER-IP is a straightforward process involving setting up the new server, installing EasyEngine and Docker, synchronizing data with `rsync`, and starting containers. This process ensures that WordPress websites like `YOUR-SITE.COM` operate seamlessly on the new server.
 
-Credit: [ssuess](https://github.com/EasyEngine/easyengine/discussions/1895)
+Credit: [Stephen](https://github.com/EasyEngine/easyengine/discussions/1895)
