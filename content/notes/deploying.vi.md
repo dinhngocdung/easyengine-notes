@@ -55,12 +55,12 @@ ee site list
 
 **Thêm alias domain:**
 ```bash
-ee site alias example.com alias.com
+ee site alias YOUR-SITE.COM YOUR-ALIAS.COM
 ```
 
 **Tạm dừng (disable) một website:**
 ```bash
-ee site disable example.com
+ee site disable YOUR-SITE.COM
 ```
 
 **Khởi động lại các dịch vụ Nginx, PHP mà không khởi động lại container:**
@@ -78,9 +78,9 @@ ee site refresh YOUR-SITE.COM
 ee cli update
 ```
 
-**Clone một website, ví dụ tạo `sample.test` từ `YOUR-SITE.COM` để thử nghiệm tính năng mới:**
+**Clone một website, ví dụ tạo `dev.YOUR-SITE.COM` từ `YOUR-SITE.COM` để thử nghiệm tính năng mới:**
 ```bash
-ee site clone YOUR-SITE.COM sample.test
+ee site clone YOUR-SITE.COM dev.YOUR-SITE.COM
 ```
 
 **Truy cập vào shell trong container của website (để chạy lệnh quản lý WordPress qua WP-CLI):**

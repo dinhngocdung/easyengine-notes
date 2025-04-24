@@ -137,7 +137,7 @@ Tham khảo: [EasyEngine HTTP Request Cycle](https://easyengine.io/handbook/inte
 Bây giờ, chúng ta xem lại dữ liệu sẽ được lưu ở đâu, điều này giúp bạn biết upload nội dung website vào đâu và can thiệp cấu hình như thế nào.
 
 ```bash
-sample-site.com
+YOUR-SITE.COM
 ├── app
 │   ├── htdocs                  # Source code của website
 │   └── wp-config.php           # File cấu hình WordPress
@@ -158,24 +158,24 @@ sample-site.com
 
 | Mô tả | Đường dẫn |
 | --- | --- |
-| Source code của site | `/opt/easyengine/sites/example.com/app/htdocs/` |
-| File `wp-config.php` (nếu là WordPress) | `/opt/easyengine/sites/example.com/app/wp-config.php` |
+| Source code của site | `/opt/easyengine/sites/YOUR-SITE.COM/app/htdocs/` |
+| File `wp-config.php` (nếu là WordPress) | `/opt/easyengine/sites/YOUR-SITE.COM/app/wp-config.php` |
 
 **Configuration**
 
 | Loại cấu hình | Đường dẫn |
 | --- | --- |
-| Cấu hình Nginx | `/opt/easyengine/sites/example.com/config/nginx/` |
-| Cấu hình Nginx tùy chỉnh (sẽ không bị ghi đè khi update) | `/opt/easyengine/sites/example.com/config/nginx/custom/` |
-| Cấu hình PHP | `/opt/easyengine/sites/example.com/config/php/php/` |
-| Cấu hình PHP-FPM | `/opt/easyengine/sites/example.com/config/php/php-fpm.d/` |
+| Cấu hình Nginx | `/opt/easyengine/sites/YOUR-SITE.COM/config/nginx/` |
+| Cấu hình Nginx tùy chỉnh (sẽ không bị ghi đè khi update) | `/opt/easyengine/sites/YOUR-SITE.COM/config/nginx/custom/` |
+| Cấu hình PHP | `/opt/easyengine/sites/YOUR-SITE.COM/config/php/php/` |
+| Cấu hình PHP-FPM | `/opt/easyengine/sites/YOUR-SITE.COM/config/php/php-fpm.d/` |
 
 **Logs**
 
 | Loại log | Đường dẫn |
 | --- | --- |
-| Log Nginx | `/opt/easyengine/sites/example.com/logs/nginx/` |
-| Log PHP | `/opt/easyengine/sites/example.com/logs/php/` |
+| Log Nginx | `/opt/easyengine/sites/YOUR-SITE.COM/logs/nginx/` |
+| Log PHP | `/opt/easyengine/sites/YOUR-SITE.COM/logs/php/` |
 
 Tham khảo: [EasyEngine Site Filesystem Structure](https://easyengine.io/handbook/global-filesystem-structure/site-filesystem-structure/)
 
@@ -184,7 +184,7 @@ Tham khảo: [EasyEngine Site Filesystem Structure](https://easyengine.io/handbo
 | **Tiêu chí** | **LEMP truyền thống** | **LEMP Docker hóa** | **EasyEngine** |
 | --- | --- | --- | --- |
 | **Cài phần mềm** | Cài qua `apt/yum`, ví dụ `apt install nginx`, hoặc được cài đặt và cấu hình tự động với Centminmod, WordOps... | Dùng Docker image, ví dụ `docker pull nginx` | Tự động kéo image Docker và cấu hình qua lệnh `ee site create` |
-| **Cấu hình** | Chỉnh file trên host, ví dụ `/etc/nginx` | Dùng volumes/biến môi trường | Cấu hình site `/opt/easyengine/sites/example.com/config/`  
+| **Cấu hình** | Chỉnh file trên host, ví dụ `/etc/nginx` | Dùng volumes/biến môi trường | Cấu hình site `/opt/easyengine/sites/YOUR-SITE.COM/config/`  
 Cấu hình các dịch vụ Global `/opt/easyengine/services/nginx-proxy/` |
 | **Quản lý dịch vụ** | Sử dụng systemctl, ví dụ: `systemctl start nginx` | Lệnh Docker, ví dụ: `docker start nginx-container` | Lệnh `ee`, dịch vụ site: `ee site reload YOUR-SITE.COM`  
 Dịch vụ global: `ee service reload --nginx` |

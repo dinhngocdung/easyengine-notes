@@ -56,7 +56,7 @@ ee site list
 Disable a site:  
 
    ```bash
-   ee site disable example.com
+   ee site disable YOUR-SITE.COM
    ```  
 
 Restart Nginx, PHP, and other services without restarting the container:  
@@ -77,10 +77,10 @@ Update the entire server, including global and site services:
 ee cli update
 ```  
 
-Clone an existing website, e.g., create `sample.test` from `YOUR-SITE.COM` to test new features:  
+Clone an existing website, e.g., clone `dev.YOUR-SITE.COM` from `YOUR-SITE.COM` to test new features:  
 
 ```bash
-ee site clone YOUR-SITE.COM sample.test
+ee site clone YOUR-SITE.COM dev.YOUR-SITE.COM
 ```  
 
 Access the shell within the website container, e.g., to run WordPress management commands via WP-CLI:  

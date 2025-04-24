@@ -15,10 +15,10 @@ SSL can be configured instantly using the `--ssl=le` flag, along with wildcard a
 
 ```bash
 # Set up Let's Encrypt SSL
-ee site create example.com --ssl=le --wildcard
+ee site create YOUR-SITE.COM --ssl=le --wildcard
 
 # Enable SSL for an existing website
-ee site update example.com --ssl=le
+ee site update YOUR-SITE.COM --ssl=le
 ```
 
 Reference: [EasyEngine Site Create Command](https://easyengine.io/commands/site/create/)  
@@ -33,10 +33,10 @@ EasyEngine doesn’t provide a direct command to rename a domain, but you can ac
 
 ```bash
 # Clone the old site to a new domain
-ee site clone old-domain.com new-domain.com
+ee site clone YOUR-OLD-DOMAIN.COM YOUR-NEW-DOMAIN.COM
 
 # Delete the old site
-ee site delete old-domain.com
+ee site delete YOUR-OLD-DOMAIN.COM
 ```
 
 References:  
@@ -48,7 +48,7 @@ References:
 When you create a site with either www or non-www, EasyEngine automatically creates an alias for the other version. If you want to add additional aliases:  
 
 ```bash
-ee site update example.com --add-alias-domains='a.com,*.a.com,b.com,c.com'
+ee site update YOUR-SITE.COM --add-alias-domains='YOUR-ALIAS-DOMAIN.COM,*.YOUR-ALIAS-DOMAIN.COM,YOUR-ALIAS-DOMAIN-2.COM'
 ```
 
 ## Redirect Configuration  

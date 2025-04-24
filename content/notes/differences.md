@@ -129,7 +129,7 @@ Reference: [EasyEngine HTTP Request Cycle](https://easyengine.io/handbook/intern
 Now, let's review where your data is stored. This will help you know where to upload website content and how to modify configurations.
 
 ```bash
-sample-site.com
+YOUR-SITE.COM
 ├── app
 │   ├── htdocs                  # Website source code
 │   └── wp-config.php           # WordPress configuration file
@@ -150,24 +150,24 @@ sample-site.com
 
 | Description | Path |
 | --- | --- |
-| Website source code | `/opt/easyengine/sites/example.com/app/htdocs/` |
-| `wp-config.php` file (for WordPress) | `/opt/easyengine/sites/example.com/app/wp-config.php` |
+| Website source code | `/opt/easyengine/sites/YOUR-SITE.COM/app/htdocs/` |
+| `wp-config.php` file (for WordPress) | `/opt/easyengine/sites/YOUR-SITE.COM/app/wp-config.php` |
 
 **Configuration**
 
 | Configuration Type | Path |
 | --- | --- |
-| Nginx Configuration | `/opt/easyengine/sites/example.com/config/nginx/` |
-| Custom Nginx Configuration (not overwritten on updates) | `/opt/easyengine/sites/example.com/config/nginx/custom/` |
-| PHP Configuration | `/opt/easyengine/sites/example.com/config/php/php/` |
-| PHP-FPM Configuration | `/opt/easyengine/sites/example.com/config/php/php-fpm.d/` |
+| Nginx Configuration | `/opt/easyengine/sites/YOUR-SITE.COM/config/nginx/` |
+| Custom Nginx Configuration (not overwritten on updates) | `/opt/easyengine/sites/YOUR-SITE.COM/config/nginx/custom/` |
+| PHP Configuration | `/opt/easyengine/sites/YOUR-SITE.COM/config/php/php/` |
+| PHP-FPM Configuration | `/opt/easyengine/sites/YOUR-SITE.COM/config/php/php-fpm.d/` |
 
 **Logs**
 
 | Log Type | Path |
 | --- | --- |
-| Nginx Logs | `/opt/easyengine/sites/example.com/logs/nginx/` |
-| PHP Logs | `/opt/easyengine/sites/example.com/logs/php/` |
+| Nginx Logs | `/opt/easyengine/sites/YOUR-SITE.COM/logs/nginx/` |
+| PHP Logs | `/opt/easyengine/sites/YOUR-SITE.COM/logs/php/` |
 
 Reference: [EasyEngine Site Filesystem Structure](https://easyengine.io/handbook/global-filesystem-structure/site-filesystem-structure/)
 
@@ -176,7 +176,7 @@ Reference: [EasyEngine Site Filesystem Structure](https://easyengine.io/handbook
 | **Criteria** | **Traditional LEMP** | **Dockerized LEMP** | **EasyEngine** |
 | --- | --- | --- | --- |
 | **Software Installation** | Installed via `apt/yum`, e.g., `apt install nginx`, or automatically installed and configured with Centminmod, WordOps, etc. | Uses Docker images, e.g., `docker pull nginx` | Automatically pulls Docker images and configures them via the `ee site create` command |
-| **Configuration** | Modify files on the host, e.g., `/etc/nginx` | Uses volumes/environment variables | Site configuration: `/opt/easyengine/sites/example.com/config/`  
+| **Configuration** | Modify files on the host, e.g., `/etc/nginx` | Uses volumes/environment variables | Site configuration: `/opt/easyengine/sites/YOUR-SITE.COM/config/`  
 Global service configuration: `/opt/easyengine/services/nginx-proxy/` |
 | **Service Management** | Uses systemctl, e.g., `systemctl start nginx` | Uses Docker commands, e.g., `docker start nginx-container` | Uses `ee` commands, site services: `ee site reload YOUR-SITE.COM`  
 Global services: `ee service reload --nginx` |

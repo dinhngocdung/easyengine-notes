@@ -26,7 +26,7 @@ Dynamic pages are excluded from fullpages cache, and in this case, object cache 
 By using the `--cache` flag when creating a website, both fullpages cache and object cache are installed and configured automatically for WordPress.
 
 ```bash
-ee site create example.com --cache
+ee site create YOUR-SITE.COM --cache
 ```
 
 It is set up during site creation and does not have a built-in command for enabling or disabling it on an existing website.
@@ -45,8 +45,8 @@ Access the Global Redis container to execute Redis CLI commands.
 cd /opt/easyengine/services && docker-compose exec global-redis bash
 
 # Execute Redis CLI commands,
-# Example: View keys for example.com
-redis-cli KEYS "example.com_page:*"
+# Example: View keys for YOUR-SITE.COM
+redis-cli KEYS "YOUR-SITE.COM_page:*"
 ```
 
 ## Proxy Cache
@@ -68,7 +68,7 @@ Check whether cache is available:
 Enable proxy cache:
 
 ```bash
-ee site update example.com --proxy-cache=on
+ee site update YOUR-SITE.COM --proxy-cache=on
 ```
 
 Reference: [Proxy cache as stale on Nginx-Proxy in EasyEngine v4](https://easyengine.io/handbook/proxy-cache-as-stale-on-nginx-proxy-in-easyengine-v4/)

@@ -15,10 +15,10 @@ SSL được thiết lập ngay với cờ `--ssl=le`, cùng với các thiết 
 
 ```bash
 # Thiết lập SSL Let's Encrypt
-ee site create example.com --ssl=le --wildcard  
+ee site create YOUR-SITE.COM --ssl=le --wildcard  
 
 # Thiết lập SSL cho website đã tồn tại  
-ee site update example.com --ssl=le  
+ee site update YOUR-SITE.COM --ssl=le  
 ```  
 
 Tham khảo: [EasyEngine Site Create](https://easyengine.io/commands/site/create/)  
@@ -47,7 +47,7 @@ Tham khảo:
 Khi bạn tạo trang với www hoặc non-www, EasyEngine sẽ tự động tạo alias cho tên còn lại. Nếu bạn muốn thêm một alias khác:  
 
 ```bash
-ee site update example.com --add-alias-domains='a.com,*.a.com,b.com,c.com'
+ee site update YOUR-SITE.COM --add-alias-domains='YOUR-ALIAS-DOMAIN.COM,*.YOUR-ALIAS-DOMAIN.COM,YOUR-ALIAS-DOMAIN-2.COM'
 ```  
 
 ## Redirect  
