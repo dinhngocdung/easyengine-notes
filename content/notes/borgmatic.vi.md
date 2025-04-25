@@ -68,7 +68,7 @@ services:
 		    # Thiết lập múi giờ cụ thể
       - TZ=Asia/Ho_Chi_Minh  
 	      # Passphrase tự tạo
-      - BORG_PASSPHRASE="passwordconnectborg"
+      - BORG_PASSPHRASE="YOUR-PASSPHARASE-CONNNECT-BORG"
     networks:
       global-backend-network:
 
@@ -93,7 +93,7 @@ Các bước thiết lập BorgBase:
 1. Đăng ký và tạo tài khoản nếu chưa có: [https://www.borgbase.com/register](https://www.borgbase.com/register)  
 2. Đăng nhập và tạo kho lưu trữ **Repositories**, lưu lại URL của kho, thường có dạng:  
    ```
-   ssh://123abc@def45678.repo.borgbase.com/./repo
+   ssh://XXXXX@XXXXX.repo.borgbase.com/./repo
    ```
 3. Tạo khóa **SSH** trên Borgmatic container:  
 
@@ -135,7 +135,7 @@ source_directories:
     - /mnt/source/fail2ban 
 
 repositories:
-    - path: ssh://123abc@def45678.repo.borgbase.com/./repo 
+    - path: ssh://XXXXX@XXXXX.repo.borgbase.com/./repo 
       label: "Backup for YOUR-SITE.COM on BorgBase"
 
 exclude_patterns:
@@ -143,7 +143,7 @@ exclude_patterns:
     - ~/*/.cache
 
 compression: auto,zstd
-encryption_passphrase: "passphrase_borg"
+encryption_passphrase: "YOUR-PASSPHARASE-CONNNECT-BORG"
 archive_name_format: 'YOUR-SITE.COM-{now:%Y-%m-%d-%H%M%S}'
 
 retries: 5
@@ -166,10 +166,10 @@ after_backup:
     - echo "`date` - Finished backup"
 
 mariadb_databases:
-    - name: sample_com
+    - name: YOUR-SITE_COM
       hostname: services_global-db_1
       username: YOUR-SITE.COM-AlJolB
-      password: passwordmariadb_sample_com
+      password: YOUR-PASSWORD-MARIADB_YOUR-SITE_COM
 ```
 
 Kiểm tra lại file config:  
@@ -185,7 +185,7 @@ Thực hiện trong Borgmatic container, thay `BORG_REPO=` bằng URL BorgBase r
 ```bash
 cd ~/borgmatic && docker-compose exec borgmatic bash
 borgmatic --init --encryption repokey-blake2
-export BORG_REPO=ssh://123abc@def45678.repo.borgbase.com/./repo
+export BORG_REPO=ssh://XXXXX@XXXXX.repo.borgbase.com/./repo
 ```
 
 ## Các lệnh quản lý Borgmatic  

@@ -68,7 +68,7 @@ services:
       # Set specific timezone
       - TZ=Asia/Ho_Chi_Minh  
       # Custom passphrase
-      - BORG_PASSPHRASE="passwordconnectborg"
+      - BORG_PASSPHRASE="YOUR-PASSPHARASE-CONNNECT-BORG"
     networks:
       global-backend-network:
 
@@ -93,7 +93,7 @@ Before setting up backups, we need a storage location. If your website data is a
 1. Register and create an account if you don’t have one:  
    👉 [BorgBase Registration](https://www.borgbase.com/register)  
 2. Log in and create a **Repository**. Save its URL, which usually looks like this:  
-   `ssh://123abc@def45678.repo.borgbase.com/./repo`  
+   `ssh://XXXXX@XXXXX.repo.borgbase.com:repo`  
 3. Generate an **SSH Key** on the Borgmatic container:  
 
    ```bash
@@ -137,7 +137,7 @@ source_directories:
     - /mnt/source/fail2ban 
 
 repositories:
-    - path: ssh://123abc@def45678.repo.borgbase.com/./repo 
+    - path: ssh://XXXXX@XXXXX.repo.borgbase.com/./repo 
       label: "Backup for YOUR-SITE.COM on BorgBase"
 
 exclude_patterns:
@@ -145,7 +145,7 @@ exclude_patterns:
     - ~/*/.cache
 
 compression: auto,zstd
-encryption_passphrase: "passphrase_borg" # Replace with your password
+encryption_passphrase: "YOUR-PASSPHARASE-CONNNECT-BORG" # Replace with your password
 archive_name_format: 'YOUR-SITE.COM-{now:%Y-%m-%d-%H%M%S}'
 
 retries: 5
@@ -168,10 +168,10 @@ after_backup:
     - echo "`date` - Finished backup"
 
 mariadb_databases:
-    - name: sample_com
+    - name: YOUR-SITE_COM
       hostname: services_global-db_1
       username: YOUR-SITE.COM-AlJolB
-      password: passwordmaiadb_sample_com
+      password: YOUR-PASSWORD-MARIADB_YOUR-SITE_COM
 ```
 
 Validate the configuration file:  
@@ -187,7 +187,7 @@ Inside the Borgmatic container, replace `BORG_REPO=` with your BorgBase reposito
 ```bash
 cd ~/borgmatic && docker-compose exec borgmatic bash
 borgmatic --init --encryption repokey-blake2
-export BORG_REPO=ssh://123abc@def45678.repo.borgbase.com/./repo
+export BORG_REPO=ssh://XXXXX@XXXXX.repo.borgbase.com/./repo
 ```
 
 ## Managing Borgmatic Backups  
