@@ -123,10 +123,13 @@ Synchronize two directories: `/opt/easyengine` (EasyEngine configuration) and `/
         
     - Starts containers for websites (Nginx, PHP, WordPress).
 3. **Check Status**:
-    - Verify containers:
+    - Verify containers running, stop containers what you don't need, ex: mailhog, newrelic...:
         
         ```bash
         docker ps
+        ```
+        ```
+        ee mailhog disable YOUR-SITE.COM
         ```
         
     - Check sites:

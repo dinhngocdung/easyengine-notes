@@ -119,10 +119,13 @@ Di chuyển server EasyEngine yêu cầu sao chép các thư mục chính (`/opt
         
     - Khởi động container cho các website (Nginx, PHP, WordPress).
 3. **Kiểm tra trạng thái**:
-    - Xác minh container:
+    - Xác minh các container, tắt các conntainer bạn không dùng, ví dụ Mailhog hay New Relic:
         
         ```bash
         docker ps
+        ```
+        ```
+        ee mailhog disable YOUR-SITE.COM
         ```
         
     - Kiểm tra site:
