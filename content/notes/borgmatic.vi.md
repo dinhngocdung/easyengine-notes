@@ -22,14 +22,12 @@ Tạo thư mục cho Borgmatic và thao tác trong thư mục này:
 
 ```bash
 mkdir ~/borgmatic
-mkdir -p data/{borgmatic.d,repository,.config,.ssh,.cache}
-cd ~/borgmatic
 ```
 
 Tạo file `docker-compose.yml` cho container Borgmatic:  
 
 ```bash
-nano docker-compose.yml
+nano  ~/borgmatic/docker-compose.yml
 ```
 
 Chép nội dung này vào, thay đổi `volumes` theo nhu cầu backup của bạn. Ví dụ, nếu bạn không dùng Fail2Ban, có thể bỏ dòng đó:  
@@ -81,7 +79,7 @@ networks:
 Khởi tạo Borgmatic Docker:  
 
 ```bash
-docker-compose up -d
+docker-compose -f ~/borgmatic/docker-compose.yml up -d
 ```
 
 ## Kết nối Borgmatic với BorgBase  

@@ -22,14 +22,12 @@ Create a directory for Borgmatic and navigate into it:
 
 ```bash
 mkdir ~/borgmatic
-mkdir -p data/{borgmatic.d,repository,.config,.ssh,.cache}
-cd ~/borgmatic
 ```
 
 Create the `docker-compose.yml` file for the Borgmatic container:  
 
 ```bash
-nano docker-compose.yml
+nano  ~/borgmatic/docker-compose.yml
 ```
 
 Copy the following content into the file. Modify the `volumes` section based on your backup needs. For example, if you don’t use Fail2Ban, you can remove that line.  
@@ -81,7 +79,7 @@ networks:
 Initialize the Borgmatic Docker container:  
 
 ```bash
-docker-compose up -d
+docker-compose -f ~/borgmatic/docker-compose.yml up -d
 ```
 
 ## Connecting Borgmatic to BorgBase  
