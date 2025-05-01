@@ -53,7 +53,6 @@ Migrating an EasyEngine server requires copying the main directories (`/opt/easy
         ee --version
         docker --version
         docker-compose --version
-        
         ```
         
     
@@ -122,18 +121,40 @@ Synchronize two directories: `/opt/easyengine` (EasyEngine configuration) and `/
         ```
         
     - Starts containers for websites (Nginx, PHP, WordPress).
+
 3. **Check Status**:
-    - Verify containers running, stop containers what you don't need, ex: mailhog, newrelic...:
-        
+    - Verify that the container is running; you will see all services of Docker Compose running, including rarely or completely unused services like New Relic, Mailhog, Postfix:
+
         ```bash
         docker ps
         ```
+
+    - Stop containers if you are not using them, such as Mailhog, New Relic, Postfix:
+
+        New Relic
+        ```bash
+        docker-compose -f /opt/easyengine/services/docker-compose.yml stop global-newrelic-daemon
         ```
-        ee mailhog disable YOUR-SITE.COM
+
+        Mailhog
+        ```bash
+        for compose in /opt/easyengine/sites/*/docker-compose.yml; do
+            website=$(basename "$(dirname "$compose")")
+            ee mailhog disable $website
+        done
         ```
-        
+
+        Postfix
+        ```bash
+        for compose in /opt/easyengine/sites/*/docker-compose.yml; do
+            docker-compose -f $compose stop postfix
+        done
+        ```
+
+    - To completely remove these redundant containers, use similar commands but replace `docker-compose stop` with `docker-compose rm -v`.
+
     - Check sites:
-        
+
         ```bash
         ee site list
         ```

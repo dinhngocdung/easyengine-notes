@@ -119,14 +119,33 @@ Di chuyển server EasyEngine yêu cầu sao chép các thư mục chính (`/opt
         
     - Khởi động container cho các website (Nginx, PHP, WordPress).
 3. **Kiểm tra trạng thái**:
-    - Xác minh các container, tắt các conntainer bạn không dùng, ví dụ Mailhog hay New Relic:
+    - Xác minh container đang chạy, bạn sẽ thấy tất cả các service của docker compose đều đang chạy, kể cả các service bạn hiếm hoặc hoang toàn không dùng, như New Relic, Mailhog, Postfix:
         
         ```bash
         docker ps
         ```
+    - Stop các container nếu bạn không dùng, Mailhog, New Relic, Postfix:
+
+        New Relic
+         ```bash
+        docker-compose -f /opt/easyengine/services/docker-compose.yml stop global-newrelic-daemondocker-compose -f /opt/easyengine/services/docker-compose.yml stop global-newrelic-daemon
         ```
-        ee mailhog disable YOUR-SITE.COM
+
+        Mailhog
+         ```bash
+        for compose in /opt/easyengine/sites/*/docker-compose.yml; do
+            website=$(basename "$(dirname "$compose")")
+            ee mailhog disable $website
+        done
         ```
+
+        Postfix
+        ```bash
+        for compose in /opt/easyengine/sites/*/docker-compose.yml; do
+            docker-compose -f $compose stop postfix
+        done
+        ```
+    - Để xoá hoàn toan các container dư thừa này, bằng cách sử dụng các lệnh tương tự, chỉ cần thay thế lệnh `docker-compose stop` bằng `docker-compose rm -v`.
         
     - Kiểm tra site:
         
