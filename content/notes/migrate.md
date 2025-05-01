@@ -75,7 +75,7 @@ Synchronize two directories: `/opt/easyengine` (EasyEngine configuration) and `/
 1. **Synchronize** `/opt/easyengine`:
     
     ```bash
-    rsync -avz --progress root@OLD-SERVER-IP:/opt/easyengine /opt/easyengine
+    rsync -avz --progress root@OLD-SERVER-IP:/opt/easyengine/ /opt/easyengine/
     ```
     
     - `a`: Preserves permissions, timestamps, and directory structure.

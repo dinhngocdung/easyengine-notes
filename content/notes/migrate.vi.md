@@ -72,7 +72,7 @@ Di chuyển server EasyEngine yêu cầu sao chép các thư mục chính (`/opt
 1. **Đồng bộ** `/opt/easyengine`:
     
     ```bash
-    rsync -avz --progress root@OLD-SERVER-IP:/opt/easyengine /opt/easyengine
+    rsync -avz --progress root@OLD-SERVER-IP:/opt/easyengine/ /opt/easyengine/
     
     ```
     
