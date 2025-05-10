@@ -177,7 +177,7 @@ ee site sync dev.YOUR-SITE.test root@YOUR-SERVER-IP:YOUR-SITE.COM --db
 The placeholder code is only for Dev, so remove it before syncing files:
 
 ```bash
-nano ~/easyengine/sites/dev.YOUR-SITE.test/app/htdocs/wp-content/themes/blocksy-child/functions.php
+nano ~/easyengine/sites/dev.YOUR-SITE.test/app/htdocs/wp-content/themes/YOUR-THEME/functions.php
 ```
 
 Remove the placeholder code.

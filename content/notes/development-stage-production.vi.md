@@ -176,7 +176,7 @@ ee site sync dev.YOUR-SITE.test root@YOUR-SERVER-IP:YOUR-SITE.COM --db
 Nếu có thay đổi files và cần đồng bộ, Code placeholder chỉ dùng cho Dev, nên xóa trước:
 
 ```bash
-nano ~/easyengine/sites/dev.YOUR-SITE.test/app/htdocs/wp-content/themes/blocksy-child/functions.php
+nano ~/easyengine/sites/dev.YOUR-SITE.test/app/htdocs/wp-content/themes/YOUR-THEME/functions.php
 ```
 
 Xóa đoạn code placeholder.
