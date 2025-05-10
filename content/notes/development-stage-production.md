@@ -97,16 +97,16 @@ Add the following code:
 ```php
 // IMAGE PLACEHOLDER
 function replace_broken_images_with_placeholder($content) {
-    $placeholder = '<https://sanantoniosports.org/wp-content/uploads/2022/07/placeholder-image.jpeg>';
+    $placeholder = 'https://sanantoniosports.org/wp-content/uploads/2022/07/placeholder-image.jpeg';
 
-    // Use regex to replace missing images
-    return preg_replace_callback('/<img[^>]+src=["\\']([^"\\']+)["\\'][^>]*>/i', function($matches) use ($placeholder) {
+    // Sử dụng regex để thay thế ảnh không tồn tại
+    return preg_replace_callback('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', function($matches) use ($placeholder) {
         $src = $matches[1];
 
-        // Check if the image exists on the server
+        // Kiểm tra xem ảnh có tồn tại trên server hay không
         $path = ABSPATH . str_replace(site_url('/'), '', $src);
         if (!file_exists($path)) {
-            // Replace with placeholder image
+            // Thay bằng ảnh placeholder
             return str_replace($src, $placeholder, $matches[0]);
         }
 
@@ -115,13 +115,13 @@ function replace_broken_images_with_placeholder($content) {
 }
 add_filter('the_content', 'replace_broken_images_with_placeholder');
 
-// Return placeholder for missing product images
+// Nếu ảnh sản phẩm không tồn tại, trả về ảnh placeholder
 function custom_wc_product_image_placeholder($image, $attachment_id, $size, $icon) {
     $file_path = get_attached_file($attachment_id);
-    $placeholder_url = '<https://sanantoniosports.org/wp-content/uploads/2022/07/placeholder-image.jpeg>';
+    $placeholder_url = 'https://sanantoniosports.org/wp-content/uploads/2022/07/placeholder-image.jpeg';
 
     if (!file_exists($file_path)) {
-        // Return placeholder image if file does not exist
+        // Trả về ảnh placeholder nếu file không tồn tại
         $image = [$placeholder_url, 600, 600, false];
     }
 
@@ -130,7 +130,7 @@ function custom_wc_product_image_placeholder($image, $attachment_id, $size, $ico
 add_filter('wp_get_attachment_image_src', 'custom_wc_product_image_placeholder', 10, 4);
 
 add_filter('woocommerce_placeholder_img_src', function() {
-    return '<https://sanantoniosports.org/wp-content/uploads/2022/07/placeholder-image.jpeg>';
+    return 'https://sanantoniosports.org/wp-content/uploads/2022/07/placeholder-image.jpeg';
 });
 ```
 
