@@ -87,7 +87,7 @@ Nếu không clone `uploads`, hình ảnh trên Dev có thể bị lỗi. Thêm 
 Mở file `functions.php` của theme con:
 
 ```bash
-nano ~/easyengine/sites/dev.YOUR-SITE.test/app/htdocs/wp-content/themes/blocksy-child/functions.php
+nano ~/easyengine/sites/dev.YOUR-SITE.test/app/htdocs/wp-content/themes/YOUR-THEME/functions.php
 ```
 
 Thêm đoạn code:
