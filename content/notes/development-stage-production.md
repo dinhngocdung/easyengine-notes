@@ -88,7 +88,7 @@ If the `uploads` directory is not cloned, images on Dev may be broken. Add place
 Open the `functions.php` file of the child theme:
 
 ```bash
-nano ~/easyengine/sites/dev.YOUR-SITE.test/app/htdocs/wp-content/themes/blocksy-child/functions.php
+nano ~/easyengine/sites/dev.YOUR-SITE.test/app/htdocs/wp-content/themes/YOUR-THEME/functions.php
 
 ```
 
