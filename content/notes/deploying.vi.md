@@ -26,7 +26,7 @@ wget -qO ~/.ee-completion.bash https://raw.githubusercontent.com/EasyEngine/easy
 echo 'source ~/.ee-completion.bash' >> ~/.bash_profile
 source ~/.ee-completion.bash
 ```
-[**Cài đặt trên RHEL/CentOS, openSUSE, và các bản phân phối khác**](/vi/note/rhel-cenos-opensuse/)
+[**Cài đặt trên RHEL/CentOS, openSUSE, và các bản phân phối khác**](/vi/notes/rhel-cenos-opensuse/)
 
 Tham khảo: [**Installation Guide**](https://easyengine.io/handbook/install/)
 
