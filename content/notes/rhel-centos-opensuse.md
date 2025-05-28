@@ -1,6 +1,6 @@
 ---
 title: EasyEngine with RHEL/CentOS Stream (Almalinux, Rocky Linux), openSUSE
-linkTitle: Whith RHEL/CentOS
+linkTitle: With RHEL/CentOS
 weight: 13
 type: docs
 prev: migrate

@@ -27,7 +27,7 @@ echo 'source ~/.ee-completion.bash' >> ~/.bash_profile
 source ~/.ee-completion.bash
 ```  
 
-[**Install on RHEL/CentOS, openSUSE, and other distributions**](/note/rhel-cenos-opensuse)
+[**Install on RHEL/CentOS, openSUSE, and other distributions**](/note/rhel-cenos-opensuse/)
 
 Reference: [**Installation Guide**](https://easyengine.io/handbook/install/)  
 
