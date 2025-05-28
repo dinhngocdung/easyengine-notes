@@ -11,7 +11,7 @@ next: binlog
 
 ## Cài đặt EasyEngine 4
 
-EasyEngine 4 có thể cài đặt trên bất kỳ hệ điều hành nào, miễn là có Docker, Docker Compose và PHP. Tuy nhiên, trong hướng dẫn này, tôi sử dụng **Debian 12** (đội ngũ phát triển EasyEngine thử nghiệm chủ yếu trên Debian/Ubuntu).
+EasyEngine 4 có thể cài đặt trên bấy kỳ hệ điều hành nào, miễn có docker/docker-compose, PHP. Nhưng riêng Ubuntu/Debian, Easyengine cung cấp một trình cài đặt dễ dàng để cài đặt luôn các phụ thuộc cần thiết. Ở đây tôi mặc định dùnng Debian 12, (nhóm phát triển thử nghiệm trên debian/ubuntu).
 
 Cài đặt bằng một lệnh đơn giản:
 
@@ -26,6 +26,7 @@ wget -qO ~/.ee-completion.bash https://raw.githubusercontent.com/EasyEngine/easy
 echo 'source ~/.ee-completion.bash' >> ~/.bash_profile
 source ~/.ee-completion.bash
 ```
+[**Cài đặt trên RHEL/CentOS, openSUSE, và các bản phân phối khác**](/note/rhel-cenos-opensuse)
 
 Tham khảo: [**Installation Guide**](https://easyengine.io/handbook/install/)
 

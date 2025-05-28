@@ -4,7 +4,7 @@ linkTitle: Chuyển server
 weight: 12
 type: docs
 prev: development-stage-production
-next: review
+next: rhel-centos-opensuse
 ---
 
 Đây là cách di chuyển server chạy **EasyEngine** từ OLD-SERVER-IP sang server mới (NEW-SERVER-IP), đảm bảo các website WordPress (ví dụ: `YOUR-SITE.COM`) hoạt động bình thường. Quy trình sử dụng `rsync` để đồng bộ dữ liệu và khởi động lại các dịch vụ Docker. 

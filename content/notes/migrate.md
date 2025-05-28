@@ -4,7 +4,7 @@ linkTitle: Migrate
 weight: 12
 type: docs
 prev: development-stage-production
-next: review
+next: rhel-centos-opensuse
 ---
 
 This guide explains how to migrate a server running **EasyEngine** from OLD-SERVER-IP to a new server (NEW-SERVER-IP), ensuring that WordPress websites (e.g., `YOUR-SITE.COM`) function seamlessly. The process uses `rsync` to synchronize data and restarts Docker services.

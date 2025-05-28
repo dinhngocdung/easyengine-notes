@@ -11,7 +11,7 @@ Then, you should have the confidence to choose and a basic understanding of how 
 
 ## Installing EasyEngine 4  
 
-EasyEngine 4 can be installed on any operating system as long as Docker, Docker Compose, and PHP are available. However, in this guide, I will assume Debian 12 (as the development team tests it on Debian/Ubuntu).  
+EasyEngine 4 can be installed on any operating system as long as it has **Docker/Docker Compose and PHP** installed. However, for **Ubuntu/Debian specifically, EasyEngine provides an easy installer that also sets up the necessary dependencies**. Here, I'm assuming the use of **Debian 12**, which is what the development team uses for testing (on Debian/Ubuntu). 
 
 **Install with a single command**
 
@@ -26,6 +26,8 @@ wget -qO ~/.ee-completion.bash https://raw.githubusercontent.com/EasyEngine/easy
 echo 'source ~/.ee-completion.bash' >> ~/.bash_profile
 source ~/.ee-completion.bash
 ```  
+
+[**Install on RHEL/CentOS, openSUSE, and other distributions**](/note/rhel-cenos-opensuse)
 
 Reference: [**Installation Guide**](https://easyengine.io/handbook/install/)  
 
