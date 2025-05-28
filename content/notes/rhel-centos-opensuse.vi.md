@@ -23,7 +23,7 @@ sudo curl -o /usr/local/bin/ee https://raw.githubusercontent.com/EasyEngine/easy
 sudo chmod +x /usr/local/bin/ee
 ```
 
-## **CentOS Stream / RHEL 10**
+## CentOS Stream / RHEL 10
 
 Bao gồm cả Almalinux, Rocky Linux
 
@@ -76,7 +76,7 @@ sudo curl -o /usr/local/bin/ee https://raw.githubusercontent.com/EasyEngine/easy
 sudo chmod +x /usr/local/bin/ee
 ```
 
-## **openSUSE 15.6**
+## openSUSE 15.6
 
 ```bash
 sudo zypper refresh
