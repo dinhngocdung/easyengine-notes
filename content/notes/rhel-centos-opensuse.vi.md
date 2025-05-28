@@ -64,8 +64,7 @@ sudo dnf install -y libxcrypt-compat
 Thiết lập &PATH môi trường
 ```bash
 sudo -i
-vi ~/.bashrc
-export PATH=$PATH:/usr/local/bin
+echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 

@@ -64,8 +64,7 @@ sudo dnf install -y libxcrypt-compat
 setup &PATH enviroment
 ```bash
 sudo -i
-vi ~/.bashrc
-export PATH=$PATH:/usr/local/bin
+echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
