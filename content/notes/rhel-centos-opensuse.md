@@ -4,7 +4,7 @@ linkTitle: With RHEL/CentOS
 weight: 13
 type: docs
 prev: migrate
-next: review
+next: in-container
 ---
 
 EasyEngine 4 can be installed on any operating system as long as it has **Docker/Docker Compose and PHP** installed. However, for **Ubuntu/Debian specifically, EasyEngine provides an easy installer that also sets up the necessary dependencies**. Here, I'm assuming the use of **Debian 12**, which is what the development team uses for testing (on Debian/Ubuntu).

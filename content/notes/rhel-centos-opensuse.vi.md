@@ -4,7 +4,7 @@ linkTitle: Dùng RHEL/CentOS
 weight: 13
 type: docs
 prev: migrate
-next: review
+next: in-container
 ---
 
 Nêu triển khai EasyEngine trên OS không phải Debean/Ubuntu, EasyEngine không hỗ trợ trình cài đặt, nhưng có thể triển khai thủ công:
