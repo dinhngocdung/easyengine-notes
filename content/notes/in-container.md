@@ -7,7 +7,7 @@ prev: rhel-centos-opensuse
 next: review
 ---
 
-This is a Dockerfile for creating an **EasyEngine** container, allowing you to deploy and use EasyEngine on **any Linux distribution**, not just the officially supported Debian/Ubuntu.
+Creating an **EasyEngine** container, allowing you to deploy and use EasyEngine on **any Linux distribution**, not just the officially supported Debian/Ubuntu.
 
 It works well with systems like:
 
@@ -82,14 +82,7 @@ However, all your EasyEngine data and websites remain **intact** on the host und
 
 Whenever you need to use EasyEngine, just **rerun the [`docker run` debloy](#how-to-deploy) command** to launch a new container environment instantly.
 
-
-## What’s in this Repo?
-
-* A `Dockerfile` for building the `dinhngocdung/easyengine:latest` image
-* Based on Ubuntu with EasyEngine CLI and all required dependencies pre-installed
-
-
 ## Reference
 - EasyEngine [Official Site](https://easyengine.io/)
 - My [Easyengine Notes](https://easyengine.pages.dev/)
-- [Dockerfile](https://github.com/dinhngocdung/easyengine-container/blob/main/Dockerfile)
+- A [Dockerfile](https://github.com/dinhngocdung/easyengine-container/blob/main/Dockerfile) for building the `dinhngocdung/easyengine:latest` image

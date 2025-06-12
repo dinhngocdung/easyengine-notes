@@ -7,7 +7,7 @@ prev: rhel-centos-opensuse
 next: review
 ---
 
-Đây là một Dockerfile để tạo container **EasyEngine**, cho phép bạn triển khai và sử dụng EasyEngine trên **mọi bản phân phối Linux**, không chỉ giới hạn ở Debian/Ubuntu như mặc định.
+Tạo một container **EasyEngine**, cho phép bạn triển khai và sử dụng EasyEngine trên **mọi bản phân phối Linux**, không chỉ giới hạn ở Debian/Ubuntu như mặc định.
 
 Hoạt động tốt trên các hệ điều hành như:
 
@@ -86,16 +86,8 @@ Tuy nhiên, tất cả dữ liệu EasyEngine và website vẫn được **giữ
 
 Mỗi khi cần dùng EasyEngine, chỉ cần **chạy lại lệnh [`docker run`](#cách-triển-khai)** ở trên để khởi động container mới.
 
-
-## Repo này có gì?
-
-* Một `Dockerfile` để build image `dinhngocdung/easyengine:latest`
-* Dựa trên Ubuntu, đã cài sẵn EasyEngine CLI và tất cả các phụ thuộc cần thiết
-
-
 ## Tham khảo
 
 * Trang chủ EasyEngine: [https://easyengine.io/](https://easyengine.io/)
 * Ghi chú cá nhân về EasyEngine: [https://easyengine.pages.dev/](https://easyengine.pages.dev/)
-* [Dockerfile trên GitHub](https://github.com/dinhngocdung/easyengine-container/blob/main/Dockerfile)
-
+* [Dockerfile](https://github.com/dinhngocdung/easyengine-container/blob/main/Dockerfile) để build image `dinhngocdung/easyengine:latest`
