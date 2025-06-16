@@ -37,14 +37,13 @@ Chạy lệnh sau để khởi động container EasyEngine:
 
 ```bash
 docker run -it --rm --privileged \
-  --name ee-container \
   -v /var/run/docker.sock:/var/run/docker.sock:z \
   -v /var/lib/docker/volumes:/var/lib/docker/volumes \
-  -v /etc/hosts:/etc/hosts \
   -v /opt/easyengine:/opt/easyengine \
+  -v /etc/localtime:/etc/localtime:ro \
   --network host \
-  -w /opt/easyengine \
-  dinhngocdung/easyengine:latest /bin/bash
+  --name ee-container \
+  dinhngocdung/easyengine:latest
 ```
 
 Giải thích nhanh các tham số:
@@ -56,7 +55,7 @@ Giải thích nhanh các tham số:
 | `-v /var/run/docker.sock` | Kết nối Docker bên trong container với Docker của máy chủ       |
 | `-v /opt/easyengine`      | Lưu trữ dữ liệu cấu hình và website của EasyEngine trên máy chủ |
 | `--network host`          | Sử dụng mạng của host để đảm bảo web/db hoạt động bình thường   |
-| `-w /opt/easyengine`      | Thiết lập thư mục làm việc trong container là `/opt/easyengine` |
+| `-v /etc/localtime:...`   | Đồng bộ thời gian với host                                      |
 
 
 ## Cách sử dụng
@@ -85,6 +84,66 @@ Tuy nhiên, tất cả dữ liệu EasyEngine và website vẫn được **giữ
 ## Sử dụng lại EasyEngine
 
 Mỗi khi cần dùng EasyEngine, chỉ cần **chạy lại lệnh [`docker run`](#cách-triển-khai)** ở trên để khởi động container mới.
+
+
+## Đồng bộ/Sao chép (Sync/Clone)
+
+Các lệnh `Sync/Clone` được thiết kế để tương tác giữa các cài đặt EasyEngine trực tiếp trên host. Để các lệnh này hoạt động với `ee-container`, bạn cần thực hiện các bước sau:
+
+### ee-container cục bộ
+
+1.  **Sử dụng một khóa kết nối chuyên dụng, khác với khóa chính, để truy cập host nhằm đảm bảo vẫn kiểm soát được host.**
+    ```bash
+    ssh-keygen -t ed25519 -f ~/.ssh/id_ee_container
+    ssh-copy-id -i ~/.ssh/id_ee_container.pub YOUR-USER@YOUR-REMOTE-SERVER.com
+    ssh -i ~/.ssh/id_ee_container YOUR-USER@YOUR-REMOTE-SERVER.com
+    ```
+2.  **Sử dụng `ssh-key` mới trong `ee-container` cục bộ:**
+    ```bash
+    # Chép tạm vào ee-container
+    sudo cp ~/.ssh/id_ee_container /opt/easyengine/
+
+    # Sử dụng ssh-key
+    cp /opt/easyengine/id_ee_container ~/.ssh/id_ed25519
+    ```
+
+*Nếu sử dụng EasyEngine **trực tiếp trên host***:
+```bash
+echo "Host YOUR-REMOTE-SERVER.com
+    HostName YOUR-REMOTE-SERVER.com
+    User YOUR-USER
+    IdentityFile ~/.ssh/id_ee_container
+    IdentitiesOnly yes" >> ~/.ssh/config
+```
+
+### Host của ee-container từ xa
+
+1.  **Tạo một Bash Script `/usr/local/bin/ssh_to_ee_container.sh` để chuyển tiếp các lệnh `ssh` và `rsync`:**
+    ```bash
+    #!/bin/bash
+
+    # Tên của container Docker bạn muốn kết nối
+    CONTAINER_NAME="ee-container"
+
+    # Kiểm tra nếu có lệnh được truyền vào từ SSH_ORIGINAL_COMMAND
+    if [ -n "$SSH_ORIGINAL_COMMAND" ]; then
+        docker exec -i "$CONTAINER_NAME" /bin/bash -c "$SSH_ORIGINAL_COMMAND"
+    else
+        if [ -n "$SSH_TTY" ]; then
+            docker exec -it "$CONTAINER_NAME" /bin/bash
+        else
+            docker exec -i "$CONTAINER_NAME" /bin/bash
+        fi
+    fi
+    ```
+2.  **Chỉnh sửa `~/.ssh/authorized_keys` trên host từ xa để chạy `ssh_to_ee_container.sh` khi truy cập bằng `ssh-key`:**
+    ```bash
+    vi ~/.ssh/authorized_keys
+    ```
+    Chèn `command="/usr/local/bin/ssh_to_ee_container.sh"` trước `ssh-...`
+    ```bash
+    command="/usr/local/bin/ssh_to_ee_container.sh" ssh-ed25519 AAAAB3NzaC1yc2EAAAADAQABAAABAQ... your_key_comment_or_email
+    ```
 
 ## Tham khảo
 

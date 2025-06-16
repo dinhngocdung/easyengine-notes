@@ -35,14 +35,13 @@ Run the following command to launch the EasyEngine container:
 
 ```bash
 docker run -it --rm --privileged \
-  --name ee-container \
   -v /var/run/docker.sock:/var/run/docker.sock:z \
   -v /var/lib/docker/volumes:/var/lib/docker/volumes \
-  -v /etc/hosts:/etc/hosts \
   -v /opt/easyengine:/opt/easyengine \
+  -v /etc/localtime:/etc/localtime:ro \
   --network host \
-  -w /opt/easyengine \
-  dinhngocdung/easyengine:latest /bin/bash
+  --name ee-container \
+  dinhngocdung/easyengine:latest
 ```
 
 Explanation of Parameters:
@@ -54,7 +53,7 @@ Explanation of Parameters:
 | `-v /var/run/docker.sock` | Grants access to Docker daemon from within the container            |
 | `-v /opt/easyengine`      | Stores EasyEngine configs and website data persistently on the host |
 | `--network host`          | Ensures services like web/db run properly with host networking      |
-| `-w /opt/easyengine`      | Sets working directory to EasyEngine’s data directory               |
+| `-v /etc/localtime:..`    | Sync time with host                                                 |
 
 ## How to Use
 
@@ -81,6 +80,65 @@ However, all your EasyEngine data and websites remain **intact** on the host und
 ## Reusing EasyEngine
 
 Whenever you need to use EasyEngine, just **rerun the [`docker run` debloy](#how-to-deploy) command** to launch a new container environment instantly.
+
+## Sync/Clone
+
+`Sync/Clone` is designed for interaction between EasyEngine installations directly on the host. For these commands to work with `ee-container`, you need the following:
+
+### Local ee-container
+
+1.  **Use a dedicated connection key, different from the main key, to access the host to ensure host control is maintained.**
+    ```bash
+    ssh-keygen -t ed25519 -f ~/.ssh/id_ee_container
+    ssh-copy-id -i ~/.ssh/id_ee_container.pub YOUR-USER@YOUR-REMOTE-SERVER.com
+    ssh -i ~/.ssh/id_ee_container YOUR-USER@YOUR-REMOTE-SERVER.com
+    ```
+2.  **Use the new `ssh-key` in the local `ee-container`:**
+    ```bash
+    # Temporarily copy to ee-container
+    sudo cp ~/.ssh/id_ee_container /opt/easyengine/
+
+    # Use the ssh-key
+    cp /opt/easyengine/id_ee_container ~/.ssh/id_ed25519
+    ```
+    
+*If using EasyEngine **directly on host***:
+```bash
+  echo "Host YOUR-REMOTE-SERVER.com
+      HostName YOUR-REMOTE-SERVER.com
+      User YOUR-USER
+      IdentityFile ~/.ssh/id_ee_container
+      IdentitiesOnly yes" >> ~/.ssh/config
+```
+
+### Remote ee-containerr Host
+
+1.  Create a bash Script `/usr/local/bin/ssh_to_ee_container.sh` to forward `ssh` and `rsync` commands:
+    ```bash
+    #!/bin/bash
+
+    # Name of the Docker container you want to connect to
+    CONTAINER_NAME="ee-container"
+
+    # Check if a command was passed via SSH_ORIGINAL_COMMAND
+    if [ -n "$SSH_ORIGINAL_COMMAND" ]; then
+        docker exec -i "$CONTAINER_NAME" /bin/bash -c "$SSH_ORIGINAL_COMMAND"
+    else
+        if [ -n "$SSH_TTY" ]; then
+            docker exec -it "$CONTAINER_NAME" /bin/bash
+        else
+            docker exec -i "$CONTAINER_NAME" /bin/bash
+        fi
+    fi
+    ```
+2.  Edit `~/.ssh/authorized_keys` on the remote host to run `ssh_to_ee_container.sh` when access by ssh-key:
+    ```bash
+    vi ~/.ssh/authorized_keys
+    ```
+    Insert `command="/usr/local/bin/ssh_to_ee_container.sh"` beford `ssh-...`
+    ```bash
+    command="/usr/local/bin/ssh_to_ee_container.sh" ssh-ed25519 AAAAB3NzaC1yc2EAAAADAQABAAABAQ... your_key_comment_or_email
+    ```
 
 ## Reference
 - EasyEngine [Official Site](https://easyengine.io/)
