@@ -90,35 +90,21 @@ Whenever you need to use EasyEngine, just **rerun the [`docker run` debloy](#how
 
 Create ssh-key for connect remote easyengine
 
-**If local easyengine on container**
-```
+```bash
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
 ssh-copy-id -i ~/.ssh/id_ed25519.pub YOUR-USER@YOUR-REMOTE-SERVER.com
 ```
-**If local easyengine on host**
-1.  Use a dedicated connection key, different from the main key, to access the host to ensure host control is maintained.
-    ```bash
-    ssh-keygen -t ed25519 -f ~/.ssh/id_ee_container
-    ssh-copy-id -i ~/.ssh/id_ee_container.pub YOUR-USER@YOUR-REMOTE-SERVER.com
-    ```
-2.  Indentify use `id_ee_container` when connect remote easyengine (`YOUR-REMOTE-SERVER.com`):
-    ```bash
-    echo "Host YOUR-REMOTE-SERVER.com
-        HostName YOUR-REMOTE-SERVER.com
-        User YOUR-USER
-        IdentityFile ~/.ssh/id_ee_container
-        IdentitiesOnly yes" >> ~/.ssh/config
-    ```
 
 ### Remote ee-containerr Host
 
 If remote easyeinge on remote host, it normaly, Anh If user `root` locked:
- ```bash
- vi /home/YOUR-USER/.ssh/authorized_keys
-
- #Add command... befor ssh-...
- command="if [ -n \"$SSH_ORIGINAL_COMMAND\" ]; then sudo -i bash -c \"$SSH_ORIGINAL_COMMAND\"; else sudo -i; fi" ssh-....
- ```
+    ```bash
+    vi /home/YOUR-USER/.ssh/authorized_keys
+    ```
+    Add command... befor ssh-...
+    ```bash
+    command="if [ -n \"$SSH_ORIGINAL_COMMAND\" ]; then sudo -i bash -c \"$SSH_ORIGINAL_COMMAND\"; else sudo -i; fi" ssh-....
+    ```
 If remote easyengine on container, you need foward ssh into `ee-container`
 
 1.  Create a bash Script `/usr/local/bin/ssh_to_ee_container.sh` to forward `ssh` and `rsync` commands:

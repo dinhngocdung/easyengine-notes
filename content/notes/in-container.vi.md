@@ -95,35 +95,22 @@ Các lệnh `Sync/Clone` được thiết kế để tương tác giữa các c�
 
 Tạo ssh-key để connect với remote easyengine
 
-**Nếu easyengine máy cụ bộ chạy trên container**
 ```
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
 ssh-copy-id -i ~/.ssh/id_ed25519.pub YOUR-USER@YOUR-REMOTE-SERVER.com
 ```
-**Nếu easyengine máy cục bộ chạy trực tiếp trên host**
-1.  Sử dụng một khóa kết nối chuyên dụng, khác với khóa chính, để truy cập host nhằm đảm bảo vẫn kiểm soát được host.
-    ```bash
-    ssh-keygen -t ed25519 -f ~/.ssh/id_ee_container
-    ssh-copy-id -i ~/.ssh/id_ee_container.pub YOUR-USER@YOUR-REMOTE-SERVER.com
-    ```
-2.  Chỉ định sử dụng ssh-key `id_ee_container` khi kết nối với remote easyengine (`YOUR-REMOTE-SERVER.com`):
-    ```bash
-    echo "Host YOUR-REMOTE-SERVER.com
-        HostName YOUR-REMOTE-SERVER.com
-        User YOUR-USER
-        IdentityFile ~/.ssh/id_ee_container
-        IdentitiesOnly yes" >> ~/.ssh/config
-    ```
-    
+
 ### Host của ee-container từ xa
 
 Nếu easyengine chạy trực tiếp trên remote host, mọi thứ bình thường. Chú ý khi `root` bị vô hiệu qua, bạn cần chuyển tiếp cho user hiện tại:
- ```bash
- vi /home/YOUR-USER/.ssh/authorized_keys
+    ```bash
+    vi /home/YOUR-USER/.ssh/authorized_keys
+    ```
 
- # Thêm lệnh command... và trruwocs khoá ssh...
- command="if [ -n \"$SSH_ORIGINAL_COMMAND\" ]; then sudo -i bash -c \"$SSH_ORIGINAL_COMMAND\"; else sudo -i; fi" ssh-....
- ```
+    Thêm lệnh command... và trruwocs khoá ssh...
+    ```
+    command="if [ -n \"$SSH_ORIGINAL_COMMAND\" ]; then sudo -i bash -c \"$SSH_ORIGINAL_COMMAND\"; else sudo -i; fi" ssh-....
+    ```
 Nếu remote easyengine chạy trong container, bạn cần forward ssh vào `ee-container`
 
 
