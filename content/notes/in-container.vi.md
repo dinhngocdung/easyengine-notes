@@ -117,6 +117,16 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub YOUR-USER@YOUR-REMOTE-SERVER.com
     
 ### Host của ee-container từ xa
 
+Nếu easyengine chạy trực tiếp trên remote host, mọi thứ bình thường. Chú ý khi `root` bị vô hiệu qua, bạn cần chuyển tiếp cho user hiện tại:
+ ```bash
+ vi /home/YOUR-USER/.ssh/authorized_keys
+
+ # Thêm lệnh command... và trruwocs khoá ssh...
+ command="if [ -n \"$SSH_ORIGINAL_COMMAND\" ]; then sudo -i bash -c \"$SSH_ORIGINAL_COMMAND\"; else sudo -i; fi" ssh-....
+ ```
+Nếu remote easyengine chạy trong container, bạn cần forward ssh vào `ee-container`
+
+
 1.  **Tạo một Bash Script `/usr/local/bin/ssh_to_ee_container.sh` để chuyển tiếp các lệnh `ssh` và `rsync`:**
     ```bash
     #!/bin/bash

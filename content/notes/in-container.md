@@ -109,8 +109,17 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub YOUR-USER@YOUR-REMOTE-SERVER.com
         IdentityFile ~/.ssh/id_ee_container
         IdentitiesOnly yes" >> ~/.ssh/config
     ```
-    
+
 ### Remote ee-containerr Host
+
+If remote easyeinge on remote host, it normaly, Anh If user `root` locked:
+ ```bash
+ vi /home/YOUR-USER/.ssh/authorized_keys
+
+ #Add command... befor ssh-...
+ command="if [ -n \"$SSH_ORIGINAL_COMMAND\" ]; then sudo -i bash -c \"$SSH_ORIGINAL_COMMAND\"; else sudo -i; fi" ssh-....
+ ```
+If remote easyengine on container, you need foward ssh into `ee-container`
 
 1.  Create a bash Script `/usr/local/bin/ssh_to_ee_container.sh` to forward `ssh` and `rsync` commands:
     ```bash
