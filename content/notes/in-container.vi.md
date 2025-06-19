@@ -86,6 +86,16 @@ Tuy nhiên, tất cả dữ liệu EasyEngine và website vẫn được **giữ
 
 Mỗi khi cần dùng EasyEngine, chỉ cần **chạy lại lệnh [`docker run`](#cách-triển-khai)** ở trên để khởi động container mới.
 
+Thuận tiện hơn là dùng alias để khởi động ee-container bằng một lệnh ngắn gọn `ee`:
+```bash
+echo "alias ee='sudo docker run -it --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock:z -v /var/lib/docker/volumes:/var/lib/docker/volumes -v /opt/easyengine:/opt/easyengine -v /etc/localtime:/etc/localtime:ro -v /opt/easyengine/.ssh-key:/root/.ssh --network host --name ee-container dinhngocdung/easyengine:latest'" >> $HOME/.bashrc && source ~/.bashrc
+```
+Bây giờ, mỗi khi sử dụng easyengine, chỉ cân gõ `ee`:
+```bash
+ee # khởi chạy ee-container
+
+exit # thoát và xoá ee-container
+```
 
 ## Đồng bộ/Sao chép (Sync/Clone)
 
