@@ -41,6 +41,7 @@ docker run -it --rm --privileged \
   -v /var/lib/docker/volumes:/var/lib/docker/volumes \
   -v /opt/easyengine:/opt/easyengine \
   -v /etc/localtime:/etc/localtime:ro \
+  -v /opt/easyengine/.ssh-key:/root/.ssh \
   --network host \
   --name ee-container \
   dinhngocdung/easyengine:latest
@@ -92,30 +93,28 @@ Các lệnh `Sync/Clone` được thiết kế để tương tác giữa các c�
 
 ### ee-container cục bộ
 
-1.  **Sử dụng một khóa kết nối chuyên dụng, khác với khóa chính, để truy cập host nhằm đảm bảo vẫn kiểm soát được host.**
+Tạo ssh-key để connect với remote easyengine
+
+**Nếu easyengine máy cụ bộ chạy trên container**
+```
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
+ssh-copy-id -i ~/.ssh/id_ed25519.pub YOUR-USER@YOUR-REMOTE-SERVER.com
+```
+**Nếu easyengine máy cục bộ chạy trực tiếp trên host**
+1.  Sử dụng một khóa kết nối chuyên dụng, khác với khóa chính, để truy cập host nhằm đảm bảo vẫn kiểm soát được host.
     ```bash
     ssh-keygen -t ed25519 -f ~/.ssh/id_ee_container
     ssh-copy-id -i ~/.ssh/id_ee_container.pub YOUR-USER@YOUR-REMOTE-SERVER.com
-    ssh -i ~/.ssh/id_ee_container YOUR-USER@YOUR-REMOTE-SERVER.com
     ```
-2.  **Sử dụng `ssh-key` mới trong `ee-container` cục bộ:**
+2.  Chỉ định sử dụng ssh-key `id_ee_container` khi kết nối với remote easyengine (`YOUR-REMOTE-SERVER.com`):
     ```bash
-    # Chép tạm vào ee-container
-    sudo cp ~/.ssh/id_ee_container /opt/easyengine/
-
-    # Sử dụng ssh-key
-    cp /opt/easyengine/id_ee_container ~/.ssh/id_ed25519
+    echo "Host YOUR-REMOTE-SERVER.com
+        HostName YOUR-REMOTE-SERVER.com
+        User YOUR-USER
+        IdentityFile ~/.ssh/id_ee_container
+        IdentitiesOnly yes" >> ~/.ssh/config
     ```
-
-*Nếu sử dụng EasyEngine **trực tiếp trên host***:
-```bash
-echo "Host YOUR-REMOTE-SERVER.com
-    HostName YOUR-REMOTE-SERVER.com
-    User YOUR-USER
-    IdentityFile ~/.ssh/id_ee_container
-    IdentitiesOnly yes" >> ~/.ssh/config
-```
-
+    
 ### Host của ee-container từ xa
 
 1.  **Tạo một Bash Script `/usr/local/bin/ssh_to_ee_container.sh` để chuyển tiếp các lệnh `ssh` và `rsync`:**

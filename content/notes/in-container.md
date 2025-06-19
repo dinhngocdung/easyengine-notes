@@ -39,6 +39,7 @@ docker run -it --rm --privileged \
   -v /var/lib/docker/volumes:/var/lib/docker/volumes \
   -v /opt/easyengine:/opt/easyengine \
   -v /etc/localtime:/etc/localtime:ro \
+  -v /opt/easyengine/.ssh-key:/root/.ssh \
   --network host \
   --name ee-container \
   dinhngocdung/easyengine:latest
@@ -87,30 +88,28 @@ Whenever you need to use EasyEngine, just **rerun the [`docker run` debloy](#how
 
 ### Local ee-container
 
-1.  **Use a dedicated connection key, different from the main key, to access the host to ensure host control is maintained.**
+Create ssh-key for connect remote easyengine
+
+**If local easyengine on container**
+```
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
+ssh-copy-id -i ~/.ssh/id_ed25519.pub YOUR-USER@YOUR-REMOTE-SERVER.com
+```
+**If local easyengine on host**
+1.  Use a dedicated connection key, different from the main key, to access the host to ensure host control is maintained.
     ```bash
     ssh-keygen -t ed25519 -f ~/.ssh/id_ee_container
     ssh-copy-id -i ~/.ssh/id_ee_container.pub YOUR-USER@YOUR-REMOTE-SERVER.com
-    ssh -i ~/.ssh/id_ee_container YOUR-USER@YOUR-REMOTE-SERVER.com
     ```
-2.  **Use the new `ssh-key` in the local `ee-container`:**
+2.  Indentify use `id_ee_container` when connect remote easyengine (`YOUR-REMOTE-SERVER.com`):
     ```bash
-    # Temporarily copy to ee-container
-    sudo cp ~/.ssh/id_ee_container /opt/easyengine/
-
-    # Use the ssh-key
-    cp /opt/easyengine/id_ee_container ~/.ssh/id_ed25519
+    echo "Host YOUR-REMOTE-SERVER.com
+        HostName YOUR-REMOTE-SERVER.com
+        User YOUR-USER
+        IdentityFile ~/.ssh/id_ee_container
+        IdentitiesOnly yes" >> ~/.ssh/config
     ```
     
-*If using EasyEngine **directly on host***:
-```bash
-  echo "Host YOUR-REMOTE-SERVER.com
-      HostName YOUR-REMOTE-SERVER.com
-      User YOUR-USER
-      IdentityFile ~/.ssh/id_ee_container
-      IdentitiesOnly yes" >> ~/.ssh/config
-```
-
 ### Remote ee-containerr Host
 
 1.  Create a bash Script `/usr/local/bin/ssh_to_ee_container.sh` to forward `ssh` and `rsync` commands:
