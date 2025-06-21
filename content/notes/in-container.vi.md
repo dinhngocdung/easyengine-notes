@@ -78,23 +78,70 @@ ee site delete example.com
 exit
 ```
 
-Sau khi thoát, container sẽ được xóa tự động.
-Tuy nhiên, tất cả dữ liệu EasyEngine và website vẫn được **giữ nguyên** trên máy chủ tại thư mục `/opt/easyengine`.
+Điều này sẽ đưa bạn trở lại hệ điều hành máy chủ (host OS) và container sẽ tự động bị xóa.
+Tuy nhiên, tất cả dữ liệu và website của EasyEngine vẫn **nguyên vẹn** trên máy chủ tại thư mục `/opt/easyengine`.
 
+Bất cứ khi nào bạn cần sử dụng EasyEngine, chỉ cần **chạy lại lệnh triển khai [`docker run` debloy](#how-to-deploy) để khởi động môi trường container mới ngay lập tức.
 
-## Sử dụng lại EasyEngine
+## Sử dụng Docker Compose
 
-Mỗi khi cần dùng EasyEngine, chỉ cần **chạy lại lệnh [`docker run`](#cách-triển-khai)** ở trên để khởi động container mới.
+Đầu tiên, tải tệp cấu hình `docker-compose.yml` về thư mục `~/easyengine`:
 
-Thuận tiện hơn là dùng alias để khởi động ee-container bằng một lệnh ngắn gọn `ee`:
 ```bash
-echo "alias ee='sudo docker run -it --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock:z -v /var/lib/docker/volumes:/var/lib/docker/volumes -v /opt/easyengine:/opt/easyengine -v /etc/localtime:/etc/localtime:ro -v /opt/easyengine/.ssh-key:/root/.ssh --network host --name ee-container dinhngocdung/easyengine:latest'" >> $HOME/.bashrc && source ~/.bashrc
+mkdir -p ~/easyengine && \
+curl -o ~/easyengine/docker-compose.yml https://raw.githubusercontent.com/dinhngocdung/easyengine-container/master/docker-compose.yml
 ```
-Bây giờ, mỗi khi sử dụng easyengine, chỉ cân gõ `ee`:
-```bash
-ee # khởi chạy ee-container
 
-exit # thoát và xoá ee-container
+Để chạy container và bắt đầu sử dụng EasyEngine:
+
+```bash
+cd ~/easyengine
+sudo docker compose run --rm ee-container
+```
+
+
+## Sử dụng Alias `ee`
+
+Để thuận tiện hơn, bạn có thể tạo một **alias `ee`**. Alias này giúp bạn chạy EasyEngine Container mà không cần gõ lệnh dài dòng mỗi lần.
+
+**1. Thêm alias vào tệp `.bashrc` của bạn:**
+
+Nếu sử dụng *docker compose*:
+
+```bash
+echo -e "\n\nalias ee='sudo docker compose -f $HOME/easyengine/docker-compose.yml run --rm ee-container'" >> "$HOME/.bashrc" && source "$HOME/.bashrc"
+```
+
+Nếu sử dụng *docker run*:
+
+```bash
+echo "alias ee='sudo docker run -it --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock:z -v /var/lib/docker/volumes:/var/lib/docker/volumes -v /opt/easyengine:/opt/easyengine -v /etc/localtime:/etc/localtime:ro -v /opt/easyengine/.ssh-key:/root/.ssh --network host --name ee-container dinhngocdung/easyengine:latest'" >> "$HOME/.bashrc" && source "$HOME/.bashrc"
+```
+
+**2. Để vào container và tương tác:**
+Sau khi tạo alias, bạn có thể sử dụng `ee` như một lệnh bình thường:
+
+```bash
+# Bắt đầu chạy ee-container
+ee
+
+# Bạn sẽ lại thấy dấu nhắc lệnh `[root@ee-container: /opt/easyengine]$`.
+# bạn có thể chạy các lệnh EasyEngine như:
+ee site list
+ee site create sample.com
+ee cron list --all
+
+# Gõ `exit` khi bạn muốn thoát.
+exit
+```
+
+**3. Để chạy một lệnh `ee` duy nhất:**
+
+Nếu bạn chỉ muốn chạy một lệnh và sau đó thoát, EasyEngine sẽ tự động mở container, chạy lệnh và xóa container. Ví dụ:
+
+```bash
+ee ee site list
+ee ee site clean sample.com
 ```
 
 ## Đồng bộ/Sao chép (Sync/Clone)
