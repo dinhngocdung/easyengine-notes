@@ -7,7 +7,21 @@ prev: rhel-centos-opensuse
 next: review
 ---
 
-Creating an **EasyEngine** container, allowing you to deploy and use EasyEngine on **any Linux distribution**, not just the officially supported Debian/Ubuntu.
+## Quick guide
+
+```bash
+# Ready to run ee-container with alias ee
+mkdir -p ~/easyengine && \
+curl -o ~/easyengine/docker-compose.yml https://raw.githubusercontent.com/dinhngocdung/easyengine-container/master/docker-compose.yml && \
+echo -e "\n\nalias ee='sudo docker compose -f $HOME/easyengine/docker-compose.yml run --rm ee-container'" >> ~/.bashrc && source ~/.bashrc
+
+# Run ee-containr, and use easyeinge command
+ee
+```
+
+## Deploy on any Linux distribution
+
+The **EasyEngine** container, allowing you to deploy and use EasyEngine on **any Linux distribution**, not just the officially supported Debian/Ubuntu.
 
 It works well with systems like:
 

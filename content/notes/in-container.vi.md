@@ -6,6 +6,19 @@ type: docs
 prev: rhel-centos-opensuse
 next: review
 ---
+## Hướng dẫn nhanh
+
+```bash
+# "cài đặt" ee-container, thiết lập lệnh ngắn ee và sẵn sàng chạy
+mkdir -p ~/easyengine && \
+curl -o ~/easyengine/docker-compose.yml https://raw.githubusercontent.com/dinhngocdung/easyengine-container/master/docker-compose.yml && \
+echo -e "\n\nalias ee='sudo docker compose -f $HOME/easyengine/docker-compose.yml run --rm ee-container'" >> ~/.bashrc && source ~/.bashrc
+
+# Chạy ee-containr, và dùng các lệnh easyeinge
+ee
+```
+
+## Chạy với mọi bản phân phối Linux
 
 Tạo một container **EasyEngine**, cho phép bạn triển khai và sử dụng EasyEngine trên **mọi bản phân phối Linux**, không chỉ giới hạn ở Debian/Ubuntu như mặc định.
 
