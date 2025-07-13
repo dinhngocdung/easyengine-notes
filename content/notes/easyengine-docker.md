@@ -5,6 +5,8 @@ weight: 14
 type: docs
 prev: rhel-centos-opensuse
 next: review
+aliases:
+- in-container
 ---
 
 ## Quick guide
