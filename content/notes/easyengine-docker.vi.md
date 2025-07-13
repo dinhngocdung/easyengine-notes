@@ -1,6 +1,6 @@
 ---
 title: EasyEngine trong Contianer – chạy trên bất kỳ bản phân phối Linux nào
-linkTitle: Trong Container
+linkTitle: Easyengine-Docker
 weight: 14
 type: docs
 prev: rhel-centos-opensuse
@@ -9,10 +9,10 @@ next: review
 ## Hướng dẫn nhanh
 
 ```bash
-# "cài đặt" ee-container, thiết lập lệnh ngắn ee và sẵn sàng chạy
+# "cài đặt" easyengine, thiết lập lệnh ngắn ee và sẵn sàng chạy
 mkdir -p ~/easyengine && \
-curl -o ~/easyengine/docker-compose.yml https://raw.githubusercontent.com/dinhngocdung/easyengine-container/master/docker-compose.yml && \
-echo -e "\n\nalias ee='sudo docker compose -f $HOME/easyengine/docker-compose.yml run --rm ee-container'" >> ~/.bashrc && source ~/.bashrc
+curl -o ~/easyengine/docker-compose.yml https://raw.githubusercontent.com/dinhngocdung/easyengine-docker/master/docker-compose.yml && \
+echo -e "\n\nalias ee='sudo docker compose -f $HOME/easyengine/docker-compose.yml run --rm easyengine'" >> ~/.bashrc && source ~/.bashrc
 
 # Chạy ee-containr, và dùng các lệnh easyeinge
 ee
@@ -56,7 +56,7 @@ docker run -it --rm --privileged \
   -v /etc/localtime:/etc/localtime:ro \
   -v /opt/easyengine/.ssh-key:/root/.ssh \
   --network host \
-  --name ee-container \
+  --name easyengine \
   dinhngocdung/easyengine:latest
 ```
 
@@ -74,7 +74,7 @@ Giải thích nhanh các tham số:
 
 ## Cách sử dụng
 
-Khi đã vào bên trong container (`ee-container`), bạn có thể sử dụng các lệnh EasyEngine như bình thường.
+Khi đã vào bên trong container (`easyengine`), bạn có thể sử dụng các lệnh EasyEngine như bình thường.
 
 Ví dụ lệnh:
 
@@ -102,43 +102,43 @@ Bất cứ khi nào bạn cần sử dụng EasyEngine, chỉ cần **chạy l�
 
 ```bash
 mkdir -p ~/easyengine && \
-curl -o ~/easyengine/docker-compose.yml https://raw.githubusercontent.com/dinhngocdung/easyengine-container/master/docker-compose.yml
+curl -o ~/easyengine/docker-compose.yml https://raw.githubusercontent.com/dinhngocdung/easyengine-docker/master/docker-compose.yml
 ```
 
 Để chạy container và bắt đầu sử dụng EasyEngine:
 
 ```bash
 cd ~/easyengine
-sudo docker compose run --rm ee-container
+sudo docker compose run --rm easyengine
 ```
 
 
 ## Sử dụng Alias `ee`
 
-Để thuận tiện hơn, bạn có thể tạo một **alias `ee`**. Alias này giúp bạn chạy EasyEngine Container mà không cần gõ lệnh dài dòng mỗi lần.
+Để thuận tiện hơn, bạn có thể tạo một **alias `ee`**. Alias này giúp bạn chạy Easyengine-Docker mà không cần gõ lệnh dài dòng mỗi lần.
 
 **1. Thêm alias vào tệp `.bashrc` của bạn:**
 
 Nếu sử dụng *docker compose*:
 
 ```bash
-echo -e "\n\nalias ee='sudo docker compose -f $HOME/easyengine/docker-compose.yml run --rm ee-container'" >> "$HOME/.bashrc" && source "$HOME/.bashrc"
+echo -e "\n\nalias ee='sudo docker compose -f $HOME/easyengine/docker-compose.yml run --rm easyengine'" >> "$HOME/.bashrc" && source "$HOME/.bashrc"
 ```
 
 Nếu sử dụng *docker run*:
 
 ```bash
-echo "alias ee='sudo docker run -it --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock:z -v /var/lib/docker/volumes:/var/lib/docker/volumes -v /opt/easyengine:/opt/easyengine -v /etc/localtime:/etc/localtime:ro -v /opt/easyengine/.ssh-key:/root/.ssh --network host --name ee-container dinhngocdung/easyengine:latest'" >> "$HOME/.bashrc" && source "$HOME/.bashrc"
+echo "alias ee='sudo docker run -it --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock:z -v /var/lib/docker/volumes:/var/lib/docker/volumes -v /opt/easyengine:/opt/easyengine -v /etc/localtime:/etc/localtime:ro -v /opt/easyengine/.ssh-key:/root/.ssh --network host --name easyengine dinhngocdung/easyengine:latest'" >> "$HOME/.bashrc" && source "$HOME/.bashrc"
 ```
 
 **2. Để vào container và tương tác:**
 Sau khi tạo alias, bạn có thể sử dụng `ee` như một lệnh bình thường:
 
 ```bash
-# Bắt đầu chạy ee-container
+# Bắt đầu chạy easyengine
 ee
 
-# Bạn sẽ lại thấy dấu nhắc lệnh `[root@ee-container: /opt/easyengine]$`.
+# Bạn sẽ lại thấy dấu nhắc lệnh `[easyengine: /opt/easyengine]$`.
 # bạn có thể chạy các lệnh EasyEngine như:
 ee site list
 ee site create sample.com
@@ -159,9 +159,9 @@ ee ee site clean sample.com
 
 ## Đồng bộ/Sao chép (Sync/Clone)
 
-Các lệnh `Sync/Clone` được thiết kế để tương tác giữa các cài đặt EasyEngine trực tiếp trên host. Để các lệnh này hoạt động với `ee-container`, bạn cần thực hiện các bước sau:
+Các lệnh `Sync/Clone` được thiết kế để tương tác giữa các cài đặt EasyEngine trực tiếp trên host. Để các lệnh này hoạt động với `easyengine`, bạn cần thực hiện các bước sau:
 
-### ee-container cục bộ
+### easyengine cục bộ
 
 Tạo ssh-key để connect với remote easyengine
 
@@ -170,7 +170,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
 ssh-copy-id -i ~/.ssh/id_ed25519.pub YOUR-USER@YOUR-REMOTE-SERVER.com
 ```
 
-### Host của ee-container từ xa
+### Host của easyengine từ xa
 
 Nếu easyengine chạy trực tiếp trên remote host, mọi thứ bình thường. Chú ý khi `root` bị vô hiệu qua, bạn cần chuyển tiếp cho user hiện tại:
     ```bash
@@ -181,7 +181,7 @@ Nếu easyengine chạy trực tiếp trên remote host, mọi thứ bình thư�
     ```
     command="if [ -n \"$SSH_ORIGINAL_COMMAND\" ]; then sudo -i bash -c \"$SSH_ORIGINAL_COMMAND\"; else sudo -i; fi" ssh-....
     ```
-Nếu remote easyengine chạy trong container, bạn cần forward ssh vào `ee-container`
+Nếu remote easyengine chạy trong container, bạn cần forward ssh vào `easyengine`
 
 
 1.  **Tạo một Bash Script `/usr/local/bin/ssh_to_ee_container.sh` để chuyển tiếp các lệnh `ssh` và `rsync`:**
@@ -189,7 +189,7 @@ Nếu remote easyengine chạy trong container, bạn cần forward ssh vào `ee
     #!/bin/bash
 
     # Tên của container Docker bạn muốn kết nối
-    CONTAINER_NAME="ee-container"
+    CONTAINER_NAME="easyengine"
 
     # Kiểm tra nếu có lệnh được truyền vào từ SSH_ORIGINAL_COMMAND
     if [ -n "$SSH_ORIGINAL_COMMAND" ]; then
@@ -215,4 +215,4 @@ Nếu remote easyengine chạy trong container, bạn cần forward ssh vào `ee
 
 * Trang chủ EasyEngine: [https://easyengine.io/](https://easyengine.io/)
 * Ghi chú cá nhân về EasyEngine: [https://easyengine.pages.dev/](https://easyengine.pages.dev/)
-* [Dockerfile](https://github.com/dinhngocdung/easyengine-container/blob/main/Dockerfile) để build image `dinhngocdung/easyengine:latest`
+* [Dockerfile](https://github.com/dinhngocdung/easyengine-docker/blob/main/Dockerfile) để build image `dinhngocdung/easyengine:latest`

@@ -39,6 +39,7 @@ layout: hextra-home
 
 <div class="hx-mb-6">
 {{< hextra/hero-button text="Let's start" link="notes" >}}
+{{< hextra/hero-button text="Easyengine-Docker" link="notes/easyengine-docker" >}}
 </div>
 
 <div class="hx-mt-6"></div>

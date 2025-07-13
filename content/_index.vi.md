@@ -22,7 +22,8 @@ layout: hextra-home
 </div>
 
 <div class="hx-mb-6">
-{{< hextra/hero-button text="Xem" link="notes" >}}
+{{< hextra/hero-button text="Triển khai Easyengine-Docker" link="notes/easyengine-docker" >}}
+{{< hextra/hero-button text="Đọc Notes" link="notes" >}}
 </div>
 
 <div class="hx-mt-6"></div>
