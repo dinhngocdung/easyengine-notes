@@ -9,6 +9,14 @@ layout: hextra-home
   {{< icon name="arrow-circle-right" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
 
+{{< hextra/hero-container
+  image="/images/easyeengine-docker-gray.svg"
+  imageClass="hx-block hx-overflow-hidden hx-rounded-3xl"
+  imageWidth="300" imageHeight="300"
+  imageTitle="AXIVO"
+>}}
+
+
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-headline >}}
   Ghi chép của Dũng&nbsp;<br class="sm:hx-block hx-hidden" />về EasyEngine 4
