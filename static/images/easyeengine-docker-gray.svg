@@ -8,7 +8,7 @@
       }
 
       .st1 {
-        stroke: #fff;
+        stroke: #58595b;
         stroke-width: 8.48px;
       }
 
@@ -17,7 +17,7 @@
       }
 
       .st3, .st4 {
-        fill: #231f20;
+        fill: #58595b;
       }
 
       .st4 {
@@ -30,7 +30,7 @@
       }
 
       .st2 {
-        stroke: #231f20;
+        stroke: #58595b;
         stroke-width: 11.31px;
       }
     </style>
