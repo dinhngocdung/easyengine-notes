@@ -12,7 +12,7 @@ next: review
   {{< card link="borgmatic" title="Sao lưu Borgmatic" icon="cloud-upload" >}}
   {{< card link="migrate" title="Chuyển server mới" icon="truck" >}}
   {{< card link="development-stage-production" title="Development, Stage, và Production" icon="beaker" >}}
-  {{< card link="rhel-centos-opensuse" title="Cài đặt với RHEL/CentOS, openSUSE" icon="terminal" >}}
+  {{< card link="easyengine-docker" title="Esyengine-Docker" icon="cube" >}}
 
 {{< /cards >}}
 

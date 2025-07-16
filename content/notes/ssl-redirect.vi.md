@@ -42,7 +42,7 @@ Tham khảo:
 - [EasyEngine Site Clone](https://easyengine.io/commands/site/clone/)  
 - [EasyEngine Site Delete](https://easyengine.io/commands/site/delete/)  
 
-## **www, non-www**  
+## www, non-www
 
 Khi bạn tạo trang với www hoặc non-www, EasyEngine sẽ tự động tạo alias cho tên còn lại. Nếu bạn muốn thêm một alias khác:  
 
@@ -64,5 +64,4 @@ Sau khi chỉnh sửa, restart Nginx:
 ee site reload YOUR-SITE.COM
 ```  
 
-Lưu ý rằng file cấu hình này sẽ được chèn vào khối `server` của Nginx cho từng site cụ thể.  
-
+Lưu ý rằng file cấu hình này sẽ được chèn vào khối `server` của Nginx cho từng site cụ thể. 

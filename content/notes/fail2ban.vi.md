@@ -48,320 +48,35 @@ Các bước tiến hành:
 {{% steps %}}
 
 ### Tạo thư mục
-Lập thư mục chứa Fail2Ban Docker:
+Lập thư mục chứa Fail2Ban Docker, tạo file `docker-compose.yml`, file chỉ thị cho Docker xây dựng Fail2Ban container:
 
 ```bash
-mkdir ~/fail2ban && cd ~/fail2ban
+# Tạo các thư mục cura fail2ban
+mkdir -p ./fail2ban/data/{action.d,filter.d,jail.d,db}
+
+# Downaload docker-compose.yml, .env
+curl -o ./fail2ban/docker-compose.yml -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/docker-compose.yml
+curl -o ./fail2ban/.env -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/.env
 ```
+### Áp dụng Jail, filter, action
 
-Tạo file `docker-compose.yml`, file chỉ thị cho Docker xây dựng Fail2Ban container:
-
+Triển khai bảo vệ 2 vị trí dễ tổng thương nhất của webserver: **ssh** và **wp-login** 
 ```bash
-nano docker-compose.yml
+curl -o ./fail2ban/data/filter.d/sshd.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/filter.d/sshd.local
+curl -o ./fail2ban/data/filter.d/wp-login-fail.conf -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/filter.d/wp-login-fail.conf
+
+curl -o ./fail2ban/data/jail.d/jail.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail.local
 ```
-### Nội dung
 
-Chép nội dung này vào:
+> [!TIP]
+> Đặc biệt chú ý cài đặt `chain = DOCKER-USER`, Fail2Ban sẽ chèn lệnh cấm vào chain này để có tác dụng trong hệ thống Docker hóa.  
 
-```yaml {filename="~/fail2ban/docker-compose.yml"}
-services:
-  fail2ban:
-    image: crazymax/fail2ban:latest
-    container_name: fail2ban
-    network_mode: "host"
-    cap_add:
-      - NET_ADMIN
-      - NET_RAW
-    volumes:
-      - "./data:/data"  # Chứa custom jails, actions, filters và Fail2Ban persistent database
-      - "/opt/easyengine/services/nginx-proxy/logs:/var/log/nginx-proxy:ro"  # Log của nginx-proxy
-      - "/opt/easyengine/sites/YOUR-SITE.COM/logs/nginx:/var/log/YOUR-SITE.COM-nginx:ro"  # Log của site Nginx
-    environment:
-      - F2B_LOG_TARGET=STDOUT
-      - F2B_LOG_LEVEL=INFO
-      - F2B_DB_PURGE_AGE=1d
-    restart: unless-stopped
-```
-{{% /steps %}}
-
-## Tạo Jail  
-
-Đây là jail của tôi, chống lại các tấn công phổ biến trên WordPress. Jail được tạo trong thư mục `~/fail2ban/data/jail.d/jail.local`  
-
-{{% steps %}}
-
-### Tạo file jail.local
-
+Nếu có sư dụng cloudflare, và muốn cấm gay tại Cloudflare WAF
 ```bash
-mkdir -p ~/fail2ban/data/jail.d
-nano ~/fail2ban/data/jail.d/jail.local
-```  
-### Nội dung
+curl -o ./fail2ban/data/jail.d/jail-cloudflare.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail-cloudflare.local
 
-Chép nội dung sau đây vào file `jail.local` đang mở. Đặc biệt chú ý cài đặt `chain = DOCKER-USER`, Fail2Ban sẽ chèn lệnh cấm vào chain này để có tác dụng trong hệ thống Docker hóa.  
-
-```bash {filename="~/fail2ban/data/jail.d/jail.local"}
-[DEFAULT]
-
-ignoreip = 116.110.40.117 127.0.0.1/8 ::1 10.0.0.0/20 
-
-chain = DOCKER-USER 
-
-findtime = 10m
-maxretry = 5
-bantime = 10m
-
-# "bantime.increment" cho phép sử dụng cơ sở dữ liệu để tìm kiếm các IP bị cấm trước đó 
-# và tăng thời gian cấm theo công thức đặc biệt: mặc định là bantime * 1, 2, 4, 8, 16, 32...
-bantime.increment = true
-
-# "bantime.rndtime" là số giây tối đa để trộn với thời gian ngẫu nhiên
-# nhằm ngăn chặn botnet "thông minh" tính toán chính xác thời gian IP có thể được bỏ cấm:
-bantime.rndtime = 2048
-
-# Ví dụ sau có thể dùng để tăng thời gian cấm ban đầu nhỏ (bantime=60) - tăng dần theo thời gian.
-# Với bantime=60, các hệ số nhân lần lượt là: 1 phút, 5 phút, 30 phút, 1 giờ, 5 giờ, 12 giờ, 1 ngày, 2 ngày.
-bantime.multipliers = 1 5 30 60 300 720 1440 2880
-
-# WORDOPS TEAM  
-
-# Cấm truy cập WordPress khi đăng nhập thất bại
-[wp-login-fail]
-enabled  = true
-filter   = wp-login-fail
-port     = http,https
-logpath  = /var/log/nginx-proxy/access.log
-findtime = 24h
-maxretry = 10
-bantime  = 1d
-
-# EASYENGINE TEAM  
-
-# Cấm khi vượt quá giới hạn request trên Nginx
-[nginx-req-limit]
-enabled  = true
-filter   = nginx-req-limit
-port     = http,https
-protocol = tcp
-logpath  = /var/log/*-nginx/error.log
-findtime = 10m
-bantime  = 2h
-maxretry = 10
-
-# R-PUFKY DOCS  
-# https://r-pufky.github.io/docs/services/fail2ban/setup-docker.html  
-
-# Cấm khi thất bại xác thực HTTP trên Nginx  
-[nginx-http-auth]
-enabled  = true
-filter   = nginx-http-auth
-port     = http,https
-logpath  = /var/log/nginx-proxy/error.log
-bantime  = 24h
-findtime = 2h
-maxretry = 3
-
-# Cấm truy cập sai file/thư mục  
-[nginx-no-file-directory]
-enabled  = true
-filter   = nginx-no-file-directory
-port     = http,https
-logpath  = /var/log/nginx-proxy/error.log
-bantime  = 24h
-findtime = 2h
-maxretry = 6
-
-# Cấm truy cập vào index bị chặn  
-[nginx-forbidden]
-enabled  = true
-filter   = nginx-forbidden
-port     = http,https
-logpath  = /var/log/*-nginx/error.log
-bantime  = 24h
-findtime = 2h
-maxretry = 6
-
-# Cấm các client liên tục gây lỗi  
-[nginx-errors]
-enabled  = true
-filter   = nginx-errors
-port     = http,https
-logpath  = /var/log/nginx-proxy/access.log
-bantime  = 24h
-findtime = 2h
-maxretry = 6
-
-# Cấm truy vấn tìm kiếm script độc hại  
-[nginx-noscript]
-enabled  = true
-filter   = nginx-noscript
-port     = http,https
-logpath  = /var/log/nginx-proxy/access.log
-bantime  = 24h
-findtime = 2h
-maxretry = 6
-
-# Cấm các bot độc hại đã biết  
-[nginx-badbots]
-enabled  = true
-filter   = nginx-badbots
-port     = http,https
-logpath  = /var/log/nginx-proxy/access.log
-bantime  = 24h
-findtime = 2h
-maxretry = 6
-
-# Cấm truy cập vào thư mục người dùng  
-[nginx-nohome]
-enabled  = true
-filter   = nginx-nohome
-port     = http,https
-logpath  = /var/log/nginx-proxy/access.log
-bantime  = 24h
-findtime = 2h
-maxretry = 6
-
-# Cấm các yêu cầu sử dụng proxy mở  
-[nginx-noproxy]
-enabled  = true
-filter   = nginx-noproxy
-port     = http,https
-logpath  = /var/log/nginx-proxy/access.log
-bantime  = 24h
-findtime = 2h
-maxretry = 6
-```
-{{% /steps %}}
-
-## Tạo Filter Fail2Ban
-
-Dưới đây là danh sách các tệp filter cấu hình cho Fail2Ban nhằm bảo vệ Nginx và WordPress khỏi các cuộc tấn công phổ biến.
-
-{{% steps %}}
-
-### Tạo thư mục chứa Filter
-Trước khi tạo các tệp cấu hình, hãy đảm bảo thư mục `filter.d` tồn tại:
-
-```bash
-mkdir -p ~/fail2ban/data/filter.d
-```
-
-### Tạo và điền nội dung các tệp cấu hình
-
-
-`wp-login-fail.conf`
-```bash
-nano ~/fail2ban/data/filter.d/wp-login-fail.conf
-```
-Nội dung:
-``` {filename="wp-login-fail.conf"}
-[Definition]
-failregex = ^<HOST>.* "POST .*/wp-login.php([/?#\\].*)? HTTP/.*" 200
-ignoreregex =
-```
-
-`nginx-req-limit.conf`
-```bash
-nano ~/fail2ban/data/filter.d/nginx-req-limit.conf
-```
-Nội dung:
-```{filename="nginx-req-limit.conf"}
-[Definition]
-failregex = limiting requests, excess:.* by zone.*client: <HOST>
-ignoreregex =
-```
-
-`nginx-badbots.conf`
-```bash
-nano ~/fail2ban/data/filter.d/nginx-badbots.conf
-```
-Nội dung:
-```{filename="nginx-badbots.conf"}
-[Definition]
-failregex = ^<HOST> -.*"(GET|POST|HEAD).*HTTP.*"(?:badbots|badbotscustom)"$
-ignoreregex = .*Googlebot.*|.*Bingbot.*
-```
-
-`nginx-http-auth.conf`
-```bash
-nano ~/fail2ban/data/filter.d/nginx-http-auth.conf
-```
-Nội dung:
-```{filename="nginx-http-auth.conf"}
-[Definition]
-failregex = ^ \[error\] \d+#\d+: \*\d+ user "(?:[^"]+|.*?)":? (?:password mismatch|was not found in "[^"]*"), client: <HOST>
-ignoreregex =
-```
-
-`nginx-nohome.conf`
-```bash
-nano ~/fail2ban/data/filter.d/nginx-nohome.conf
-```
-Nội dung:
-```{filename="nginx-nohome.conf"}
-[Definition]
-failregex = ^<HOST> -.*GET .*/~.*
-ignoreregex =
-```
-
-`nginx-noproxy.conf`
-```bash
-nano ~/fail2ban/data/filter.d/nginx-noproxy.conf
-```
-Nội dung:
-```{filename="nginx-noproxy.conf"}
-[Definition]
-failregex = ^<HOST> -.*GET http.*
-ignoreregex =
-```
-
-`nginx-noscript.conf`
-```bash
-nano ~/fail2ban/data/filter.d/nginx-noscript.conf
-```
-Nội dung:
-```{filename="ginx-noscript.conf"}
-[Definition]
-failregex = ^<HOST>.* "(GET|POST) .*/.*\.(php|asp|exe|pl|cgi|scgi)(\?.*)? HTTP/.*"
-ignoreregex = ^<HOST>.* "(GET|POST) .*/wp-login\.php.*$"
-              ^<HOST>.* "(GET|POST) .*/wp-admin/.*$"
-              ^<HOST>.* "(GET|POST) .*/wp-json/.*$"
-```
-
-`nginx-forbidden.conf`
-```bash
-nano ~/fail2ban/data/filter.d/nginx-forbidden.conf
-```
-Nội dung:
-```{filename="ginx-forbidden.conf"}
-[Definition]
-failregex = ^.*\[error\] \d+#\d+: .* is forbidden, client: <HOST>.*$
-ignoreregex =
-```
-
-`nginx-no-file-directory.conf`
-```bash
-nano ~/fail2ban/data/filter.d/nginx-no-file-directory.conf
-```
-Nội dung:
-```{filename="nginx-no-file-directory.conf"}
-[Definition]
-failregex = ^.*\[error\] \d+#\d+: .*No such file or directory.*client: <HOST>.*$
-ignoreregex = ^.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|woff|woff2|svg|map)(\?.*)? HTTP/.*"
-```
-
-`nginx-errors.conf`
-```bash
-nano ~/fail2ban/data/filter.d/nginx-errors.conf
-```
-Nội dung:
-```{filename="nginx-errors.conf"}
-[Definition]
-failregex = ^<HOST> -.* "(GET|POST|HEAD) .+ HTTP/.*" (40[0-7]|41[0-8]) .*$
-ignoreregex = ^<HOST>.* "(GET|POST|HEAD) .*/[^ ]*\.(png|txt|jpg|ico|js|css|ttf|woff|woff2|svg|map)(\?.*)? HTTP/.*"
-              ^<HOST>.* "(GET|POST|HEAD) .*/wp-json/.* HTTP/.*"
-              ^<HOST>.* "(GET|POST|HEAD) .*/wp-admin/.* HTTP/.*"
-              ^<HOST>.* "(GET|POST|HEAD) .*/wp-login\.php.* HTTP/.*"
+# And change your cfzone and cftoken
+vi ./fail2ban/data/jail.d/jail-cloudflare.local
 ```
 
 {{% /steps %}}
@@ -373,20 +88,13 @@ Như vậy, với các file đã chuẩn bị, chúng ta đã sẵn sàng vận 
 ```bash
 ~/fail2ban/
 ├── docker-compose.yml
+├── .env
 └── data/
     ├── jail.d/
     │   └── jail.local
     └── filter.d/
-        ├── wp-login-fail.conf
-        ├── nginx-req-limit.conf
-        ├── nginx-badbots.conf
-        ├── nginx-http-auth.conf
-        ├── nginx-nohome.conf
-        ├── nginx-noproxy.conf
-        ├── nginx-noscript.conf
-        ├── nginx-forbidden.conf
-        ├── nginx-no-file-directory.conf
-        └── nginx-errors.conf
+        ├── sshd.local
+        └── wp-login-fail.conf
 ```
 
 Chạy Fail2Ban Docker
@@ -399,24 +107,24 @@ cd ~/fail2ban
 Chạy Fail2Ban Docker:
 ```bash
 # Chạy nền Fail2Ban Docker
-docker-compose up -d 
+sudo docker compose up -d 
 ```
 
 Xem nhật ký hoạt động Fail2Ban
 ```bash
-docker-compose logs -f
+sudo docker compose logs -f
 ```
 
 Xem các IP đang bị chặn trên tất cả các jail
 ```bash
-docker-compose exec fail2ban fail2ban-client status --all
+sudo docker compose exec fail2ban fail2ban-client status --all
 ```
 
 Unban một IP
-Đôi khi Fail2Ban chặn nhầm, ví dụ: unban IP `123.123.123.123` trong jail `nginx-errors`:
+Đôi khi Fail2Ban chặn nhầm, ví dụ: unban IP `123.123.123.123` trong jail `wp-login-fail`:
 
 ```bash
-docker-compose exec fail2ban fail2ban-client set nginx-errors unbanip 123.123.123.123
+sudo docker compose exec fail2ban fail2ban-client set nginx-errors unbanip 123.123.123.123
 ```
 
 

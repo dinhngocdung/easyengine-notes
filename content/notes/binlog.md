@@ -109,7 +109,8 @@ nano /etc/logrotate.d/ee-nginx-proxy-log
 ```
 
 ```bash {filename="~/etc/logrotate.d/ee-nginx-proxy-log"}
-/opt/easyengine/services/nginx-proxy/logs/*.log {
+/opt/easyengine/services/nginx-proxy/logs/*.log
+{
     weekly
     missingok
     copytruncate
@@ -130,7 +131,8 @@ nano /etc/logrotate.d/ee-sites-log
 File content:
 ```bash {filename="~/etc/logrotate.d/ee-sites-log"}
 /var/lib/docker/volumes/*log_php/_data/*.log
-/var/lib/docker/volumes/*log_nginx/_data/*.log {
+/var/lib/docker/volumes/*log_nginx/_data/*.log
+{
     weekly
     missingok
     rotate 12
