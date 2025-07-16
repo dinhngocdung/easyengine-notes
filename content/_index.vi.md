@@ -10,8 +10,8 @@ layout: hextra-home
 
 {{< hextra/hero-container
   image="/images/easyeengine-docker-gray.svg"
-  imageClass="hx-block hx-overflow-hidden hx-rounded-3xl"
-  imageWidth="300" imageHeight="300"
+  imageClass="hx-block hx-overflow-hidden"
+  imageWidth="400" imageHeight="300"
   imageTitle="AXIVO"
 >}}
 
