@@ -2,7 +2,6 @@
 title: Ghi chép của Dũng về EasyEngine 4
 layout: hextra-home
 ---
-
 {{< hextra/hero-badge link="https://github.com/EasyEngine/easyengine/discussions">}}
   <div class="hx-w-2 hx-h-2 hx-rounded-full hx-bg-primary-400"></div>
   <span>Đặt câu hỏi về EasyEngine</span>
@@ -16,7 +15,6 @@ layout: hextra-home
   imageTitle="AXIVO"
 >}}
 
-
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-headline >}}
   Ghi chép của Dũng&nbsp;<br class="sm:hx-block hx-hidden" />về EasyEngine 4
@@ -29,8 +27,10 @@ layout: hextra-home
 {{< /hextra/hero-subtitle >}}
 </div>
 
+{{< /hextra/hero-container >}}
+
 <div class="hx-mb-6">
-{{< hextra/hero-button text="Triển khai Easyengine-Docker" link="notes/easyengine-docker" >}}
+{{< hextra/hero-button text="Easyengine-Docker" link="notes/easyengine-docker" >}}
 {{< hextra/hero-button text="Đọc Notes" link="notes" >}}
 </div>
 
