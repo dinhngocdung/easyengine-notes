@@ -43,11 +43,10 @@ Các bước tiến hành:
 2. Thiết lập jail, action, filter.
 3. Chạy Fail2Ban với Docker.
 
-## docker-compose.yml
 
 {{% steps %}}
 
-### Tạo thư mục
+### Tạo thư mục và file xây dựng docker fail2ban
 Lập thư mục chứa Fail2Ban Docker, tạo file `docker-compose.yml`, file chỉ thị cho Docker xây dựng Fail2Ban container:
 
 ```bash
