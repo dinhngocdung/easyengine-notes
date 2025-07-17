@@ -21,8 +21,8 @@
       }
 
       .st4 {
-        font-family: Roboto-Regular, Roboto;
-        font-size: 174.68px;
+        font-family: Roboto-Regular, Helvetical, Arial;
+        font-size: 160px;
       }
 
       .st5 {
