@@ -21,65 +21,28 @@ Tôi dùng hình ảnh Docker chính thức từ Borgmatic.
 Tạo thư mục cho Borgmatic và thao tác trong thư mục này:  
 
 ```bash
-mkdir ~/borgmatic
+mkdir -p ./borgmatic/data/{borgmatic.d,repository,.config,.ssh,.cache}
 ```
 
-Tạo file `docker-compose.yml` cho container Borgmatic:  
+Download các file  `docker-compose.yml` và `borgmatic.d/config.yaml` cho container Borgmatic, thay đổi `volumes` trong `docker-compose.yml` theo nhu cầu backup của bạn. Ví dụ, nếu bạn không dùng Fail2Ban, có thể bỏ dòng đó. Mặc định của tôi ở dây là sử dụng backup các website, borgmatic, fail2ban, crontab, database
 
 ```bash
-nano  ~/borgmatic/docker-compose.yml
+curl -o ./borgmatic/docker-compose.yml https://raw.githubusercontent.com/dinhngocdung/easyengine-stack/refs/heads/main/borgmatic/docker-compose.yml
+curl -o ./borgmatic/data/borgmatic.d/config.yaml https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/borgmatic/data/borgmatic.d/config.yaml
 ```
 
-Chép nội dung này vào, thay đổi `volumes` theo nhu cầu backup của bạn. Ví dụ, nếu bạn không dùng Fail2Ban, có thể bỏ dòng đó:  
+Download và chỉnh sửa file `.env`, hoặc copy-paste từ local (Password, repo, passphare repo...)
+```bash
+curl -o ./borgmatic/.env -L https://github.com/dinhngocdung/easyengine-dock-stack/raw/refs/heads/main/borgmatic/.env
 
-```yaml
-services:
-  borgmatic:
-    image: ghcr.io/borgmatic-collective/borgmatic
-    container_name: borgmatic
-    volumes:
-      - /opt/easyengine:/mnt/source/easyengine:ro            
-	      # backup EasyEngine docker-compose.yml
-      - /var/lib/docker/volumes:/mnt/source/volumes:ro       
-	      # backup volumes Docker data
-      - /root/borgmatic:/mnt/source/borgmatic:ro             
-	      # backup Borgmatic config, docker-compose.yml
-      - /root/fail2ban:/mnt/source/fail2ban:ro               
-	      # backup Fail2Ban config, docker-compose.yml
-      - /root/restore:/restore                               
-	      # restore data  
-      - ./data/repository:/mnt/borg-repository               
-	      # backup target
-      - ./data/borgmatic.d:/etc/borgmatic.d/                 
-	      # Borgmatic config file(s) + crontab.txt
-      - ./data/.config/borg:/root/.config/borg               
-	      # config và keyfiles
-      - ./data/.ssh:/root/.ssh                               
-	      # SSH key cho remote repositories
-      - ./data/.cache/borg:/root/.cache/borg                 
-	      # checksums dùng cho deduplication
-      - /etc/localtime:/etc/localtime:ro  
-	      # Đồng bộ múi giờ với host
-      - /etc/timezone:/etc/timezone:ro    
-	      # (Tùy chọn) Đồng bộ timezone
-    environment:
-		    # Thiết lập múi giờ cụ thể
-      - TZ=Asia/Ho_Chi_Minh  
-	      # Passphrase tự tạo
-      - BORG_PASSPHRASE="YOUR-PASSPHARASE-CONNNECT-BORG"
-    networks:
-      global-backend-network:
-
-networks:
-  global-backend-network:
-    external: true
-    name: ee-global-backend-network
+# Chỉnh sửa các biến phù hợp
+vi ./borgmatic/.env
 ```
 
 Khởi tạo Borgmatic Docker:  
 
 ```bash
-docker-compose -f ~/borgmatic/docker-compose.yml up -d
+sudo docker compose -f ~/borgmatic/docker-compose.yml up -d
 ```
 
 ## Kết nối Borgmatic với BorgBase  
@@ -97,7 +60,7 @@ Các bước thiết lập BorgBase:
 
     ```bash
     # Kết nối shell Borgmatic Docker
-    cd ~/borgmatic && docker-compose exec borgmatic bash
+    cd ~/borgmatic && sudo docker compose exec borgmatic bash
 
     # Tạo khóa SSH, bỏ qua khi nhắc passphrase
     ssh-keygen -o -a 100 -t ed25519
@@ -110,100 +73,33 @@ Các bước thiết lập BorgBase:
 4. Thêm **public key** vào BorgBase: 
   Nhấn **Add Key** trong mục SSH Keys, dán public key vừa tạo vào, đặt tên tùy ý và lưu lại.  
 5. Kết nối key vừa thêm vào repository: 
-  Nhấn nút chỉnh sửa, trong phần **Access**, chọn key vừa thêm, lưu lại và hoàn tất.  
-
-
-## Thiết lập cách hoạt động của Borgmatic  
-
-Mọi hoạt động của Borgmatic được cấu hình trong file `config.yaml`.  
-
-Tạo file cấu hình:  
-
-```bash
-nano data/borgmatic.d/config.yaml
-```
-
-Chép nội dung sau vào, nhớ thay thế `repositories` và `encryption_passphrase` phù hợp:  
-
-```yaml  {filename="~/borgmatic/data/borgmatic.d/config.yaml"}
-source_directories:
-    - /mnt/source/easyengine 
-    - /mnt/source/volumes 
-    - /mnt/source/borgmatic 
-    - /mnt/source/fail2ban 
-
-repositories:
-    - path: ssh://XXXXX@XXXXX.repo.borgbase.com/./repo 
-      label: "Backup for YOUR-SITE.COM on BorgBase"
-
-exclude_patterns:
-    - '*.pyc'
-    - ~/*/.cache
-
-compression: auto,zstd
-encryption_passphrase: "YOUR-PASSPHARASE-CONNNECT-BORG"
-archive_name_format: 'YOUR-SITE.COM-{now:%Y-%m-%d-%H%M%S}'
-
-retries: 5
-retry_wait: 5
-
-keep_daily: 7
-keep_weekly: 4
-keep_monthly: 12
-keep_yearly: 5
-
-checks:
-    - name: disabled
-
-check_last: 3
-
-before_backup:
-    - echo "`date` - Starting backup"
-
-after_backup:
-    - echo "`date` - Finished backup"
-
-mariadb_databases:
-    - name: YOUR-SITE_COM
-      hostname: services_global-db_1
-      username: YOUR-SITE.COM-AlJolB
-      password: YOUR-PASSWORD-MARIADB_YOUR-SITE_COM
-```
-
-Kiểm tra lại file config:  
-
-```bash
-docker-compose exec borgmatic borgmatic config validate
-```
-
-## Khởi tạo kho BorgBase  
-
-Thực hiện trong Borgmatic container, thay `BORG_REPO=` bằng URL BorgBase repository của bạn:  
-
-```bash
-cd ~/borgmatic && docker-compose exec borgmatic bash
-borgmatic --init --encryption repokey-blake2
-export BORG_REPO=ssh://XXXXX@XXXXX.repo.borgbase.com/./repo
-```
+  Nhấn nút chỉnh sửa, trong phần **Access**, chọn key vừa thêm, lưu lại và hoàn tất. 
+6. Với repo borgbase mới hoàn toàn, khởi tạo lần đầu bằng cách:
+    ```bash
+    cd ./borgmatic && \
+    sudo docker compose up -d
+    borgmatic init -e repokey-blake2
+    borgmatic create
+    ```
 
 ## Các lệnh quản lý Borgmatic  
 
 Xem danh sách backup:  
 
 ```bash
-docker-compose exec borgmatic borgmatic list
+sudo docker compose exec borgmatic borgmatic list
 ```
 
 Xem các database được lưu trữ trong bản mới nhất:  
 
 ```bash
-docker-compose exec borgmatic borgmatic list --archive latest --find *borgmatic/*_databases
+sudo docker compose exec borgmatic borgmatic list --archive latest --find *borgmatic/*_databases
 ```
 
 Trích xuất file `path/1` trong bản lưu mới nhất và lưu vào `/restore`:  
 
 ```bash
-docker-compose exec borgmatic borgmatic extract --archive latest --path path/1 --destination /restore
+sudo docker compose exec borgmatic borgmatic extract --archive latest --path path/1 --destination /restore
 ```
 
 ## Lên lịch chạy định kỳ  
@@ -229,7 +125,7 @@ Nếu chỉ backup một lần mỗi ngày, cách tối ưu hơn là tắt conta
 Tắt Borgmatic container:  
 
 ```bash
-cd ~/borgmatic && docker-compose down
+cd ~/borgmatic && sudo docker compose down
 ```
 
 Chỉnh sửa cron jobs:  
@@ -241,7 +137,7 @@ crontab -e
 Thêm lịch trình:  
 
 ```bash
-0 3 * * * cd /root/borgmatic/ && /usr/local/bin/docker-compose run --rm borgmatic borgmatic >> /root/borgmatic/cron.log 2>&1
+0 3 * * * cd /root/borgmatic/ && sudo /usr/local/bin/docker compose run --rm borgmatic borgmatic >> /root/borgmatic/cron.log 2>&1
 ```
 
 Như vậy, 3 AM mỗi ngày, Docker sẽ chạy backup, sau đó container tự xóa.  

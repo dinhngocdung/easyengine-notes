@@ -118,67 +118,17 @@ This approach improves security, reduces server load, and mitigates threats earl
 
 To integrate Fail2Ban with Cloudflare WAF, you need to modify Fail2Ban’s default actions to interact with Cloudflare’s API.  
 
-### 1. Modify Fail2Ban Jail Configuration  
-Edit the **jail.local** configuration file:  
-
 ```bash
-nano ~/fail2ban/data/jail.d/jail.local
-```  
+curl -o ./fail22ban/data/jail.d/jail-cloudflare.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail-cloudflare.local
 
-Add the following under `[DEFAULT]`:  
+# Please accurately change your cfzone and cftoken
+vi ./fail2ban/data/jail.d/jail-cloudflare.local
+```
 
-```ini
-[DEFAULT]
-...
-
-action   = iptables-multiport[port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
-           cloudflare-token
-```  
-
-### 2. Create a Cloudflare Action File  
-Create a new action file **cloudflare-token.conf**:  
-
-```bash
-nano ~/fail2ban/data/action.d/cloudflare-token.conf
-```  
-
-Copy and paste the following configuration (replace `cfzone` and `cftoken` with your Cloudflare details):  
-
-```ini  {filename="~/fail2ban/data/action.d/cloudflare-token.conf"}
-[Definition]
-
-actionban = curl -s -X POST "<_cf_api_url>" \
-              <_cf_api_prms> \
-              --data '{"mode":"<cfmode>","configuration":{"target":"<cftarget>","value":"<ip>"},"notes":"<notes>"}'
-
-actionunban = id=$(curl -s -X GET "<_cf_api_url>" \
-              --data-urlencode "mode=<cfmode>" --data-urlencode "notes=<notes>" --data-urlencode "configuration.target=<cftarget>" --data-urlencode "configuration.value=<ip>" \
-              <_cf_api_prms> \
-                  | awk -F"[,:}]" '{for(i=1;i<=NF;i++){if($i~/'id'\042/){print $(i+1)}}}' \
-                  | tr -d ' "' \
-                  | head -n 1)
-              if [ -z "$id" ]; then echo "<name>: ID for <ip> cannot be found using target <cftarget>"; exit 0; fi; \
-              curl -s -X DELETE "<_cf_api_url>/$id" \
-                  <_cf_api_prms> \
-                  --data '{"cascade": "none"}'
-
-_cf_api_url = https://api.cloudflare.com/client/v4/zones/<cfzone>/firewall/access_rules/rules
-_cf_api_prms = -H "Authorization: Bearer <cftoken>" -H "Content-Type: application/json"
-
-[Init]
-
-cfzone = [your Cloudflare Zone ID]
-cftoken = [your Cloudflare API Token]
-cftarget = ip
-cfmode = block
-notes = Fail2Ban <name>
-```  
-
-### 3. Restart Fail2Ban  
 Reload Fail2Ban to apply the new configuration:  
 
 ```bash
-docker-compose exec fail2ban fail2ban-client reload
+sudo docker compose exec fail2ban fail2ban-client reload
 ```  
 
 With this setup, Fail2Ban can now send ban requests directly to Cloudflare, improving security by blocking malicious IPs at the Cloudflare level before they reach your server.

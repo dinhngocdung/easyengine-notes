@@ -123,123 +123,13 @@ Cần thêm Action cho Fail2Ban để nó can thiệp vào Cloudflare WAF.
 Thay đổi action mặc định của Fail2Ban, bổ sung thêm hành động tác động đến Cloudflare WAF.  
 
 ```bash
-nano ~/fail2ban/data/jail.d/jail.local
-```  
+curl -o ./fail2ban/data/jail.d/jail-cloudflare.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail-cloudflare.local
 
-Thêm đoạn này vào khu vực `[DEFAULT]`:  
-
-```bash
-[DEFAULT]
-...
-
-action   = iptables-multiport[port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
-           cloudflare-token
-```  
-
-Thêm action `cloudflare-token.conf`:  
-
-```bash
-nano ~/fail2ban/data/action.d/cloudflare-token.conf
-```  
-
-Chép nội dung này vào, nhớ thay thế `cfzone` và `cftoken` của bạn vào file:  
-
-```bash {filename="~/fail2ban/data/action.d/cloudflare-token.conf"}
-#
-# Author: Logic-32
-#
-# IMPORTANT
-#
-# Please set jail.local's permission to 640 because it contains your CF API token.
-#
-# This action depends on curl.
-#
-# To get your Cloudflare API token: https://developers.cloudflare.com/api/tokens/create/
-#
-# Cloudflare Firewall API: https://developers.cloudflare.com/firewall/api/cf-firewall-rules/endpoints/
-
-[Definition]
-
-# Option:  actionstart
-# Notes.:  Command executed on demand at the first ban (or at the start of Fail2Ban if actionstart_on_demand is set to false).
-# Values:  CMD
-#
-actionstart =
-
-# Option:  actionstop
-# Notes.:  Command executed at the stop of jail (or at the end of Fail2Ban).
-# Values:  CMD
-#
-actionstop =
-
-# Option:  actioncheck
-# Notes.:  Command executed once before each actionban command.
-# Values:  CMD
-#
-actioncheck =
-
-# Option:  actionban
-# Notes.:  Command executed when banning an IP.
-# Tags:    <ip>  IP address
-#          <failures>  Number of failures
-#          <time>  Unix timestamp of the ban time
-# Values:  CMD
-actionban = curl -s -X POST "<_cf_api_url>" \
-              <_cf_api_prms> \
-              --data '{"mode":"<cfmode>","configuration":{"target":"<cftarget>","value":"<ip>"},"notes":"<notes>"}'
-
-# Option:  actionunban
-# Notes.:  Command executed when unbanning an IP.
-# Tags:    <ip>  IP address
-#          <failures>  Number of failures
-#          <time>  Unix timestamp of the ban time
-# Values:  CMD
-#
-actionunban = id=$(curl -s -X GET "<_cf_api_url>" \
-              --data-urlencode "mode=<cfmode>" --data-urlencode "notes=<notes>" --data-urlencode "configuration.target=<cftarget>" --data-urlencode "configuration.value=<ip>" \
-              <_cf_api_prms> \
-                  | awk -F"[,:}]" '{for(i=1;i<=NF;i++){if($i~/'id'\042/){print $(i+1)}}}' \
-                  | tr -d ' "' \
-                  | head -n 1)
-              if [ -z "$id" ]; then echo "<name>: ID for <ip> cannot be found using target <cftarget>"; exit 0; fi; \
-              curl -s -X DELETE "<_cf_api_url>/$id" \
-                  <_cf_api_prms> \
-                  --data '{"cascade": "none"}'
-
-_cf_api_url = https://api.cloudflare.com/client/v4/zones/<cfzone>/firewall/access_rules/rules
-_cf_api_prms = -H "Authorization: Bearer <cftoken>" -H "Content-Type: application/json"
-
-[Init]
-
-# Declare your Cloudflare Authorization Bearer Token in the [DEFAULT] section of your jail.local file.
-
-# The Cloudflare <ZONE_ID> of the domain you want to manage.
-#
-cfzone = [điền cfzone của bạn]
-
-# Your personal Cloudflare token. Ideally restricted to just have "Zone.Firewall Services" permissions.
-#
-cftoken = [điền cftoken của bạn]
-
-# Target of the firewall rule. Default is "ip" (v4).
-#
-cftarget = ip
-
-# The firewall mode Cloudflare should use. Default is "block" (deny access).
-# Consider also "js_challenge" or other "allowed_modes" if you want.
-#
-cfmode = block
-
-# The message to include in the firewall IP banning rule.
-#
-notes = Fail2Ban <name>
-
-[Init?family=inet6]
-cftarget = ip6
-```  
-
+# Hãy thay đổi chính xác cfzone và cftoken của bạn
+vi ./fail2ban/data/jail.d/jail-cloudflare.local
+```
 Reload Fail2Ban sau khi chỉnh sửa các thiết lập:  
 
 ```bash
-docker-compose exec fail2ban fail2ban-client reload
+sudo docker compose exec fail2ban fail2ban-client reload
 ```  

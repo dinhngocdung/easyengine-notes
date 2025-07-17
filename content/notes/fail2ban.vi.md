@@ -70,11 +70,11 @@ curl -o ./fail2ban/data/jail.d/jail.local -L https://raw.githubusercontent.com/d
 > [!TIP]
 > Đặc biệt chú ý cài đặt `chain = DOCKER-USER`, Fail2Ban sẽ chèn lệnh cấm vào chain này để có tác dụng trong hệ thống Docker hóa.  
 
-Nếu có sư dụng cloudflare, và muốn cấm gay tại Cloudflare WAF
+Nếu có sử dụng Cloudflare, và muốn cấm ngay tại Cloudflare WAF, cần bổ xung thêm action cloudflare:
 ```bash
 curl -o ./fail2ban/data/jail.d/jail-cloudflare.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail-cloudflare.local
 
-# And change your cfzone and cftoken
+# Hãy thay đổi chính xác cfzone và cftoken của bạn
 vi ./fail2ban/data/jail.d/jail-cloudflare.local
 ```
 
@@ -97,7 +97,7 @@ Như vậy, với các file đã chuẩn bị, chúng ta đã sẵn sàng vận 
 ```
 
 Chạy Fail2Ban Docker
-Đảm bảo bạn đang ở trong thư mục `~/fail2ban` để chạy các lệnh `docker-compose`:
+Đảm bảo bạn đang ở trong thư mục `~/fail2ban` để chạy các lệnh `docker compose`:
 
 ```bash
 cd ~/fail2ban

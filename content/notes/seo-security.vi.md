@@ -84,38 +84,106 @@ Giải pháp: Chỉ sử dụng URL gốc để kiểm tra cache trong Redis. N�
 Chỉnh sửa file `main.conf` (lưu ý các thay đổi này sẽ bị mất khi cập nhật `ee cli update`, cần lưu lại để áp dụng lại sau):  
 
 ```bash
-nano /opt/easyengine/sites/YOUR-SITE.COM/config/nginx/conf.d/main.conf
+vi /opt/easyengine/sites/YOUR-SITE.COM/config/nginx/conf.d/main.conf
 ```
 
-Thêm đoạn sau (thay `YOUR-SITE.COM` bằng domain của bạn):  
+Replacing `Redis NGINX CONFIGURATION` with the provided snippet and using `YOUR-SITE.COM` as a placeholder:
 
 ```nginx
-# Bỏ qua cache với các query string theo dõi từ Google, Facebook, quảng cáo
-if ($query_string !~* "(^$|srsltid=|utm_.*=|fbclid=|_gl=|gclid=|gad_source=|dclid=|wbraid=|gbraid=|gclsrc=)") {
-    set $skip 1;
+## # CUSTOM Redis NGINX CONFIGURATION
+# Cache with tracking parameters like Facebook, Google, UTM, etc.
+
+# Initialize cache control flags
+set $skip_fetch 0;  # 0 = allow fetching from cache, 1 = skip cache
+set $skip_store 0;  # 0 = allow storing to cache, 1 = skip storing to cache
+
+# Rule 1: Completely skip cache for POST requests
+if ($request_method = POST) {
+    set $skip_fetch 1;
+    set $skip_store 1;
 }
 
-# Tạo biến $clean_uri bằng cách loại bỏ query string khỏi $request_uri
+# Rule 2: Skip cache for common query strings
+# (Only allow caching for empty query strings or tracking parameters)
+if ($query_string !~* "(^$|srsltid=|utm_.*=|fbclid=|_gl=|gclid=|gad_source=|dclid=|wbraid=|gbraid=|gclsrc=)") {
+    set $skip_fetch 1;
+    set $skip_store 1;
+}
+
+# Rule 3: Special handling for tracking parameters
+# - Allow fetching from cache but do not store to cache
+if ($query_string ~* "(srsltid=|utm_.*=|fbclid=|_gl=|gclid=|gad_source=|dclid=|wbraid=|gbraid=|gclsrc=)") {
+    set $skip_store 1;  # Prevent storing to cache
+    # $skip_fetch remains = 0 to allow fetching from cache
+}
+
+# Rule 4: Skip cache for admin pages
+if ($request_uri ~* "(/wp-admin/|/wp-login.php|/xmlrpc.php|wp-.*.php|index.php|/feed/|sitemap(_index)?.xml)") {
+    set $skip_fetch 1;
+    set $skip_store 1;
+}
+
+# Rule 5: Skip cache for logged-in users
+if ($http_cookie ~* "comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_no_cache|wordpress_logged_in|woocommerce_items_in_cart") {
+    set $skip_fetch 1;
+    set $skip_store 1;
+}
+
+# Create $clean_uri variable (removes query string)
 set $clean_uri $request_uri;
-if ($request_uri ~ "^(.*)\\?.*$") {
+if ($request_uri ~ "^(.*)\?.*$") {
     set $clean_uri $1;
 }
 
-# Cấu hình lưu cache trong Redis
+# Main request handling
+location / {
+    try_files $uri $uri/ /index.php?$args;
+}
+
+# Endpoint for fetching cache from Redis (internal)
+location /redis-fetch {
+    internal;
+    set $redis_key $args;
+    redis_pass redis;
+}
+
+# Endpoint for storing cache to Redis (internal)
 location /redis-store {
     internal;
     set_unescape_uri $key $arg_key;
     redis2_query set $key $echo_request_body;
-    # Chỉnh thời gian cache, ví dụ tăng lên 7 ngày
-    redis2_query expire $key 604800;
+    redis2_query expire $key 86400;  # Cache TTL 24 hours
     redis2_pass redis;
 }
 
-# Tạo key cache chỉ dựa trên URL gốc đã xử lý
-set $key "YOUR-SITE.COM_page:http$request_method$host$clean_uri"; 
+# PHP processing with caching mechanism
+location ~ \.php$ {
+    # Create cache key in the required format
+    set $key "YOUR-SITE.COM_page:http$request_method$host$clean_uri";
+    
+    # Adjust key for HTTPS connection
+    if ($HTTP_X_FORWARDED_PROTO = "https") {
+        set $key "YOUR-SITE.COM_page:https$request_method$host$clean_uri";
+    }
 
-# Nếu sử dụng HTTPS, cập nhật key cho phù hợp
-if ($http_x_forwarded_proto = "https") {
-    set $key "YOUR-SITE.COM_page:https$request_method$host$clean_uri";
+    try_files $uri =404;
+
+    # Apply cache control flags
+    srcache_fetch_skip $skip_fetch;
+    srcache_store_skip $skip_store;
+
+    srcache_response_cache_control off;
+    set_escape_uri $escaped_key $key;
+
+    # Perform cache fetch/store
+    srcache_fetch GET /redis-fetch $key;
+    srcache_store PUT /redis-store key=$escaped_key;
+
+    # Debug headers
+    more_set_headers 'X-SRCache-Fetch-Status $srcache_fetch_status';
+    more_set_headers 'X-SRCache-Store-Status $srcache_store_status';
+
+    include fastcgi_params;
+    fastcgi_pass php;
 }
 ```
