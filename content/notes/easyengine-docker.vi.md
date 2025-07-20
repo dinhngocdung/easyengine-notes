@@ -1,5 +1,5 @@
 ---
-title: EasyEngine trong Docker – chạy trên bất kỳ bản phân phối Linux nào
+title: EasyEngine-Docker: chạy trên bất kỳ bản phân phối Linux nào
 linkTitle: Easyengine-Docker
 weight: 14
 type: docs

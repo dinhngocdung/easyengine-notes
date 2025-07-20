@@ -1,6 +1,6 @@
 ---
-title: EasyEngine-Docker – Deploy Anywhere
-linkTitle: easyengine-docker
+title: EasyEngine-Docker: Deploy Anywhere
+linkTitle: Easyengine-Docker
 weight: 14
 type: docs
 prev: rhel-centos-opensuse
