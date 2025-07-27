@@ -122,7 +122,7 @@ To integrate Fail2Ban with Cloudflare WAF, you need to modify Fail2Ban’s defau
 curl -o ./fail22ban/data/jail.d/jail-cloudflare.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail-cloudflare.local
 
 # Please accurately change your cfzone and cftoken
-vi ./fail2ban/data/jail.d/jail-cloudflare.local
+vi /opt/fail2ban/data/jail.d/jail-cloudflare.local
 ```
 
 Reload Fail2Ban to apply the new configuration:  

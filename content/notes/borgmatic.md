@@ -21,29 +21,29 @@ I'm using the official Docker image for Borgmatic.
 Create a directory for Borgmatic and work within it:
 
 ```bash
-mkdir -p ./borgmatic/data/{borgmatic.d,repository,.config,.ssh,.cache}
+mkdir -p /opt/borgmatic/data/{borgmatic.d,repository,.config,.ssh,.cache}
 ```
 
 Download the `docker-compose.yml` and `borgmatic.d/config.yaml` files for the Borgmatic container. Adjust the `volumes` in `docker-compose.yml` to fit your backup needs. For example, if you don't use Fail2Ban, you can remove that line. My default setup here includes backing up websites, borgmatic, fail2ban, crontab, and databases.
 
 ```bash
-curl -o ./borgmatic/docker-compose.yml https://raw.githubusercontent.com/dinhngocdung/easyengine-stack/refs/heads/main/borgmatic/docker-compose.yml
-curl -o ./borgmatic/data/borgmatic.d/config.yaml https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/borgmatic/data/borgmatic.d/config.yaml
+curl -o /opt/borgmatic/docker-compose.yml https://raw.githubusercontent.com/dinhngocdung/easyengine-stack/refs/heads/main/borgmatic/docker-compose.yml
+curl -o /opt/borgmatic/data/borgmatic.d/config.yaml https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/borgmatic/data/borgmatic.d/config.yaml
 ```
 
 Download and edit the `.env` file, or copy-paste it from your local machine (Password, repo, passphrase repo, etc.):
 
 ```bash
-curl -o ./borgmatic/.env -L https://github.com/dinhngocdung/easyengine-dock-stack/raw/refs/heads/main/borgmatic/.env
+curl -o /opt/borgmatic/.env -L https://github.com/dinhngocdung/easyengine-dock-stack/raw/refs/heads/main/borgmatic/.env
 
 # Edit variables as appropriate
-vi ./borgmatic/.env
+vi /opt/borgmatic/.env
 ```
 
 Initialize Borgmatic Docker:
 
 ```bash
-sudo docker compose -f ~/borgmatic/docker-compose.yml up -d
+sudo docker compose -f /opt/borgmatic/docker-compose.yml up -d
 ```
 
 
@@ -61,7 +61,7 @@ Before setting up backups, we need a storage location. If your website data is a
 
    ```bash
    # Connect to Borgmatic container shell
-   cd ~/borgmatic && docker-compose exec borgmatic bash
+   cd /opt/borgmatic && docker-compose exec borgmatic bash
 
    # Generate SSH key (skip passphrase prompt)
    ssh-keygen -o -a 100 -t ed25519
@@ -81,7 +81,7 @@ Before setting up backups, we need a storage location. If your website data is a
    - Save and complete the setup  
 6. With all new repo borgbase, to init one time:
     ```bash
-    cd ./borgmatic && \
+    cd /opt/borgmatic && \
     sudo docker compose up -d
     borgmatic init -e repokey-blake2
     borgmatic create
@@ -115,7 +115,7 @@ docker-compose exec borgmatic borgmatic extract --archive latest --path path/1 -
 Add a cron schedule inside the container’s `crontab.txt` file:  
 
 ```bash
-nano ~/borgmatic/data/borgmatic.d/crontab.txt
+nano /opt/borgmatic/data/borgmatic.d/crontab.txt
 ```
 
 Add the following line:  
@@ -131,7 +131,7 @@ To optimize resources, I set up a cron job that starts Borgmatic **only when bac
 Stop the Borgmatic container:  
 
 ```bash
-cd ~/borgmatic && docker-compose down
+cd /opt/borgmatic && docker-compose down
 ```
 
 Edit cron jobs:  

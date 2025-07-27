@@ -51,20 +51,20 @@ Lập thư mục chứa Fail2Ban Docker, tạo file `docker-compose.yml`, file c
 
 ```bash
 # Tạo các thư mục cura fail2ban
-mkdir -p ./fail2ban/data/{action.d,filter.d,jail.d,db}
+mkdir -p /opt/fail2ban/data/{action.d,filter.d,jail.d,db}
 
 # Downaload docker-compose.yml, .env
-curl -o ./fail2ban/docker-compose.yml -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/docker-compose.yml
-curl -o ./fail2ban/.env -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/.env
+curl -o /opt/fail2ban/docker-compose.yml -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/docker-compose.yml
+curl -o /opt/fail2ban/.env -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/.env
 ```
 ### Áp dụng Jail, filter, action
 
 Triển khai bảo vệ 2 vị trí dễ tổng thương nhất của webserver: **ssh** và **wp-login** 
 ```bash
-curl -o ./fail2ban/data/filter.d/sshd.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/filter.d/sshd.local
-curl -o ./fail2ban/data/filter.d/wp-login-fail.conf -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/filter.d/wp-login-fail.conf
+curl -o /opt/fail2ban/data/filter.d/sshd.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/filter.d/sshd.local
+curl -o /opt/fail2ban/data/filter.d/wp-login-fail.conf -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/filter.d/wp-login-fail.conf
 
-curl -o ./fail2ban/data/jail.d/jail.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail.local
+curl -o /opt/fail2ban/data/jail.d/jail.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail.local
 ```
 
 > [!TIP]
@@ -72,10 +72,10 @@ curl -o ./fail2ban/data/jail.d/jail.local -L https://raw.githubusercontent.com/d
 
 Nếu có sử dụng Cloudflare, và muốn cấm ngay tại Cloudflare WAF, cần bổ xung thêm action cloudflare:
 ```bash
-curl -o ./fail2ban/data/jail.d/jail-cloudflare.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail-cloudflare.local
+curl -o /opt/fail2ban/data/jail.d/jail-cloudflare.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail-cloudflare.local
 
 # Hãy thay đổi chính xác cfzone và cftoken của bạn
-vi ./fail2ban/data/jail.d/jail-cloudflare.local
+vi /opt/fail2ban/data/jail.d/jail-cloudflare.local
 ```
 
 {{% /steps %}}
@@ -85,7 +85,7 @@ vi ./fail2ban/data/jail.d/jail-cloudflare.local
 Như vậy, với các file đã chuẩn bị, chúng ta đã sẵn sàng vận hành Fail2Ban Docker.
 
 ```bash
-~/fail2ban/
+/opt/fail2ban/
 ├── docker-compose.yml
 ├── .env
 └── data/
@@ -97,10 +97,10 @@ Như vậy, với các file đã chuẩn bị, chúng ta đã sẵn sàng vận 
 ```
 
 Chạy Fail2Ban Docker
-Đảm bảo bạn đang ở trong thư mục `~/fail2ban` để chạy các lệnh `docker compose`:
+Đảm bảo bạn đang ở trong thư mục `/opt/fail2ban` để chạy các lệnh `docker compose`:
 
 ```bash
-cd ~/fail2ban
+cd /opt/fail2ban
 ```
 
 Chạy Fail2Ban Docker:

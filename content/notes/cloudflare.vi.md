@@ -123,10 +123,10 @@ Cần thêm Action cho Fail2Ban để nó can thiệp vào Cloudflare WAF.
 Thay đổi action mặc định của Fail2Ban, bổ sung thêm hành động tác động đến Cloudflare WAF.  
 
 ```bash
-curl -o ./fail2ban/data/jail.d/jail-cloudflare.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail-cloudflare.local
+curl -o /opt/fail2ban/data/jail.d/jail-cloudflare.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail-cloudflare.local
 
 # Hãy thay đổi chính xác cfzone và cftoken của bạn
-vi ./fail2ban/data/jail.d/jail-cloudflare.local
+vi /opt/fail2ban/data/jail.d/jail-cloudflare.local
 ```
 Reload Fail2Ban sau khi chỉnh sửa các thiết lập:  
 

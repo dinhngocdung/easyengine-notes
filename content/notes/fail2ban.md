@@ -53,11 +53,11 @@ Set up the Fail2Ban Docker directory and create the `docker-compose.yml` file, w
 
 ```bash
 # Create directories for Fail2Ban
-mkdir -p ./fail2ban/data/{action.d,filter.d,jail.d,db}
+mkdir -p /opt/fail2ban/data/{action.d,filter.d,jail.d,db}
 
 # Download docker-compose.yml, .env
-curl -o ./fail2ban/docker-compose.yml -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/docker-compose.yml
-curl -o ./fail2ban/.env -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/.env
+curl -o /opt/fail2ban/docker-compose.yml -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/docker-compose.yml
+curl -o /opt/fail2ban/.env -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/.env
 ```
 
 ### Apply Jail, Filter, Action
@@ -66,9 +66,9 @@ Deploy protection for the two most vulnerable points of a web server: **SSH** an
 
 ```bash
 curl -o ./fail22ban/data/filter.d/sshd.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/filter.d/sshd.local
-curl -o ./fail2ban/data/filter.d/wp-login-fail.conf -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/filter.d/wp-login-fail.conf
+curl -o /opt/fail2ban/data/filter.d/wp-login-fail.conf -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/filter.d/wp-login-fail.conf
 
-curl -o ./fail2ban/data/jail.d/jail.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail.local
+curl -o /opt/fail2ban/data/jail.d/jail.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail.local
 ```
 
 > [\!TIP]
@@ -80,7 +80,7 @@ If you use Cloudflare and want to ban directly at Cloudflare WAF, you need to ad
 curl -o ./fail22ban/data/jail.d/jail-cloudflare.local -L https://raw.githubusercontent.com/dinhngocdung/easyengine-docker-stack/refs/heads/main/fail2ban/jail.d/jail-cloudflare.local
 
 # Please accurately change your cfzone and cftoken
-vi ./fail2ban/data/jail.d/jail-cloudflare.local
+vi /opt/fail2ban/data/jail.d/jail-cloudflare.local
 ```
 
 {{% /steps %}}
@@ -92,7 +92,7 @@ vi ./fail2ban/data/jail.d/jail-cloudflare.local
 With the prepared files, we are now ready to operate Fail2Ban Docker.
 
 ```bash
-~/fail2ban/
+/opt/fail2ban/
 ├── docker-compose.yml
 ├── .env
 └── data/
@@ -103,9 +103,9 @@ With the prepared files, we are now ready to operate Fail2Ban Docker.
         └── wp-login-fail.conf
 ```
 
-Ensure You Are in the `~/fail2ban` Directory:
+Ensure You Are in the `/opt/fail2ban` Directory:
 ```bash
-cd ~/fail2ban
+cd /opt/fail2ban
 ```
 
 Start Fail2Ban Docker:
