@@ -1,5 +1,5 @@
 ---
-title: EasyEngine-Docker: Deploy Anywhere
+title: 'EasyEngine-Docker: Deploy Anywhere'
 linkTitle: Easyengine-Docker
 weight: 14
 type: docs
