@@ -10,4 +10,4 @@ type: about
 
 Một người yêu thích EasyEngine.
 
-![](/images/easyengine-note-origin-rotate.svg)
+![](/images/easyeengine-docker-gray.svg)
